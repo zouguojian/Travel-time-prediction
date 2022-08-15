@@ -113,18 +113,19 @@ class DataClass(object):
             low, high = 0, int(self.shape_s[0]//self.site_num * self.divide_ratio)
         else:
             low, high = int(self.shape_s[0]//self.site_num * self.divide_ratio), int(self.shape_s[0]//self.site_num)
+        speed_low, speed_high =self.input_length, int(self.shape_s[0]//self.site_num * self.divide_ratio)
 
-        speed_low, speed_high =0, int(self.shape_s[0]//self.site_num * self.divide_ratio)
         while speed_low + self.input_length + self.output_length <= speed_high:
-            if datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') <= data_s[low, -1]:
-                label=data_s[(low + self.input_length) * self.site_num: (low + self.input_length + self.output_length) * self.site_num,-1:]
+            if datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') >= data_s[speed_low, -1] and datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') < data_s[speed_low+1, -1]:
+                # 个体轨迹数据与交通速度数据之间的对应
+                label=data_s[speed_low * self.site_num: (speed_low + self.output_length) * self.site_num, -1:]
                 label=np.concatenate([label[i * self.site_num : (i + 1) * self.site_num, :] for i in range(self.output_length)], axis=1)
 
-                yield (data_s[low * self.site_num : (low + self.input_length) * self.site_num, 5:6],                       # speed
-                       data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 2]//7, # week
-                       data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 2],    # day
-                       data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 3],    # hour
-                       data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 4]//15,# minute
+                yield (data_s[(speed_low -self.input_length) * self.site_num : speed_low * self.site_num, 5:6],                         # speed
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]//7, # week
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2],    # day
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4]//15,# minute
                        label, # speed label
 
                        self.vehicle_id[data_tra[low,0]], # vehicle id
@@ -134,12 +135,13 @@ class DataClass(object):
                        datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour,   # start hour
                        datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute, # start minute
                        datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, # start second
-                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.int),         # distances
-                       np.array([dragon_dragon[tuple] for tuple in route]),                                              # route id
+                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.float),       # distances
+                       np.array([dragon_dragon[tuple] for tuple in route],dtype=np.int),                                 # route id
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),      # separate trajectory time
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float)) # total time
                 low += 1
-            else: continue
+            else:
+                speed_low+=1
 
     def next_batch(self, batch_size, epoch, is_training=True):
         '''
@@ -154,7 +156,9 @@ class DataClass(object):
         '''
 
         self.is_training=is_training
-        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.float32, tf.float32, tf.float32))
+        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
+                                                                            tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
+                                                                            tf.float32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_s[0]//self.hp.site_num * self.divide_ratio-self.input_length-self.output_length)//self.step)

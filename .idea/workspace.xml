@@ -2,73 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Travel-time-prediction.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/adjacent.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/28.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/29.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/31.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/32.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/33.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/34.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/35.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/36.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/37.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/38.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/39.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/40.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/41.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/42.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/43.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/44.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/45.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/46.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/47.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/48.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/49.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/50.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/51.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/52.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/53.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/54.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/55.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/56.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/57.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/58.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/59.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/60.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/61.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/62.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/63.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/64.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/65.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/66.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/67.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/68.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/69.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/70.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/71.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/72.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/73.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/74.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/75.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/76.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/77.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/78.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_list/79.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_read.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/generate_trajectory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/routeline.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/train.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/trajectory_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/data_next.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/hyparameter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/data_next.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,14 +38,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4248" />
+          <entry key="py" value="4351" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="4248" />
+          <entry key="Python" value="4351" />
         </counts>
       </usages-collector>
     </session>
@@ -121,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/model/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -130,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/data/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
               <folding>
                 <element signature="e#23#42#0" expanded="true" />
               </folding>
@@ -141,8 +76,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/data_next.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
+            <state relative-caret-position="-503">
+              <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -163,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="265">
-              <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="53" />
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -515,14 +450,14 @@
     <entry file="file://$PROJECT_DIR$/model/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
-          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="53" />
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -536,7 +471,7 @@
     <entry file="file://$PROJECT_DIR$/data/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
           <folding>
             <element signature="e#23#42#0" expanded="true" />
           </folding>
@@ -545,8 +480,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/data_next.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
+        <state relative-caret-position="-503">
+          <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
