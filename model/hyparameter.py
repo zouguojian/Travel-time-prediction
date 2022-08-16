@@ -40,11 +40,11 @@ class parameter(object):
         self.parser.add_argument('--validate_set_rate', type=float, default=0.15, help='validate set rate')
         self.parser.add_argument('--test_set_rate', type=float, default=0.15, help='test set rate')
 
-        self.parser.add_argument('--file_train_s', type=str, default='data/train.csv', help='training_speed file address')
+        self.parser.add_argument('--file_train_s', type=str, default='/Users/guojianzou/Travel-time-prediction/data/train.csv', help='training_speed file address')
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
         self.parser.add_argument('--file_test', type=str, default='data/test.csv', help='test set file address')
 
-        self.parser.add_argument('--file_train_t', type=str, default='data/trajectory_1.csv', help='trajectory file address')
+        self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_1.csv', help='trajectory file address')
 
         self.parser.add_argument('--file_adj', type=str,default='data/adjacent.csv', help='adj file address')
 
