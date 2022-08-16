@@ -36,21 +36,44 @@ class DataClass(object):
         self.site_num=self.hp.site_num
         self.trajectory_length=self.hp.trajectory_length
         self.file_train_s= self.hp.file_train_s
-        self.file_train_p = self.hp.file_train_p
-        self.normalize = self.hp.normalize             # data normalization
+        self.file_train_t = self.hp.file_train_t
+        self.normalize =self.hp.normalize             # data normalization
 
         self.data_s=self.get_source_data(self.file_train_s)
         self.shape_s=self.data_s.shape
-        self.data_tra=self.get_source_data(self.file_train_p)
-        self.shape_p=self.data_tra.shape
+        self.data_tra=self.get_source_data(self.file_train_t)
+        self.shape_tra=self.data_tra.shape
 
-        self.vehicle_id={} # store the index from vehicle id to index
-        self.length=self.data_s.shape[0]                        # data length
-        self.max_s, self.min_s= self.get_max_min(self.data_s)   # max and min values' dictionary
-        self.max_p, self.min_p = self.get_max_min(self.data_tra)  # max and min values' dictionary
+        self.vehicle_id=self.get_vehicle_id(self.data_tra.values[:,0])        # store the index from vehicle id to index
+        self.vehicle_type = self.get_vehicle_type(self.data_tra.values[:, 1]) # store the index from vehicle type to index
+        self.length=self.data_s.shape[0]                          # data length
+        self.max_s, self.min_s= self.get_max_min(self.data_s)     # max and min values' dictionary
+        # self.max_t, self.min_t = self.get_max_min(self.data_tra)  # max and min values' dictionary
 
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
-        self.normalization(self.data_tra, list(self.data_tra.keys())[4:], max_dict=self.max_p, min_dict=self.min_p, is_normalize=self.normalize)  # normalization
+        # self.normalization(self.data_tra, [], max_dict=self.max_t, min_dict=self.min_t, is_normalize=self.normalize)  # normalization
+
+    def get_vehicle_id(self, data=None):
+        '''
+        :param data:
+        :return:
+        '''
+        vehicle_id = dict()
+        for id in data:
+            if id not in vehicle_id:
+                vehicle_id[id] = len(vehicle_id)
+        return vehicle_id
+
+    def get_vehicle_type(self, data=None):
+        '''
+        :param data:
+        :return:
+        '''
+        vehicle_type = dict()
+        for id in data:
+            if id not in vehicle_type:
+                vehicle_type[id] = len(vehicle_type)
+        return vehicle_type
 
     def get_source_data(self,file_path=None):
         '''
@@ -137,7 +160,7 @@ class DataClass(object):
                        datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, # start second
                        np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.float),       # distances
                        np.array([dragon_dragon[tuple] for tuple in route],dtype=np.int),                                 # route id
-                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),      # separate trajectory time
+                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float)/10000.0,# separate trajectory time
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float)) # total time
                 low += 1
             else:
@@ -148,17 +171,31 @@ class DataClass(object):
         :param batch_size:
         :param epochs:
         :param is_training:
-        :return: x shape is [batch, input_length*site_num, features];
-                 day shape is [batch, (input_length+output_length)*site_num];
-                 hour shape is [batch, (input_length+output_length)*site_num];
-                 minute shape is [batch, (input_length+output_length)*site_num];
-                 label shape is [batch, output_length*site_num, features]
+        :return:
+        speed: [batch, length, site num, feature]
+        week: [batch, length, site num]
+        day: [batch, length, site num]
+        hour: [batch, length, site num]
+        minute: [batch, length, site num]
+        label: [batch, site num, output length]
+
+        vehicle ID: [batch, 1]
+        vehicle type: [batch, 1]
+        start week: [batch, 1]
+        start day: [batch, 1]
+        start hour: [batch, 1]
+        start minute: [batch, 1]
+        start second: [batch, 1]
+        distance: [batch, trajectory length]
+        separate trajectory ID: [batch, trajectory_length]
+        label separate time: [batch, trajectory_length]
+        label total time: [batch, 1]
         '''
 
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.float32))
+                                                                            tf.float32, tf.int32, tf.float32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_s[0]//self.hp.site_num * self.divide_ratio-self.input_length-self.output_length)//self.step)
