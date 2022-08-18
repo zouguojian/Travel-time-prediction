@@ -16,6 +16,8 @@ class parameter(object):
         self.parser.add_argument('--learning_rate', type=float, default=0.0005, help='learning rate')
         self.parser.add_argument('--dropout', type=float, default=0.0, help='drop out')
         self.parser.add_argument('--site_num', type=int, default=108, help='total number of road')
+        self.parser.add_argument('--k', type=int, default=40, help='latent vector dimension')
+        self.parser.add_argument('--field_cnt', type=int, default=1, help='the number of filed')
         self.parser.add_argument('--trajectory_length', type=int, default=5, help='length of trajectory')
         self.parser.add_argument('--num_heads', type=int, default=4, help='total number of head attentions')
         self.parser.add_argument('--num_blocks', type=int, default=2, help='total number of attention layers')

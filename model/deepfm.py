@@ -1,12 +1,7 @@
 # coding:utf-8
 import os
-import sys
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = os.path.split(curPath)[0]
-sys.path.append(rootPath)
 import tensorflow as tf
 import numpy as np
-from Deep_FM.utilities import *
 import pandas as pd
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
@@ -15,21 +10,22 @@ class DeepFM(object):
     """
     Deep FM with FTRL optimization
     """
-    def __init__(self, config):
+    def __init__(self, hp):
         """
         :param config: configuration of hyperparameters
         type of dict
         """
         # number of latent factors
-        self.k = config['k']
-        self.lr = config['lr']
-        self.batch_size = config['batch_size']
-        self.reg_l1 = config['reg_l1']
-        self.reg_l2 = config['reg_l2']
+        self.hp = hp
+        self.k = self.hp['k']
+        self.lr = self.hp['learning_rate']
+        self.batch_size = self.hp['batch_size']
+        self.reg_l1 = self.hp['reg_l1']
+        self.reg_l2 = self.hp['reg_l2']
         # num of features
         self.p = feature_length
         # num of fields
-        self.field_cnt = field_cnt
+        self.field_cnt = self.hp['field_cnt']
 
     def add_placeholders(self):
         self.X = tf.placeholder('float32', [None, self.p])
