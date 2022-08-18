@@ -110,6 +110,9 @@ class DataClass(object):
             for key in keys:
                 data[key]=(data[key] - min_dict[key]) / (max_dict[key] - min_dict[key] + self.min_value)
 
+    def get_trajectory_feature_length(self, data=None, keys=None):
+        return
+
     def generator(self):
         '''
         speed: [length, site num, feature]
