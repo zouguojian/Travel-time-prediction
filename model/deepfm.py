@@ -7,7 +7,6 @@ sys.path.append(rootPath)
 import tensorflow as tf
 import numpy as np
 from Deep_FM.utilities import *
-import math
 import pandas as pd
 import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
@@ -45,7 +44,7 @@ class DeepFM(object):
         :return: labels for each sample
         """
         v = tf.Variable(tf.truncated_normal(shape=[self.p, self.k], mean=0, stddev=0.01),dtype='float32')
-
+                                                   # p = 种类数
         # Factorization Machine
         with tf.variable_scope('FM'):
             b = tf.get_variable('bias', shape=[2],
@@ -67,7 +66,7 @@ class DeepFM(object):
 
         # three-hidden-layer neural network, network shape of (200-200-200)
         with tf.variable_scope('DNN',reuse=False):
-            # embedding layer
+            # embedding layer, 切分出对应字段的的隐藏空间特征值
             y_embedding_input = tf.reshape(tf.gather(v, self.feature_inds), [-1, self.field_cnt*self.k])
             # first hidden layer
             w1 = tf.get_variable('w1_dnn', shape=[self.field_cnt*self.k, 200],

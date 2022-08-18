@@ -3,7 +3,7 @@
 import pandas as pd
 import datetime
 data = pd.read_csv('trajectory_1.csv',encoding='utf-8')
-print(data.values[1])
+print(max(data['speed_1'].values()))
 time = data.values[1][2]
 print(time)
 
