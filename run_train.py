@@ -1,12 +1,13 @@
 # -- coding: utf-8 --
 import tensorflow as tf
-
-from model.deepfm import DeepFM
-from model.hyparameter import parameter
 import pandas as pd
 import numpy as np
 import os
 import argparse
+
+from model.embedding import embedding
+from model.deepfm import DeepFM
+from model.hyparameter import parameter
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"

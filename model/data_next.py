@@ -84,6 +84,16 @@ class DataClass(object):
         data = pd.read_csv(file_path, encoding='utf-8')
         return data
 
+    def get_one_hot(self, value=0, array_length=300):
+        '''
+        :param value:
+        :param array_length:
+        :return:
+        '''
+        array = np.zeros([array_length],dtype=np.int)
+        array[value]=1
+        return array
+
     def get_max_min(self, data=None, times =1):
         '''
         :param data:
@@ -156,18 +166,18 @@ class DataClass(object):
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]//7, # week
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2],    # day
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
-                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],# minute
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],    # minute
                        label, # speed label
-                       self.vehicle_id[data_tra[low,0]], # vehicle id
-                       data_tra[low, 1],                 # vehicle type
-                       datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7, # start week
-                       datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day,    # start day
-                       datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour,   # start hour
-                       datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute, # start minute
-                       datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, # start second
-                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.float),       # distances
+                       self.get_one_hot(self.vehicle_id[data_tra[low,0]],array_length=len(self.vehicle_id)), # vehicle id
+                       self.get_one_hot(data_tra[low, 1],array_length=16),                 # vehicle type
+                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7, array_length=5),  # start week
+                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day, array_length=31),    # start day
+                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour, array_length=60),   # start hour
+                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute, array_length=60), # start minute
+                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, array_length=60), # start second
+                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.float)/10000.0,          # distances
                        np.array([dragon_dragon[tuple] for tuple in route],dtype=np.int),                                 # route id
-                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float)/10000.0,# separate trajectory time
+                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),      # separate trajectory time
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float)) # total time
                 low += 1
             else:
