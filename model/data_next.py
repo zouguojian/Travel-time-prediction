@@ -113,10 +113,19 @@ class DataClass(object):
         return array
 
     def get_element_index(self, elements_index = [], elements_field_length=[]):
-
-        for i, element_index in enumerate(elements_index):
-
-        return
+        '''
+        :param elements_index:
+        :param elements_field_length:
+        :return:
+        '''
+        indexs = []
+        sum_index = 0
+        for i, elements in enumerate(elements_index):
+            for j, element in enumerate(elements):
+                if elements_index == -1:
+                    indexs.append(sum_index + j)
+            sum_index +=elements_field_length[i]
+        return indexs
 
     def get_max_min(self, data=None, times =1):
         '''
@@ -198,13 +207,15 @@ class DataClass(object):
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second], array_length=60), # start second
                        np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                           # distances
                        np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=108)),                        # route id
-                       self.get_element_index([self.vehicle_id[data_tra[low,0]], data_tra[low, 1],
-                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7,
-                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day,
-                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour,
-                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute,
-                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second,
-                                               ]),
+                       self.get_element_index([[self.vehicle_id[data_tra[low,0]]], [data_tra[low, 1]],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second],
+                                               [-1] * self.trajectory_length,
+                                               [dragon_dragon[tuple] for tuple in route]],
+                                               [len(self.vehicle_id), 16, 5, 31, 24, 60, 60, self.trajectory_length, 108]),           # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))              # total time label
                 low += 1
