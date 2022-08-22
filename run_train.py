@@ -19,6 +19,10 @@ class Model(object):
         self.site_num = self.hp.site_num
         self.input_length = self.hp.input_length
         self.output_length = self.hp.output_length
+        self.emb_size = self.hp.emb_size
+        self.batch_size = self.hp.batch_size
+        self.features_s = self.hp.features_s
+        self.features_tra = self.hp.features_tra
 
         # define placeholders
         self.placeholders = {
@@ -29,16 +33,11 @@ class Model(object):
             'indices_i': tf.placeholder(dtype=tf.int64, shape=[None, None], name='input_indices'),
             'values_i': tf.placeholder(dtype=tf.float32, shape=[None], name='input_values'),
             'dense_shape_i': tf.placeholder(dtype=tf.int64, shape=[None], name='input_dense_shape'),
-            'features_s': tf.placeholder(tf.float32,
-                                         shape=[None, self.input_length, self.site_num, self.para.features],
-                                         name='input_s'),
-            'labels_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length],
-                                       name='labels_s'),
-            'features_p': tf.placeholder(tf.float32, shape=[None, self.input_length, self.para.features_p],
-                                         name='input_p'),
-            'labels_p': tf.placeholder(tf.float32, shape=[None, self.output_length], name='labels_p'),
-            'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
-            'num_features_nonzero': tf.placeholder(tf.int32, name='input_zero')  # helper variable for sparse dropout
+            'features_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.features_s], name='input_s'),
+            'labels_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length], name='labels_s'),
+            'features_tra': tf.placeholder(tf.float32, shape=[None, self.input_length, self.features_tra], name='input_tra'),
+            'labels_tra': tf.placeholder(tf.float32, shape=[None, self.output_length], name='labels_tra'),
+            'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
         }
         self.model()
 
@@ -52,26 +51,18 @@ class Model(object):
         :param is_training: True
         :return:
         '''
-        p_emd = embedding(self.placeholders['position'], vocab_size=self.para.site_num, num_units=self.para.emb_size,
-                          scale=False, scope="position_embed")
-        p_emd = tf.reshape(p_emd, shape=[1, self.para.site_num, self.para.emb_size])
-        self.p_emd = tf.tile(tf.expand_dims(p_emd, axis=0),
-                             [self.para.batch_size, self.para.input_length + self.para.output_length, 1, 1])
+        p_emd = embedding(self.placeholders['position'], vocab_size=self.site_num, num_units=self.emb_size, scale=False, scope="position_embed")
+        p_emd = tf.reshape(p_emd, shape=[1, self.site_num, self.emb_size])
+        self.p_emd = tf.tile(tf.expand_dims(p_emd, axis=0), [self.batch_size, self.input_length + self.output_length, 1, 1])
 
-        d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.para.emb_size, scale=False,
-                          scope="day_embed")
-        self.d_emd = tf.reshape(d_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
-                                              self.para.site_num, self.para.emb_size])
+        d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.emb_size, scale=False, scope="day_embed")
+        self.d_emd = tf.reshape(d_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
-        h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.para.emb_size, scale=False,
-                          scope="hour_embed")
-        self.h_emd = tf.reshape(h_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
-                                              self.para.site_num, self.para.emb_size])
+        h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.emb_size, scale=False, scope="hour_embed")
+        self.h_emd = tf.reshape(h_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
-        m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.para.emb_size, scale=False,
-                          scope="minute_embed")
-        self.m_emd = tf.reshape(m_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
-                                              self.para.site_num, self.para.emb_size])
+        m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.emb_size, scale=False, scope="minute_embed")
+        self.m_emd = tf.reshape(m_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
         # encoder
         print('#................................in the encoder step....................................#')
@@ -128,40 +119,6 @@ class Model(object):
                                                            STE=STE[:, :self.para.input_length, :, :],
                                                            supports=self.supports)
             print('encoder encoder_outs shape is : ', encoder_outs.shape)
-
-        # bridge
-        print('#................................in the bridge step.....................................#')
-        with tf.variable_scope(name_or_scope='bridge'):
-            # STE[:, :self.para.input_length,:,:]
-            # bridge_outs = transformAttention(encoder_outs, encoder_outs, STE[:, self.para.input_length:,:,:], self.para.num_heads, self.para.emb_size // self.para.num_heads, False, 0.99, self.para.is_training)
-            bridge = BridgeTransformer(self.para)
-            bridge_outs = bridge.encoder(X=encoder_outs,
-                                         X_P=encoder_outs,
-                                         X_Q=STE[:, self.para.input_length:, :, :])
-            print('bridge bridge_outs shape is : ', bridge_outs.shape)
-
-        # decoder
-        # print('#................................in the decoder step....................................#')
-        # with tf.variable_scope(name_or_scope='decoder'):
-        #     '''
-        #     return, the gcn output --- for example, inputs.shape is :  (32, 1, 162, 32)
-        #     axis=0: bath size
-        #     axis=1: input data time size
-        #     axis=2: numbers of the nodes
-        #     axis=3: output feature size
-        #     '''
-        #     decoder = Decoder_ST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
-        #     decoder_outs = decoder.decoder_spatio_temporal(speed=bridge_outs,
-        #                                                    STE = STE[:, self.para.input_length:,:,:],
-        #                                                    supports=self.supports)
-        #     print('decoder decoder_outs shape is : ', decoder_outs.shape)
-
-        # inference
-        print('#................................in the inference step...................................#')
-        with tf.variable_scope(name_or_scope='inference'):
-            inference = InferenceClass(para=self.para)
-            self.pres_s = inference.inference(out_hiddens=bridge_outs)
-            print('pres_s shape is : ', self.pres_s.shape)
 
         self.loss1 = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
@@ -262,7 +219,7 @@ class Model(object):
             pre_s_list.append(pre_s)
 
         label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32),
-                                  [-1, self.para.site_num, self.para.output_length]).transpose([1, 0, 2])
+                                  [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
         pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
                                 [-1, self.para.site_num, self.para.output_length]).transpose([1, 0, 2])
         if self.para.normalize:

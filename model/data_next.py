@@ -90,8 +90,8 @@ class DataClass(object):
         :param array_length:
         :return:
         '''
-        array = np.zeros([array_length],dtype=np.int)
-        array[value]=1
+        array = np.zeros([array_length])
+        array[int(value)]=1
         return array
 
     def get_max_min(self, data=None, times =1):
@@ -175,7 +175,7 @@ class DataClass(object):
                        self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour, array_length=60),   # start hour
                        self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute, array_length=60), # start minute
                        self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, array_length=60), # start second
-                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)],dtype=np.float)/10000.0,          # distances
+                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                         # distances
                        np.array([dragon_dragon[tuple] for tuple in route],dtype=np.int),                                 # route id
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),      # separate trajectory time
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float)) # total time
