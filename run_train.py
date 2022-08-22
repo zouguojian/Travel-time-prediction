@@ -63,18 +63,11 @@ class Model(object):
         m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.emb_size, scale=False, scope="minute_embed")
         self.m_emd = tf.reshape(m_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
-        # encoder
-        print('#................................in the encoder step....................................#')
+        print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='encoder'):
-            '''
-            return, the gcn output --- for example, inputs.shape is :  (32, 3, 162, 32)
-            axis=0: bath size
-            axis=1: input data time size
-            axis=2: numbers of the nodes
-            axis=3: output feature size
-            '''
+            DeepModel = DeepFM(self.hp)
 
-            
+
 
         self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
         self.train_op = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.loss)

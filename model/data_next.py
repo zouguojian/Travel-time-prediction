@@ -101,7 +101,7 @@ class DataClass(object):
         data = pd.read_csv(file_path, encoding='utf-8')
         return data
 
-    def get_one_hot(self, values=[0], array_length=300):
+    def get_one_hot(self, values=[], array_length=300):
         '''
         :param value:
         :param array_length:
@@ -112,7 +112,9 @@ class DataClass(object):
             array[int(value)]=1
         return array
 
-    def get_element_index(self):
+    def get_element_index(self, elements_index = [], elements_field_length=[]):
+
+        for i, element_index in enumerate(elements_index):
 
         return
 
@@ -194,11 +196,17 @@ class DataClass(object):
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour], array_length=24),   # start hour
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute], array_length=60), # start minute
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second], array_length=60), # start second
-                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                         # distances
-                       np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=108)),                      # route id
-
-                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                 # separate trajectory time label
-                       np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))            # total time label
+                       np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                           # distances
+                       np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=108)),                        # route id
+                       self.get_element_index([self.vehicle_id[data_tra[low,0]], data_tra[low, 1],
+                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7,
+                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day,
+                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour,
+                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute,
+                                               datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second,
+                                               ]),
+                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
+                       np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))              # total time label
                 low += 1
             else:
                 speed_low+=1
