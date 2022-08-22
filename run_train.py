@@ -52,7 +52,6 @@ class Model(object):
         :return:
         '''
         p_emd = embedding(self.placeholders['position'], vocab_size=self.site_num, num_units=self.emb_size, scale=False, scope="position_embed")
-        p_emd = tf.reshape(p_emd, shape=[1, self.site_num, self.emb_size])
         self.p_emd = tf.tile(tf.expand_dims(p_emd, axis=0), [self.batch_size, self.input_length + self.output_length, 1, 1])
 
         d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.emb_size, scale=False, scope="day_embed")
@@ -74,55 +73,11 @@ class Model(object):
             axis=2: numbers of the nodes
             axis=3: output feature size
             '''
-            timestamp = [self.h_emd, self.m_emd]
-            position = self.p_emd
-            # [-1, input_length, site num, emb_size]
-            if self.para.model_name == 'STGIN_1':
-                speed = FC(self.placeholders['features_s'], units=[self.para.emb_size, self.para.emb_size],
-                           activations=[tf.nn.relu, None],
-                           bn=False, bn_decay=0.99, is_training=self.para.is_training)
-            else:
-                speed = tf.transpose(self.placeholders['features_s'], perm=[0, 2, 1, 3])
-                speed = tf.reshape(speed, [-1, self.para.input_length, self.para.features])
-                speed3 = tf.layers.conv1d(inputs=speed,
-                                          filters=self.para.emb_size,
-                                          kernel_size=3,
-                                          padding='SAME',
-                                          kernel_initializer=tf.truncated_normal_initializer(),
-                                          name='conv_1')
 
-                speed2 = tf.layers.conv1d(inputs=tf.reverse(speed, axis=[1]),
-                                          filters=self.para.emb_size,
-                                          kernel_size=3,
-                                          padding='SAME',
-                                          kernel_initializer=tf.truncated_normal_initializer(),
-                                          name='conv_2')
+            
 
-                speed1 = tf.layers.conv1d(inputs=speed,
-                                          filters=self.para.emb_size,
-                                          kernel_size=1,
-                                          padding='SAME',
-                                          kernel_initializer=tf.truncated_normal_initializer(),
-                                          name='conv_3')
-                # speed2 = tf.nn.sigmoid(speed2)
-                speed2 = tf.reverse(speed2, axis=[1])
-                speed2 = tf.multiply(speed2, tf.nn.sigmoid(speed2))
-                speed3 = tf.multiply(speed3, tf.nn.sigmoid(speed3))
-                speed = tf.add_n([speed1, speed2, speed3])
-                speed = tf.reshape(speed, [-1, self.para.site_num, self.para.input_length, self.para.emb_size])
-                speed = tf.transpose(speed, perm=[0, 2, 1, 3])
-            # [-1, input_length, emb_size]
-            STE = STEmbedding(position, timestamp, 0, self.para.emb_size, False, 0.99, self.para.is_training)
-
-            encoder = Encoder_ST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
-            encoder_outs = encoder.encoder_spatio_temporal(speed=speed,
-                                                           STE=STE[:, :self.para.input_length, :, :],
-                                                           supports=self.supports)
-            print('encoder encoder_outs shape is : ', encoder_outs.shape)
-
-        self.loss1 = tf.reduce_mean(
-            tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
-        self.train_op_1 = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.loss1)
+        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
+        self.train_op = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
 

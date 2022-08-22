@@ -66,6 +66,23 @@ class DataClass(object):
                 vehicle_id[id] = len(vehicle_id)
         return vehicle_id
 
+    def get_trajectory_feature_length(self, vehicle_id=10000, vehicle_type=16, week=5, day=31, hour=24, minute=60, second=60, distances=5, route_id=5):
+        '''
+        :param vehicle_id:
+        :param vehicle_type:
+        :param week:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param distances:
+        :param route_id:
+        :return:
+        '''
+        vehicle_id = len(self.vehicle_id)
+        traing_length = vehicle_id + vehicle_type + week + day + hour + minute + second + distances + route_id
+        return traing_length
+
     def get_vehicle_type(self, data=None):
         '''
         :param data:
@@ -84,15 +101,20 @@ class DataClass(object):
         data = pd.read_csv(file_path, encoding='utf-8')
         return data
 
-    def get_one_hot(self, value=0, array_length=300):
+    def get_one_hot(self, values=[0], array_length=300):
         '''
         :param value:
         :param array_length:
         :return:
         '''
         array = np.zeros([array_length])
-        array[int(value)]=1
+        for value in values:
+            array[int(value)]=1
         return array
+
+    def get_element_index(self):
+
+        return
 
     def get_max_min(self, data=None, times =1):
         '''
@@ -119,9 +141,6 @@ class DataClass(object):
         if is_normalize:
             for key in keys:
                 data[key]=(data[key] - min_dict[key]) / (max_dict[key] - min_dict[key] + self.min_value)
-
-    def get_trajectory_feature_length(self, data=None, keys=None):
-        return
 
     def generator(self):
         '''
@@ -168,17 +187,18 @@ class DataClass(object):
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],    # minute
                        label, # speed label
-                       self.get_one_hot(self.vehicle_id[data_tra[low,0]],array_length=len(self.vehicle_id)), # vehicle id
-                       self.get_one_hot(data_tra[low, 1],array_length=16),                 # vehicle type
-                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7, array_length=5),  # start week
-                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day, array_length=31),    # start day
-                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour, array_length=60),   # start hour
-                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute, array_length=60), # start minute
-                       self.get_one_hot(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second, array_length=60), # start second
+                       self.get_one_hot([self.vehicle_id[data_tra[low,0]]],array_length=len(self.vehicle_id)),                        # vehicle id
+                       self.get_one_hot([data_tra[low, 1]],array_length=16),                                                          # vehicle type
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7], array_length=5),  # start week
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day], array_length=31),    # start day
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour], array_length=24),   # start hour
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute], array_length=60), # start minute
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second], array_length=60), # start second
                        np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                         # distances
-                       np.array([dragon_dragon[tuple] for tuple in route],dtype=np.int),                                 # route id
-                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),      # separate trajectory time
-                       np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float)) # total time
+                       np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=108)),                      # route id
+
+                       np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                 # separate trajectory time label
+                       np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))            # total time label
                 low += 1
             else:
                 speed_low+=1
