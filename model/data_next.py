@@ -148,8 +148,9 @@ class DataClass(object):
         sum_index = 0
         for i, elements in enumerate(elements_index):
             for j, element in enumerate(elements):
-                if elements_index == -1:
+                if element == -1:
                     indexs.append(sum_index + j)
+                else:indexs.append(sum_index + element)
             sum_index += elements_field_length[i]
         return indexs
 
@@ -272,5 +273,6 @@ if __name__=='__main__':
     with tf.Session() as sess:
         for _ in range(1):
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
-            print('speed : ', b.shape, c.shape, d.shape, e.shape)
-            print('trajectory',i.shape, j.shape, k.shape, l.shape, )
+            print('speed : ', a.shape, b.shape, c.shape, d.shape, e.shape, f.shape)
+            print('trajectory', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)
+            print(index)
