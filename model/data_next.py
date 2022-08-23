@@ -55,6 +55,39 @@ class DataClass(object):
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
         # self.normalization(self.data_tra, [], max_dict=self.max_t, min_dict=self.min_t, is_normalize=self.normalize)  # normalization
 
+    def get_source_data(self,file_path=None):
+        '''
+        :return:
+        '''
+        data = pd.read_csv(file_path, encoding='utf-8')
+        return data
+
+    def get_max_min(self, data=None, times =1):
+        '''
+        :param data:
+        :return:
+        '''
+        min_dict=dict()
+        max_dict=dict()
+
+        for key in data.keys():
+            min_dict[key] = data[key].min()
+            max_dict[key] = data[key].max()
+        # print('the max feature list is :', max_dict)
+        # print('the min feature list is :', min_dict)
+        return max_dict, min_dict
+
+    def normalization(self, data, keys=None, max_dict =None, min_dict=None, is_normalize=True):
+        '''
+        :param data:
+        :param keys:  is a list
+        :param is_normalize:
+        :return:
+        '''
+        if is_normalize:
+            for key in keys:
+                data[key]=(data[key] - min_dict[key]) / (max_dict[key] - min_dict[key] + self.min_value)
+
     def get_vehicle_id(self, data=None):
         '''
         :param data:
@@ -94,13 +127,6 @@ class DataClass(object):
                 vehicle_type[id] = len(vehicle_type)
         return vehicle_type
 
-    def get_source_data(self,file_path=None):
-        '''
-        :return:
-        '''
-        data = pd.read_csv(file_path, encoding='utf-8')
-        return data
-
     def get_one_hot(self, values=[], array_length=300):
         '''
         :param value:
@@ -124,34 +150,8 @@ class DataClass(object):
             for j, element in enumerate(elements):
                 if elements_index == -1:
                     indexs.append(sum_index + j)
-            sum_index +=elements_field_length[i]
+            sum_index += elements_field_length[i]
         return indexs
-
-    def get_max_min(self, data=None, times =1):
-        '''
-        :param data:
-        :return:
-        '''
-        min_dict=dict()
-        max_dict=dict()
-
-        for key in data.keys():
-            min_dict[key] = data[key].min()
-            max_dict[key] = data[key].max()
-        # print('the max feature list is :', max_dict)
-        # print('the min feature list is :', min_dict)
-        return max_dict, min_dict
-
-    def normalization(self, data, keys=None, max_dict =None, min_dict=None, is_normalize=True):
-        '''
-        :param data:
-        :param keys:  is a list
-        :param is_normalize:
-        :return:
-        '''
-        if is_normalize:
-            for key in keys:
-                data[key]=(data[key] - min_dict[key]) / (max_dict[key] - min_dict[key] + self.min_value)
 
     def generator(self):
         '''
@@ -199,7 +199,7 @@ class DataClass(object):
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],    # minute
                        label, # speed label
                        self.get_one_hot([self.vehicle_id[data_tra[low,0]]],array_length=len(self.vehicle_id)),                        # vehicle id
-                       self.get_one_hot([data_tra[low, 1]],array_length=16),                                                          # vehicle type
+                       self.get_one_hot([data_tra[low, 1]],array_length=25),                                                          # vehicle type
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7], array_length=5),  # start week
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day], array_length=31),    # start day
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour], array_length=24),   # start hour
@@ -215,7 +215,7 @@ class DataClass(object):
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second],
                                                [-1] * self.trajectory_length,
                                                [dragon_dragon[tuple] for tuple in route]],
-                                               [len(self.vehicle_id), 16, 5, 31, 24, 60, 60, self.trajectory_length, 108]),           # each element index
+                                               [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, 108]),           # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))              # total time label
                 low += 1
@@ -251,7 +251,7 @@ class DataClass(object):
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.int32, tf.float32, tf.float32))
+                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio-self.input_length-self.output_length)//self.step)
@@ -270,7 +270,7 @@ if __name__=='__main__':
 
     next=iter.next_batch(batch_size=1, epoch=1, is_training=False)
     with tf.Session() as sess:
-        for _ in range(40):
-            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q = sess.run(next)
-            print('speed', b[0,0], c[0,0], d[0,0], e[0,0])
-            print('trajectory',i[0], j[0], k[0], l[0])
+        for _ in range(1):
+            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
+            print('speed : ', b.shape, c.shape, d.shape, e.shape)
+            print('trajectory',i.shape, j.shape, k.shape, l.shape, )
