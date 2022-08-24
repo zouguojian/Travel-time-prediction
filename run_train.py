@@ -4,11 +4,13 @@ import pandas as pd
 import numpy as np
 import os
 import argparse
+import datetime
 
 from model.embedding import embedding
 # from model.deepfm import DeepFM
 from model.trajectory_inference import DeepFM
 from model.hyparameter import parameter
+from model.data_next import DataClass
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -26,6 +28,10 @@ class Model(object):
         self.feature_tra = self.hp.feature_tra
         self.learning_rate = self.hp.learning_rate
         self.field_cnt = self.hp.field_cnt
+        self.epoch = self.hp.epoch
+        self.divide_ratio = self.hp.divide_ratio
+        self.step = self.hp.step
+        self.dropout = self.hp.dropout
 
         self.initial_placeholder()
         self.initial_speed_embedding()
@@ -76,10 +82,11 @@ class Model(object):
         :return:
         '''
         print('#................................feature cross....................................#')
-        with tf.variable_scope(name_or_scope='encoder'):
+        with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
-
-
+            self.pre = DeepModel.inference(X=self.placeholders['feature_tra'],
+                                            feature_inds=self.placeholders['feature_inds'],
+                                            keep_prob=self.placeholders['dropout'])
 
         self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre + 1e-10 - self.placeholders['labels_tra']), axis=0)))
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
@@ -113,19 +120,18 @@ class Model(object):
         start_time = datetime.datetime.now()
         max_mae = 100
         self.sess.run(tf.global_variables_initializer())
-        iterate = DataClass(self.para)
+        iterate = DataClass(self.hp)
+        train_next = iterate.next_batch(batch_size=self.batch_size, epoch=self.epoch, is_training=True)
 
-        train_next = iterate.next_batch(batch_size=self.para.batch_size, epoch=self.para.epoch, is_training=True)
-
-        for i in range(int((iterate.length // self.para.site_num * self.para.divide_ratio - (
-                self.para.input_length + self.para.output_length)) // self.para.step)
-                       * self.para.epoch // self.para.batch_size):
+        for i in range(int((iterate.length // self.site_num * self.para.divide_ratio - (
+                self.input_length + self.output_length)) // self.para.step)
+                       * self.epoch // self.batch_size):
             x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(train_next)
-            x_s = np.reshape(x_s, [-1, self.para.input_length, self.para.site_num, self.para.features])
-            day = np.reshape(day, [-1, self.para.site_num])
-            hour = np.reshape(hour, [-1, self.para.site_num])
-            minute = np.reshape(minute, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
+            day = np.reshape(day, [-1, self.site_num])
+            hour = np.reshape(hour, [-1, self.site_num])
+            minute = np.reshape(minute, [-1, self.site_num])
+            feed_dict = construct_feed_dict(x_s, label_s, day, hour, minute, x_p, label_p, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
 
             loss_1, _ = self.sess.run((self.loss1, self.train_op_1), feed_dict=feed_dict)
