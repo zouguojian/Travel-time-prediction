@@ -172,6 +172,7 @@ class DataClass(object):
         start second: [1]
         distance: [trajectory length]
         separate trajectory ID: [trajectory_length]
+        feature_inds: []
         label separate time: [trajectory_length]
         label total time: [1]
         :return:
@@ -245,6 +246,7 @@ class DataClass(object):
         start second: [batch, 1]
         distance: [batch, trajectory length]
         separate trajectory ID: [batch, trajectory_length]
+        feature_inds: []
         label separate time: [batch, trajectory_length]
         label total time: [batch, 1]
         '''
@@ -271,8 +273,9 @@ if __name__=='__main__':
 
     next=iter.next_batch(batch_size=1, epoch=1, is_training=False)
     with tf.Session() as sess:
-        for _ in range(1):
+        for index_i in range(9000):
+            print(index_i)
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
             print('speed : ', a.shape, b.shape, c.shape, d.shape, e.shape, f.shape)
-            print('trajectory', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)
+            print('trajectory : ', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)
             print(index)

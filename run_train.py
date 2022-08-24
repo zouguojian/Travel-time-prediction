@@ -6,7 +6,8 @@ import os
 import argparse
 
 from model.embedding import embedding
-from model.deepfm import DeepFM
+# from model.deepfm import DeepFM
+from model.trajectory_inference import DeepFM
 from model.hyparameter import parameter
 
 tf.reset_default_graph()
@@ -21,10 +22,16 @@ class Model(object):
         self.output_length = self.hp.output_length
         self.emb_size = self.hp.emb_size
         self.batch_size = self.hp.batch_size
-        self.features_s = self.hp.features_s
-        self.features_tra = self.hp.features_tra
+        self.feature_s = self.hp.feature_s
+        self.feature_tra = self.hp.feature_tra
         self.learning_rate = self.hp.learning_rate
+        self.field_cnt = self.hp.field_cnt
 
+        self.initial_placeholder()
+        self.initial_speed_embedding()
+        self.model()
+
+    def initial_placeholder(self):
         # define placeholders
         self.placeholders = {
             'position': tf.placeholder(tf.int32, shape=(1, self.site_num), name='input_position'),
@@ -32,17 +39,31 @@ class Model(object):
             'day': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_day'),
             'hour': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_hour'),
             'minute': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_minute'),
-            'indices_i': tf.placeholder(dtype=tf.int64, shape=[None, None], name='input_indices'),
-            'values_i': tf.placeholder(dtype=tf.float32, shape=[None], name='input_values'),
-            'dense_shape_i': tf.placeholder(dtype=tf.int64, shape=[None], name='input_dense_shape'),
-            'features_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.features_s], name='input_s'),
+            'feature_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.feature_s], name='input_s'),
             'labels_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length], name='labels_s'),
-            'features_tra': tf.placeholder(tf.float32, shape=[None, self.input_length, self.features_tra], name='input_tra'),
+            'feature_tra': tf.placeholder(tf.float32, shape=[None, self.feature_tra], name='input_tra'),
             'labels_tra': tf.placeholder(tf.float32, shape=[None, self.output_length], name='labels_tra'),
             'labels_tra_sum': tf.placeholder(tf.float32, shape=[None, 1], name='labels_tra_sum'),
+            'feature_inds': tf.placeholder(dtype=tf.int32, shape=[None, self.field_cnt], name='feature_inds'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
         }
-        self.model()
+
+    def initial_speed_embedding(self):
+        # speed related embedding define
+        p_emd = embedding(self.placeholders['position'], vocab_size=self.site_num, num_units=self.emb_size, scale=False, scope="position_embed")
+        self.p_emd = tf.tile(tf.expand_dims(p_emd, axis=0), [self.batch_size, self.input_length + self.output_length, 1, 1])
+
+        w_emb = embedding(self.placeholders['week'], vocab_size=5, num_units=self.emb_size, scale=False, scope="week_embed")
+        self.w_emd = tf.reshape(w_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
+
+        d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.emb_size, scale=False, scope="day_embed")
+        self.d_emd = tf.reshape(d_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
+
+        h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.emb_size, scale=False, scope="hour_embed")
+        self.h_emd = tf.reshape(h_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
+
+        m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.emb_size, scale=False, scope="minute_embed")
+        self.m_emd = tf.reshape(m_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
     def model(self):
         '''
@@ -54,18 +75,6 @@ class Model(object):
         :param is_training: True
         :return:
         '''
-        p_emd = embedding(self.placeholders['position'], vocab_size=self.site_num, num_units=self.emb_size, scale=False, scope="position_embed")
-        self.p_emd = tf.tile(tf.expand_dims(p_emd, axis=0), [self.batch_size, self.input_length + self.output_length, 1, 1])
-
-        d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.emb_size, scale=False, scope="day_embed")
-        self.d_emd = tf.reshape(d_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
-
-        h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.emb_size, scale=False, scope="hour_embed")
-        self.h_emd = tf.reshape(h_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
-
-        m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.emb_size, scale=False, scope="minute_embed")
-        self.m_emd = tf.reshape(m_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
-
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='encoder'):
             DeepModel = DeepFM(self.hp)
