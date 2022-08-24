@@ -23,10 +23,12 @@ class Model(object):
         self.batch_size = self.hp.batch_size
         self.features_s = self.hp.features_s
         self.features_tra = self.hp.features_tra
+        self.learning_rate = self.hp.learning_rate
 
         # define placeholders
         self.placeholders = {
             'position': tf.placeholder(tf.int32, shape=(1, self.site_num), name='input_position'),
+            'week': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_week'),
             'day': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_day'),
             'hour': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_hour'),
             'minute': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_minute'),
@@ -37,6 +39,7 @@ class Model(object):
             'labels_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length], name='labels_s'),
             'features_tra': tf.placeholder(tf.float32, shape=[None, self.input_length, self.features_tra], name='input_tra'),
             'labels_tra': tf.placeholder(tf.float32, shape=[None, self.output_length], name='labels_tra'),
+            'labels_tra_sum': tf.placeholder(tf.float32, shape=[None, 1], name='labels_tra_sum'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
         }
         self.model()
@@ -69,8 +72,8 @@ class Model(object):
 
 
 
-        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
-        self.train_op = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.loss)
+        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre + 1e-10 - self.placeholders['labels_tra']), axis=0)))
+        self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
 
