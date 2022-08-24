@@ -159,11 +159,20 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(x_s, adj, label_s, day, hour, minute, x_p, label_p, placeholders):
+def construct_feed_dict(x_s =None,
+                        week=1,
+                        day=1,
+                        hour=1,
+                        minute=1,
+                        label_s=None,
+                        element_index=[],
+                        separate_trajectory_time=0.1,
+                        total_time=0.1, placeholders=None):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
-    feed_dict.update({placeholders['labels_s']: label_s})
+    feed_dict.update({placeholders['label_s']: label_s})
+    feed_dict.update({placeholders['week']: week})
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['minute']: minute})
@@ -173,8 +182,6 @@ def construct_feed_dict(x_s, adj, label_s, day, hour, minute, x_p, label_p, plac
     feed_dict.update({placeholders['dense_shape_i']: adj[2]})
     feed_dict.update({placeholders['features_p']: x_p})
     feed_dict.update({placeholders['labels_p']: label_p})
-    # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
-    feed_dict.update({placeholders['num_features_nonzero']: x_s[0].shape})
     return feed_dict
 
 
@@ -220,6 +227,14 @@ def one_hot_representation(sample, fields_dict, array_length):
         array[ind] = 1
         idx.append(ind)
     return array,idx[:21]
+
+def one_hot_concatenation(features=[]):
+    '''
+    :param features:
+    :return: [N, p]
+    '''
+    features = np.concatenate(np.array(features, dtype=np.float), axis=-1)
+    return features
 
 import matplotlib.pyplot as plt
 def describe(label, predict):
