@@ -142,6 +142,7 @@ class Model(object):
                                             day=day,
                                             hour=hour, minute=minute,
                                             label_s=label_s,
+                                            x_tra = x_tra,
                                             element_index=element_index,
                                             separate_trajectory_time=separate_trajectory_time,
                                             total_time=total_time,

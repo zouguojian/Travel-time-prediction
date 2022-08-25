@@ -159,29 +159,29 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(x_s =None,
-                        week=1,
-                        day=1,
-                        hour=1,
-                        minute=1,
-                        label_s=None,
-                        element_index=[],
-                        separate_trajectory_time=0.1,
-                        total_time=0.1, placeholders=None):
+def construct_feed_dict(x_s = None,
+                        week = 1,
+                        day = 1,
+                        hour = 1,
+                        minute = 1,
+                        label_s = None,
+                        x_tra = None,
+                        element_index = [],
+                        separate_trajectory_time = [0.1],
+                        total_time = 0.1, placeholders = None):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
-    feed_dict.update({placeholders['label_s']: label_s})
     feed_dict.update({placeholders['week']: week})
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['minute']: minute})
-    feed_dict.update({placeholders['features_s']: x_s})
-    feed_dict.update({placeholders['indices_i']: adj[0]})
-    feed_dict.update({placeholders['values_i']: adj[1]})
-    feed_dict.update({placeholders['dense_shape_i']: adj[2]})
-    feed_dict.update({placeholders['features_p']: x_p})
-    feed_dict.update({placeholders['labels_p']: label_p})
+    feed_dict.update({placeholders['feature_s']: x_s})
+    feed_dict.update({placeholders['label_s']: label_s})
+    feed_dict.update({placeholders['feature_tra']: x_tra})
+    feed_dict.update({placeholders['label_tra']: separate_trajectory_time})
+    feed_dict.update({placeholders['label_tra_sum']: total_time})
+    feed_dict.update({placeholders['feature_inds']: element_index})
     return feed_dict
 
 
