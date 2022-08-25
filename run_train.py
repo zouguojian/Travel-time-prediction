@@ -167,6 +167,7 @@ class Model(object):
         :return:
         '''
         label_s_list, pre_s_list = list(), list()
+        label_tra_sum_list, pre_tra_sum_list = list(), list()
 
         # with tf.Session() as sess:
         model_file = tf.train.latest_checkpoint(self.hp.save_path)
@@ -179,38 +180,37 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
-        # '''
         for i in range(int((iterate_test.length // self.site_num
                             - iterate_test.length // self.site_num * iterate_test.divide_ratio
                             - (
                                     self.input_length + self.output_length)) // iterate_test.output_length) // self.batch_size):
-            x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(test_next)
+            x_s, week, day, hour, minute, label_s, \
+            vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
+            element_index, separate_trajectory_time, total_time = self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
+            week = np.reshape(week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
             hour = np.reshape(hour, [-1, self.site_num])
             minute = np.reshape(minute, [-1, self.site_num])
-            feed_dict = construct_feed_dict(x_s, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            x_tra = one_hot_concatenation(features=[vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id])
+            feed_dict = construct_feed_dict(x_s=x_s,
+                                            week=week,
+                                            day=day,
+                                            hour=hour, minute=minute,
+                                            label_s=label_s,
+                                            x_tra = x_tra,
+                                            element_index=element_index,
+                                            separate_trajectory_time=separate_trajectory_time,
+                                            total_time=total_time,
+                                            placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
+            pre_tra = self.sess.run((self.pre), feed_dict=feed_dict)
+            label_tra_sum_list.append(total_time)
+            pre_tra_sum_list.append(pre_tra)
 
-            pre_s = self.sess.run((self.pre), feed_dict=feed_dict)
-            label_s_list.append(label_s)
-            pre_s_list.append(pre_s)
-
-        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32),
-                                  [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
-        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
-                                [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
-        if self.hp.normalize:
-            label_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in label_s_list])
-            pre_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in pre_s_list])
-        else:
-            label_s_list = np.array([np.reshape(site_label, [-1]) for site_label in label_s_list])
-            pre_s_list = np.array([np.reshape(site_label, [-1]) for site_label in pre_s_list])
-        print('speed prediction result')
-        label_s_list = np.reshape(label_s_list, [-1])
-        pre_s_list = np.reshape(pre_s_list, [-1])
-        mae, rmse, mape, cor, r2 = metric(label_s_list, pre_s_list)  # 产生预测指标
+        label_tra_sum_list = np.reshape(np.array(label_s_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
+        pre_tra_sum_list = np.reshape(np.array(pre_s_list, dtype=np.float32) * 60, [-1, 1])      # total trajectory travel time for prediction
+        print('travel time prediction result >>>>>>')
+        mae, rmse, mape, cor, r2 = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
         return mae
