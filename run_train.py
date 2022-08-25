@@ -7,9 +7,7 @@ import argparse
 import datetime
 
 from model.embedding import embedding
-# from model.deepfm import DeepFM
 from model.trajectory_inference import DeepFM
-from model.hyparameter import parameter
 from model.data_next import DataClass
 from model.utils import construct_feed_dict, one_hot_concatenation, metric
 
@@ -20,19 +18,20 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 class Model(object):
     def __init__(self, hp):
         self.hp = hp
-        self.step = self.hp.step
-        self.epoch = self.hp.epoch
-        self.dropout = self.hp.dropout
-        self.site_num = self.hp.site_num
-        self.emb_size = self.hp.emb_size
-        self.field_cnt = self.hp.field_cnt
-        self.feature_s = self.hp.feature_s
-        self.batch_size = self.hp.batch_size
-        self.feature_tra = self.hp.feature_tra
-        self.divide_ratio = self.hp.divide_ratio
-        self.input_length = self.hp.input_length
-        self.output_length = self.hp.output_length
-        self.learning_rate = self.hp.learning_rate
+        self.step = self.hp.step                             # window length
+        self.epoch = self.hp.epoch                           # total training epochs
+        self.dropout = self.hp.dropout                       # dropout
+        self.site_num = self.hp.site_num                     # number of roads
+        self.emb_size = self.hp.emb_size                     # hidden embedding size
+        self.field_cnt = self.hp.field_cnt                   # number of features fields
+        self.feature_s = self.hp.feature_s                   # number of speed features
+        self.batch_size = self.hp.batch_size                 # batch size
+        self.feature_tra = self.hp.feature_tra               # number of trajectory features
+        self.divide_ratio = self.hp.divide_ratio             # the ratio of training set
+        self.input_length = self.hp.input_length             # input length of speed data
+        self.output_length = self.hp.output_length           # output length of speed data
+        self.learning_rate = self.hp.learning_rate           # learning rate
+        self.trajectory_length = self.hp.trajectory_length   # trajectory length
 
         self.initial_placeholder()
         self.initial_speed_embedding()
@@ -49,7 +48,7 @@ class Model(object):
             'feature_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.feature_s], name='input_s'),
             'label_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length], name='label_s'),
             'feature_tra': tf.placeholder(tf.float32, shape=[None, self.feature_tra], name='input_tra'),
-            'label_tra': tf.placeholder(tf.float32, shape=[None, self.output_length], name='label_tra'),
+            'label_tra': tf.placeholder(tf.float32, shape=[None, self.trajectory_length], name='label_tra'),
             'label_tra_sum': tf.placeholder(tf.float32, shape=[None, 1], name='label_tra_sum'),
             'feature_inds': tf.placeholder(dtype=tf.int32, shape=[None, self.field_cnt], name='feature_inds'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
@@ -89,7 +88,7 @@ class Model(object):
                                             feature_inds=self.placeholders['feature_inds'],
                                             keep_prob=self.placeholders['dropout'])
 
-        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre + 1e-10 - self.placeholders['labels_tra']), axis=0)))
+        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
@@ -124,9 +123,7 @@ class Model(object):
         iterate = DataClass(self.hp)
         train_next = iterate.next_batch(batch_size=self.batch_size, epoch=self.epoch, is_training=True)
 
-        for i in range(int((iterate.length // self.site_num * self.divide_ratio - (
-                self.input_length + self.output_length)) // self.step)
-                       * self.epoch // self.batch_size):
+        for i in range(int(iterate.shape_tra[0] * self.divide_ratio) * self.epoch // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
             element_index, separate_trajectory_time, total_time = self.sess.run(train_next)
@@ -149,16 +146,16 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.dropout})
 
-            loss_1, _ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
-            print("after %d steps,the training average loss value is : %.6f" % (i, loss_1))
+            loss, _ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
+            print("after %d steps,the training average loss value is : %.6f" % (i, loss))
 
             # validate processing
-            if i % 100 == 0:
-                mae = self.evaluate()
-                if max_mae > mae:
-                    print("the validate average loss value is : %.6f" % (mae))
-                    max_mae = mae
-                    self.saver.save(self.sess, save_path=self.hp.save_path + 'model.ckpt')
+            # if i % 100 == 0:
+            #     mae = self.evaluate()
+            #     if max_mae > mae:
+            #         print("the validate average loss value is : %.6f" % (mae))
+            #         max_mae = mae
+            #         self.saver.save(self.sess, save_path=self.hp.save_path + 'model.ckpt')
         end_time = datetime.datetime.now()
         total_time = end_time - start_time
         print("Total running times is : %f" % total_time.total_seconds())

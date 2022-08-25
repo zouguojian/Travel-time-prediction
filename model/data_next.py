@@ -38,6 +38,8 @@ class DataClass(object):
         self.file_train_s= self.hp.file_train_s
         self.file_train_t = self.hp.file_train_t
         self.normalize =self.hp.normalize             # data normalization
+        self.train_length = 0 # recoder the real number of train sample
+        self.test_length = 0  # recoder the real number of test sample
 
         self.data_s=self.get_source_data(self.file_train_s)
         self.data_s['datatime'] = pd.to_datetime(self.data_s.date) + pd.to_timedelta(self.data_s.hour, unit='h') + pd.to_timedelta(
@@ -184,12 +186,12 @@ class DataClass(object):
         else:
             low, high = int(self.shape_tra[0] * self.divide_ratio), int(self.shape_tra[0])
 
-        speed_low, speed_high =self.input_length, int(self.shape_s[0]//self.site_num)
+        speed_low, speed_high = self.input_length, int(self.shape_s[0]//self.site_num)
 
         while speed_low + self.input_length + self.output_length <= speed_high:
-            # print(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S'))
-            # print(data_s[speed_low*self.site_num, -1])
             if datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') >= data_s[speed_low*self.site_num, -1] and datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') < data_s[(speed_low+1)*self.site_num, -1]:
+                if self.is_training: self.train_length+=1
+                else:self.test_length+=1
                 # 个体轨迹数据与交通速度数据之间的对应
                 label=data_s[speed_low * self.site_num: (speed_low + self.output_length) * self.site_num, -2:-1]
                 label=np.concatenate([label[i * self.site_num : (i + 1) * self.site_num, :] for i in range(self.output_length)], axis=1)
@@ -208,7 +210,7 @@ class DataClass(object):
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute], array_length=60), # start minute
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second], array_length=60), # start second
                        np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                           # distances
-                       np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=108)),                        # route id
+                       np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=self.site_num)),              # route id
                        self.get_element_index([[self.vehicle_id[data_tra[low,0]]], [data_tra[low, 1]],
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7],
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day],
@@ -217,7 +219,7 @@ class DataClass(object):
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second],
                                                [-1] * self.trajectory_length,
                                                [dragon_dragon[tuple] for tuple in route]],
-                                               [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, 108]),           # each element index
+                                               [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, self.site_num]), # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))              # total time label
                 low += 1
@@ -257,7 +259,7 @@ class DataClass(object):
                                                                             tf.float32, tf.int32, tf.int32, tf.float32, tf.float32))
 
         if self.is_training:
-            dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio-self.input_length-self.output_length)//self.step)
+            dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio))
             dataset=dataset.repeat(count=epoch)
         dataset=dataset.batch(batch_size=batch_size)
         iterator=dataset.make_one_shot_iterator()
@@ -273,8 +275,9 @@ if __name__=='__main__':
 
     next=iter.next_batch(batch_size=1, epoch=1, is_training=False)
     with tf.Session() as sess:
-        for index_i in range(9000):
+        for index_i in range(200):
             print(index_i)
+            print(len(iter.vehicle_id))
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
             print('speed : ', a.shape, b.shape, c.shape, d.shape, e.shape, f.shape)
             print('trajectory : ', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)

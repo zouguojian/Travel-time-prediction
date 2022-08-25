@@ -39,9 +39,9 @@ class DeepFM(object):
                                                    # p 总的轨迹数据元素长度
         # Factorization Machine
         with tf.variable_scope('FM'):
-            b = tf.get_variable('bias', shape=[2],
+            b = tf.get_variable('bias', shape=[1],
                                 initializer=tf.zeros_initializer())
-            w1 = tf.get_variable('w1', shape=[self.p, 2],
+            w1 = tf.get_variable('w1', shape=[self.p, 1],
                                  initializer=tf.truncated_normal_initializer(mean=0,stddev=1e-2))
             # shape of [None, 2]
             self.linear_terms = tf.add(tf.matmul(X, w1), b)
@@ -79,11 +79,12 @@ class DeepFM(object):
                                  initializer=tf.constant_initializer(0.001))
             y_hidden_l3 = tf.nn.relu(tf.matmul(y_hidden_l2, w3) + b3)
             # output layer
-            w_out = tf.get_variable('w_out', shape=[200, 2],
+            w_out = tf.get_variable('w_out', shape=[200, 1],
                                  initializer=tf.truncated_normal_initializer(mean=0,stddev=1e-2))
-            b_out = tf.get_variable('b_out', shape=[2],
+            b_out = tf.get_variable('b_out', shape=[1],
                                  initializer=tf.constant_initializer(0.001))
             self.y_dnn = tf.nn.relu(tf.matmul(y_hidden_l3, w_out) + b_out)
         # add FM output and DNN output
-        self.y_out = tf.add(self.y_fm, self.y_dnn)
-        self.y_out_prob = tf.nn.softmax(self.y_out)
+        y_out = tf.add(self.y_fm, self.y_dnn)
+        print(y_out.shape)
+        return y_out

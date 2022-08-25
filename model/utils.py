@@ -180,7 +180,7 @@ def construct_feed_dict(x_s = None,
     feed_dict.update({placeholders['label_s']: label_s})
     feed_dict.update({placeholders['feature_tra']: x_tra})
     feed_dict.update({placeholders['label_tra']: separate_trajectory_time})
-    feed_dict.update({placeholders['label_tra_sum']: total_time})
+    feed_dict.update({placeholders['label_tra_sum']: np.reshape(total_time, [-1, 1])})
     feed_dict.update({placeholders['feature_inds']: element_index})
     return feed_dict
 
@@ -233,7 +233,7 @@ def one_hot_concatenation(features=[]):
     :param features:
     :return: [N, p]
     '''
-    features = np.concatenate(np.array(features, dtype=np.float), axis=-1)
+    features = np.concatenate(features, axis=-1)
     return features
 
 import matplotlib.pyplot as plt
