@@ -217,7 +217,7 @@ class DataClass(object):
                                                [dragon_dragon[tuple] for tuple in route]],
                                                [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, self.site_num]), # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
-                       np.array(sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)]), dtype=np.float))              # total time label
+                       np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float))              # total time label
                 low += 1
             else:
                 speed_low+=1

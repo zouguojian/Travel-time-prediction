@@ -204,8 +204,8 @@ class Model(object):
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
 
-        label_tra_sum_list = np.reshape(np.array(label_s_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
-        pre_tra_sum_list = np.reshape(np.array(pre_s_list, dtype=np.float32) * 60, [-1, 1])      # total trajectory travel time for prediction
+        label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
+        pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60, [-1, 1])      # total trajectory travel time for prediction
         print('travel time prediction result >>>')
         mae, rmse, mape, cor, r2 = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化

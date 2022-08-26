@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/generate_trajectory.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/generate_trajectory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/trajectory_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/trajectory_1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/data_next.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/hyparameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,25 +42,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="8399" />
+          <entry key="py" value="8432" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="8399" />
+          <entry key="Python" value="8432" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="14" column="69" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
+            <state relative-caret-position="101">
+              <caret line="7" column="82" selection-start-line="7" selection-start-column="82" selection-end-line="7" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -69,11 +68,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2571">
-              <caret line="282" column="35" selection-start-line="282" selection-start-column="35" selection-end-line="282" selection-end-column="35" />
+            <state relative-caret-position="329">
+              <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
               <folding>
                 <element signature="e#22#40#0" expanded="true" />
-                <marker date="1661430049742" expanded="true" signature="8610:8612" ph="..." />
+                <marker date="1661502616059" expanded="true" signature="8589:8591" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,22 +81,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/data_next.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="249" column="11" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
+            <state relative-caret-position="234">
+              <caret line="216" column="90" selection-start-line="216" selection-start-column="90" selection-end-line="216" selection-end-column="90" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
-                <marker date="1661500875645" expanded="true" signature="5740:5746" ph="..." />
-                <marker date="1661500875645" expanded="true" signature="6841:6847" ph="..." />
+                <marker date="1661502443626" expanded="true" signature="5740:5746" ph="..." />
+                <marker date="1661502443626" expanded="true" signature="6841:6847" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+            <state relative-caret-position="259">
+              <caret line="209" column="100" selection-start-line="209" selection-start-column="100" selection-end-line="209" selection-end-column="100" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -109,7 +108,7 @@
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -121,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="338">
-              <caret line="62" column="32" lean-forward="true" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
+              <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -158,11 +157,11 @@
         <option value="$PROJECT_DIR$/model/deepfm.py" />
         <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/model/utils.py" />
         <option value="$PROJECT_DIR$/data/generate_trajectory.py" />
-        <option value="$PROJECT_DIR$/model/hyparameter.py" />
         <option value="$PROJECT_DIR$/model/data_next.py" />
+        <option value="$PROJECT_DIR$/model/utils.py" />
         <option value="$PROJECT_DIR$/run_train.py" />
+        <option value="$PROJECT_DIR$/model/hyparameter.py" />
       </list>
     </option>
   </component>
@@ -184,6 +183,11 @@
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="weights" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -350,14 +354,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1402" height="796" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.173063" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40767047" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4346591" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -466,17 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2571">
-          <caret line="282" column="35" selection-start-line="282" selection-start-column="35" selection-end-line="282" selection-end-column="35" />
-          <folding>
-            <element signature="e#22#40#0" expanded="true" />
-            <marker date="1661430049742" expanded="true" signature="8610:8612" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/generate_trajectory.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-142">
@@ -487,49 +479,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="14" column="69" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
-          <caret line="62" column="32" lean-forward="true" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/data_next.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="249" column="11" selection-start-line="249" selection-start-column="11" selection-end-line="249" selection-end-column="11" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-            <marker date="1661500875645" expanded="true" signature="5740:5746" ph="..." />
-            <marker date="1661500875645" expanded="true" signature="6841:6847" ph="..." />
-          </folding>
+          <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
+          <folding>
+            <element signature="e#22#40#0" expanded="true" />
+            <marker date="1661502616059" expanded="true" signature="8589:8591" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/data_next.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="216" column="90" selection-start-line="216" selection-start-column="90" selection-end-line="216" selection-end-column="90" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+            <marker date="1661502443626" expanded="true" signature="5740:5746" ph="..." />
+            <marker date="1661502443626" expanded="true" signature="6841:6847" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+        <state relative-caret-position="259">
+          <caret line="209" column="100" selection-start-line="209" selection-start-column="100" selection-end-line="209" selection-end-column="100" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="7" column="82" selection-start-line="7" selection-start-column="82" selection-end-line="7" selection-end-column="82" />
         </state>
       </provider>
     </entry>
