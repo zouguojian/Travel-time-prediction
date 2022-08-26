@@ -1,9 +1,13 @@
 # -- coding: utf-8 --
 import numpy as np
+import pickle as pkl
+import networkx as nx
 import scipy.sparse as sp
 from scipy.sparse.linalg.eigen.arpack import eigsh
-from model import tf_utils
-import tensorflow as tf
+import sys
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from baseline.gman import tf_utils
 
 def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):
     if isinstance(units, int):
@@ -80,6 +84,80 @@ def sample_mask(idx, l):
     return np.array(mask, dtype=np.bool)
 
 
+def load_data(dataset_str):
+    """
+    Loads input data from gcn/data directory
+
+    ind.dataset_str.x => the feature vectors of the training instances as scipy.sparse.csr.csr_matrix object;
+    ind.dataset_str.tx => the feature vectors of the test instances as scipy.sparse.csr.csr_matrix object;
+    ind.dataset_str.allx => the feature vectors of both labeled and unlabeled training instances
+        (a superset of ind.dataset_str.x) as scipy.sparse.csr.csr_matrix object;
+    ind.dataset_str.y => the one-hot labels of the labeled training instances as numpy.ndarray object;
+    ind.dataset_str.ty => the one-hot labels of the test instances as numpy.ndarray object;
+    ind.dataset_str.ally => the labels for instances in ind.dataset_str.allx as numpy.ndarray object;
+    ind.dataset_str.graph => a dict in the format {index: [index_of_neighbor_nodes]} as collections.defaultdict
+        object;
+    ind.dataset_str.test.index => the indices of test instances in graph, for the inductive setting as list object.
+
+    All objects above must be saved using python pickle module.
+
+    :param dataset_str: Dataset name
+    :return: All data input files loaded (as well the training/test data).
+    """
+    names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
+    objects = []
+    for i in range(len(names)):
+        with open("data/ind.{}.{}".format(dataset_str, names[i]), 'rb') as f:
+            if sys.version_info > (3, 0):
+                objects.append(pkl.load(f, encoding='latin1'))
+            else:
+                objects.append(pkl.load(f))
+
+    x, y, tx, ty, allx, ally, graph = tuple(objects)
+    print(x.shape)
+    print(y.shape)
+    print(tx.shape)
+    print(allx.shape)
+
+    test_idx_reorder = parse_index_file("data/ind.{}.test.index".format(dataset_str))
+    test_idx_range = np.sort(test_idx_reorder)
+
+    if dataset_str == 'citeseer':
+        # Fix citeseer dataset (there are some isolated nodes in the graph)
+        # Find isolated nodes, add them as zero-vecs into the right position
+        test_idx_range_full = range(min(test_idx_reorder), max(test_idx_reorder)+1)
+        tx_extended = sp.lil_matrix((len(test_idx_range_full), x.shape[1]))
+        tx_extended[test_idx_range-min(test_idx_range), :] = tx
+        tx = tx_extended
+        ty_extended = np.zeros((len(test_idx_range_full), y.shape[1]))
+        ty_extended[test_idx_range-min(test_idx_range), :] = ty
+        ty = ty_extended
+
+    features = sp.vstack((allx, tx)).tolil()
+    features[test_idx_reorder, :] = features[test_idx_range, :]
+    adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
+
+    labels = np.vstack((ally, ty))
+    labels[test_idx_reorder, :] = labels[test_idx_range, :]
+
+    idx_test = test_idx_range.tolist()
+    idx_train = range(len(y))
+    idx_val = range(len(y), len(y)+500)
+
+    train_mask = sample_mask(idx_train, labels.shape[0])
+    val_mask = sample_mask(idx_val, labels.shape[0])
+    test_mask = sample_mask(idx_test, labels.shape[0])
+
+    y_train = np.zeros(labels.shape)
+    y_val = np.zeros(labels.shape)
+    y_test = np.zeros(labels.shape)
+    y_train[train_mask, :] = labels[train_mask, :]
+    y_val[val_mask, :] = labels[val_mask, :]
+    y_test[test_mask, :] = labels[test_mask, :]
+
+    return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
+
+
 def sparse_to_tuple(sparse_mx):
     """Convert sparse matrix to tuple representation."""
     def to_tuple(mx):
@@ -142,29 +220,24 @@ def preprocess_adj(adj):
 
     return sparse_to_tuple(adj_normalized)
 
-def construct_feed_dict(x_s = None,
-                        week = 1,
-                        day = 1,
-                        hour = 1,
-                        minute = 1,
-                        label_s = None,
-                        x_tra = None,
-                        element_index = [],
-                        separate_trajectory_time = [0.1],
-                        total_time = 0.1, placeholders = None):
+
+
+def construct_feed_dict(x_s, adj, label_s, day, hour, minute, x_p, label_p, placeholders):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
-    feed_dict.update({placeholders['week']: week})
+    feed_dict.update({placeholders['labels_s']: label_s})
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['minute']: minute})
-    feed_dict.update({placeholders['feature_s']: x_s})
-    feed_dict.update({placeholders['label_s']: label_s})
-    feed_dict.update({placeholders['feature_tra']: x_tra})
-    feed_dict.update({placeholders['label_tra']: separate_trajectory_time})
-    feed_dict.update({placeholders['label_tra_sum']: total_time})
-    feed_dict.update({placeholders['feature_inds']: element_index})
+    feed_dict.update({placeholders['features_s']: x_s})
+    feed_dict.update({placeholders['indices_i']: adj[0]})
+    feed_dict.update({placeholders['values_i']: adj[1]})
+    feed_dict.update({placeholders['dense_shape_i']: adj[2]})
+    feed_dict.update({placeholders['features_p']: x_p})
+    feed_dict.update({placeholders['labels_p']: label_p})
+    # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
+    feed_dict.update({placeholders['num_features_nonzero']: x_s[0].shape})
     return feed_dict
 
 
@@ -189,14 +262,6 @@ def chebyshev_polynomials(adj, k):
         t_k.append(chebyshev_recurrence(t_k[-1], t_k[-2], scaled_laplacian))
 
     return sparse_to_tuple(t_k)
-
-def one_hot_concatenation(features=[]):
-    '''
-    :param features:
-    :return: [N, p]
-    '''
-    features = np.concatenate(features, axis=-1)
-    return features
 
 import matplotlib.pyplot as plt
 def describe(label, predict):

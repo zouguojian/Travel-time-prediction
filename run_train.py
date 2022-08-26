@@ -9,7 +9,10 @@ import datetime
 from model.embedding import embedding
 from model.trajectory_inference import DeepFM
 from model.data_next import DataClass
-from model.utils import construct_feed_dict, one_hot_concatenation, metric
+from model.utils import construct_feed_dict, one_hot_concatenation, metric,FC,STEmbedding
+from model.st_block import ST_Block
+from model.bridge import BridgeTransformer
+from model.inference import InferenceClass
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -23,6 +26,7 @@ class Model(object):
         self.dropout = self.hp.dropout                       # dropout
         self.site_num = self.hp.site_num                     # number of roads
         self.emb_size = self.hp.emb_size                     # hidden embedding size
+        self.is_training = self.hp.is_training
         self.field_cnt = self.hp.field_cnt                   # number of features fields
         self.feature_s = self.hp.feature_s                   # number of speed features
         self.batch_size = self.hp.batch_size                 # batch size
@@ -81,6 +85,30 @@ class Model(object):
         :param is_training: True
         :return:
         '''
+        with tf.variable_scope(name_or_scope='speed_model'):
+
+            timestamp = [self.h_emd, self.m_emd]
+            position = self.p_emd
+            speed = FC(self.placeholders['feature_s'], units=[self.emb_size, self.emb_size],
+                       activations=[tf.nn.relu, None],
+                       bn=False, bn_decay=0.99, is_training=self.is_training)
+            STE = STEmbedding(position, timestamp, 0, self.emb_size, False, 0.99, self.is_training)
+            st_block = ST_Block(hp=self.hp, placeholders=self.placeholders)
+            encoder_outs = st_block.spatio_temporal(speed = speed, STE = STE[:, :self.input_length,:,:])
+            print('ST_Block outs shape is : ', encoder_outs.shape)
+
+            bridge = BridgeTransformer(self.hp)
+            bridge_outs = bridge.encoder(X = encoder_outs,
+                                         X_P = encoder_outs,
+                                         X_Q = STE[:, self.input_length:,:,:])
+            print('BridgeTransformer outs shape is : ', bridge_outs.shape)
+
+            inference=InferenceClass(para=self.hp)
+            self.pres_s= inference.inference(out_hiddens=bridge_outs)
+            print('pres_s shape is : ', self.pres_s.shape)
+
+
+
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
