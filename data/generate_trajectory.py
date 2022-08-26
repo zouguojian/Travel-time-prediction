@@ -42,7 +42,7 @@ def generate_tra(file_name_list=None, pre_filename='data_list/', target_file='tr
     # 每个路段的行车记录进入到字典中，进行存储，从而实现毫秒级相应查找
     for file_name in file_name_list:
         data = pd.read_csv(pre_filename + str(dragon_dragon[file_name]) + '.csv', encoding='utf-8')
-        data['key_date'] = pd.to_datetime(data.end_time)
+        data['key_date'] = pd.to_datetime(data.start_time)
         data = data.sort_values(by='key_date', axis=0, ascending=True) # 按照时间的顺序进行升序排序
         for line in data.values:
             dict_roads[dragon_dragon[file_name]]['start_sets'][line[2]+ '+' +line[4]] = line[:9]  # 车牌+开始时间的字典

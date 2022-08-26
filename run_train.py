@@ -62,7 +62,7 @@ class Model(object):
         w_emb = embedding(self.placeholders['week'], vocab_size=5, num_units=self.emb_size, scale=False, scope="week_embed")
         self.w_emd = tf.reshape(w_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
-        d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.emb_size, scale=False, scope="day_embed")
+        d_emb = embedding(self.placeholders['day'], vocab_size=31, num_units=self.emb_size, scale=False, scope="day_embed")
         self.d_emd = tf.reshape(d_emb, shape=[self.batch_size, self.input_length + self.output_length, self.site_num, self.emb_size])
 
         h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.emb_size, scale=False, scope="hour_embed")
@@ -150,12 +150,12 @@ class Model(object):
             print("after %d steps,the training average loss value is : %.6f" % (i, loss))
 
             # validate processing
-            # if i % 100 == 0:
-            #     mae = self.evaluate()
-            #     if max_mae > mae:
-            #         print("the validate average loss value is : %.6f" % (mae))
-            #         max_mae = mae
-            #         self.saver.save(self.sess, save_path=self.hp.save_path + 'model.ckpt')
+            if i % 100 == 0:
+                mae = self.evaluate()
+                if max_mae > mae:
+                    print("the validate average loss value is : %.6f" % (mae))
+                    max_mae = mae
+                    self.saver.save(self.sess, save_path=self.hp.save_path + 'model.ckpt')
         end_time = datetime.datetime.now()
         total_time = end_time - start_time
         print("Total running times is : %f" % total_time.total_seconds())
@@ -174,16 +174,12 @@ class Model(object):
         if not self.hp.is_training:
             print('the model weights has been loaded:')
             self.saver.restore(self.sess, model_file)
-            # self.saver.save(self.sess, save_path='gcn/model/' + 'model.ckpt')
 
         iterate_test = DataClass(hp=self.hp)
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
-        for i in range(int((iterate_test.length // self.site_num
-                            - iterate_test.length // self.site_num * iterate_test.divide_ratio
-                            - (
-                                    self.input_length + self.output_length)) // iterate_test.output_length) // self.batch_size):
+        for i in range(int(iterate_test.shape_tra[0] * (1-self.hp.divide_ratio)- 15 * (self.input_length + self.output_length)) // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
             element_index, separate_trajectory_time, total_time = self.sess.run(test_next)
@@ -210,7 +206,7 @@ class Model(object):
 
         label_tra_sum_list = np.reshape(np.array(label_s_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
         pre_tra_sum_list = np.reshape(np.array(pre_s_list, dtype=np.float32) * 60, [-1, 1])      # total trajectory travel time for prediction
-        print('travel time prediction result >>>>>>')
+        print('travel time prediction result >>>')
         mae, rmse, mape, cor, r2 = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
         return mae

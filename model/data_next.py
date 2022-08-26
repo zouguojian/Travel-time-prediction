@@ -38,8 +38,6 @@ class DataClass(object):
         self.file_train_s= self.hp.file_train_s
         self.file_train_t = self.hp.file_train_t
         self.normalize =self.hp.normalize             # data normalization
-        self.train_length = 0 # recoder the real number of train sample
-        self.test_length = 0  # recoder the real number of test sample
 
         self.data_s=self.get_source_data(self.file_train_s)
         self.data_s['datatime'] = pd.to_datetime(self.data_s.date) + pd.to_timedelta(self.data_s.hour, unit='h') + pd.to_timedelta(
@@ -190,30 +188,28 @@ class DataClass(object):
 
         while speed_low + self.input_length + self.output_length <= speed_high:
             if datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') >= data_s[speed_low*self.site_num, -1] and datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') < data_s[(speed_low+1)*self.site_num, -1]:
-                if self.is_training: self.train_length+=1
-                else:self.test_length+=1
                 # 个体轨迹数据与交通速度数据之间的对应
                 label=data_s[speed_low * self.site_num: (speed_low + self.output_length) * self.site_num, -2:-1]
                 label=np.concatenate([label[i * self.site_num : (i + 1) * self.site_num, :] for i in range(self.output_length)], axis=1)
 
                 yield (data_s[(speed_low -self.input_length) * self.site_num : speed_low * self.site_num, 5:6],                         # speed
-                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]//7, # week
-                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2],    # day
+                       (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1)//7, # week
+                       (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1),    # day
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],    # minute
                        label, # speed label
                        self.get_one_hot([self.vehicle_id[data_tra[low,0]]],array_length=len(self.vehicle_id)),                        # vehicle id
                        self.get_one_hot([data_tra[low, 1]],array_length=25),                                                          # vehicle type
-                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7], array_length=5),  # start week
-                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day], array_length=31),    # start day
+                       self.get_one_hot([(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day-1)//7], array_length=5),# start week
+                       self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day-1], array_length=31),    # start day
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour], array_length=24),   # start hour
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute], array_length=60), # start minute
                        self.get_one_hot([datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second], array_length=60), # start second
                        np.array([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/10000.0,                           # distances
                        np.array(self.get_one_hot([dragon_dragon[tuple] for tuple in route],array_length=self.site_num)),              # route id
                        self.get_element_index([[self.vehicle_id[data_tra[low,0]]], [data_tra[low, 1]],
-                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day//7],
-                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day],
+                                               [(datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day - 1) // 7],
+                                               [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').day - 1],
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').hour],
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').minute],
                                                [datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S').second],
@@ -252,7 +248,6 @@ class DataClass(object):
         label separate time: [batch, trajectory_length]
         label total time: [batch, 1]
         '''
-
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
@@ -275,10 +270,13 @@ if __name__=='__main__':
 
     next=iter.next_batch(batch_size=1, epoch=1, is_training=False)
     with tf.Session() as sess:
-        for index_i in range(200):
-            print(index_i)
-            print(len(iter.vehicle_id))
+        for index_i in range(9000):
+            # print(index_i)
+            # print(len(iter.vehicle_id))
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
-            print('speed : ', a.shape, b.shape, c.shape, d.shape, e.shape, f.shape)
-            print('trajectory : ', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)
-            print(index)
+            # print('speed : ', a.shape, b.shape, c.shape, d.shape, e.shape, f.shape)
+            # print('trajectory : ', g.shape, h.shape, i.shape, j.shape, k.shape, l.shape, m.shape, n.shape, o.shape, p.shape, q.shape)
+            # print(index)
+
+
+            print(c[0,0], d[0,0], e[0,0])
