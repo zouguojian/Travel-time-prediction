@@ -1,0 +1,14 @@
+tensorboard               1.12.0           py36hdc36e2c_0  
+tensorflow                1.12.0          mkl_py36h2b2bbaf_0  
+tensorflow-base           1.12.0          mkl_py36h70e0e9a_0 
+scikit-learn              0.24.2                   pypi_0    pypi
+scipy                     1.1.0            py36h28f7352_1  
+seaborn                   0.9.0              pyh91ea838_1 
+python                    3.6.7                haf84260_0
+pandas                    0.23.4           py36h6440ff4_0
+numpy                     1.15.4           py36h6a91979_0  
+numpy-base                1.15.4           py36h8a80b8c_0
+jupyter_client            5.2.3                    py36_0  
+jupyter_core              4.4.0                    py36_0  
+keras-applications        1.0.6                    py36_0  
+keras-preprocessing       1.0.5                    py36_0
