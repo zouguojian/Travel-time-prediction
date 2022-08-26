@@ -201,6 +201,7 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_tra = self.sess.run((self.pre), feed_dict=feed_dict)
+            print(pre_tra * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
 

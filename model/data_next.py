@@ -186,7 +186,7 @@ class DataClass(object):
 
         speed_low, speed_high = self.input_length, int(self.shape_s[0]//self.site_num)
 
-        while speed_low + self.input_length + self.output_length <= speed_high:
+        while speed_low + self.input_length + self.output_length <= speed_high and low <= high:
             if datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') >= data_s[speed_low*self.site_num, -1] and datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') < data_s[(speed_low+1)*self.site_num, -1]:
                 # 个体轨迹数据与交通速度数据之间的对应
                 label=data_s[speed_low * self.site_num: (speed_low + self.output_length) * self.site_num, -2:-1]
@@ -270,7 +270,7 @@ if __name__=='__main__':
 
     next=iter.next_batch(batch_size=1, epoch=1, is_training=False)
     with tf.Session() as sess:
-        for index_i in range(9000):
+        for index_i in range(900000):
             # print(index_i)
             # print(len(iter.vehicle_id))
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, index, p, q = sess.run(next)
