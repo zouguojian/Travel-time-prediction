@@ -202,5 +202,4 @@ class TemporalTransformer():
                                               is_training=self.is_training)
                     ### Feed Forward
                     dec = feedforward(dec, num_units=[4 * self.hidden_units, self.hidden_units])
-        print('temporal_attention layer output, dec shape is : ', dec.shape)
         return dec

@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 import tensorflow as tf
-from models.utils import *
+from model.utils import *
 
 def normalize(inputs,
               epsilon=1e-8,
@@ -188,7 +188,7 @@ class BridgeTransformer():
         :param is_training:
         :return: [N, output_length, site_num, emb_size]
         '''
-        with tf.variable_scope("encoder"):
+        with tf.variable_scope("bridge_encoder"):
             X  = tf.reshape(tf.transpose(X,[0,2,1,3]), shape=[-1, self.input_length, self.emb_size])
             X_P = tf.reshape(tf.transpose(X_P,[0,2,1,3]), shape=[-1, self.input_length, self.emb_size])
             X_Q = tf.reshape(tf.transpose(X_Q,[0,2,1,3]), shape=[-1, self.output_length, self.emb_size])
@@ -208,7 +208,6 @@ class BridgeTransformer():
                     X_Q = feedforward(X_Q, num_units=[4 * self.hidden_units, self.hidden_units])
         X = tf.reshape(X_Q,shape=[-1, self.site_num, self.output_length, self.hidden_units])
         X = tf.transpose(X, [0, 2, 1, 3])
-        print('bridge layer output, X shape is : ', X.shape)
         return X
 
 

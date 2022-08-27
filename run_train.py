@@ -55,6 +55,7 @@ class Model(object):
             'label_tra': tf.placeholder(tf.float32, shape=[None, self.trajectory_length], name='label_tra'),
             'label_tra_sum': tf.placeholder(tf.float32, shape=[None, 1], name='label_tra_sum'),
             'feature_inds': tf.placeholder(dtype=tf.int32, shape=[None, self.field_cnt], name='feature_inds'),
+            'trajectory_inds': tf.placeholder(dtype=tf.int32, shape=[self.trajectory_length], name='feature_inds'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
         }
 
@@ -95,28 +96,29 @@ class Model(object):
             STE = STEmbedding(position, timestamp, 0, self.emb_size, False, 0.99, self.is_training)
             st_block = ST_Block(hp=self.hp, placeholders=self.placeholders)
             encoder_outs = st_block.spatio_temporal(speed = speed, STE = STE[:, :self.input_length,:,:])
-            print('ST_Block outs shape is : ', encoder_outs.shape)
+            print('ST_Block outs shape is : ', encoder_outs.shape) # (32, 12, 108, 64)
 
             bridge = BridgeTransformer(self.hp)
             bridge_outs = bridge.encoder(X = encoder_outs,
                                          X_P = encoder_outs,
                                          X_Q = STE[:, self.input_length:,:,:])
-            print('BridgeTransformer outs shape is : ', bridge_outs.shape)
+            print('BridgeTransformer outs shape is : ', bridge_outs.shape) # (32, 12, 108, 64)
 
+            hidden_states = tf.gather(tf.concat([encoder_outs, bridge_outs], axis=1), indices=self.placeholders['trajectory_inds'], axis=2) # (32, 12, 108, 64)
+            print(hidden_states.shape)
             inference=InferenceClass(para=self.hp)
-            self.pres_s= inference.inference(out_hiddens=bridge_outs)
-            print('pres_s shape is : ', self.pres_s.shape)
-
-
+            self.pre_s= inference.inference(out_hiddens=bridge_outs)
+            print('Inference outs shape is : ', self.pre_s.shape) # (32, 108, 12)
 
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
-            self.pre = DeepModel.inference(X=self.placeholders['feature_tra'],
-                                            feature_inds=self.placeholders['feature_inds'],
-                                            keep_prob=self.placeholders['dropout'])
-
-        self.loss = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
+            self.pre_tra = DeepModel.inference(X=self.placeholders['feature_tra'],
+                                               feature_inds=self.placeholders['feature_inds'],
+                                               keep_prob=self.placeholders['dropout'])
+        self.loss1 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
+        self.loss2 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
+        self.loss = 0.5 * self.loss1 + 0.5 * self.loss2
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
@@ -154,7 +156,7 @@ class Model(object):
         for i in range(int(iterate.shape_tra[0] * self.divide_ratio) * self.epoch // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time = self.sess.run(train_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds = self.sess.run(train_next)
 
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
@@ -165,12 +167,14 @@ class Model(object):
             feed_dict = construct_feed_dict(x_s=x_s,
                                             week=week,
                                             day=day,
-                                            hour=hour, minute=minute,
+                                            hour=hour,
+                                            minute=minute,
                                             label_s=label_s,
                                             x_tra = x_tra,
                                             element_index=element_index,
                                             separate_trajectory_time=separate_trajectory_time,
                                             total_time=total_time,
+                                            trajectory_inds= trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.dropout})
 
@@ -210,7 +214,7 @@ class Model(object):
         for i in range(int(iterate_test.shape_tra[0] * (1-self.hp.divide_ratio)- 15 * (self.input_length + self.output_length)) // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time = self.sess.run(test_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds = self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
@@ -226,16 +230,29 @@ class Model(object):
                                             element_index=element_index,
                                             separate_trajectory_time=separate_trajectory_time,
                                             total_time=total_time,
+                                            trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            pre_tra = self.sess.run((self.pre), feed_dict=feed_dict)
-            print(pre_tra * 60, total_time * 60)
+            pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra), feed_dict=feed_dict)
+            # print(pre_tra * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
+            label_s_list.append(label_s)
+            pre_s_list.append(pre_s)
 
         label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
         pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60, [-1, 1])      # total trajectory travel time for prediction
+
+        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
+        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
+        if self.hp.normalize:
+            label_s_list = self.re_current(label_s_list, max_s, min_s)
+            pre_s_list = self.re_current(pre_s_list, max_s, min_s)
+
+        print('speed prediction result >>>')
+        mae_s, rmse_s, mape_s, cor_s, r2_s = metric(pre_s_list, label_s_list)  # 产生预测指标
+
         print('travel time prediction result >>>')
-        mae, rmse, mape, cor, r2 = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
+        mae_tra, rmse_tra, mape_tra, cor_tra, r2_tra = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
-        return mae
+        return mae_tra

@@ -217,7 +217,9 @@ class DataClass(object):
                                                [dragon_dragon[tuple] for tuple in route]],
                                                [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, self.site_num]), # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
-                       np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float))              # total time label
+                       np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
+                       np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int))
+
                 low += 1
             else:
                 speed_low+=1
@@ -251,7 +253,7 @@ class DataClass(object):
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32))
+                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio))

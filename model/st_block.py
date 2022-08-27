@@ -18,8 +18,8 @@ class ST_Block():
         self.dropout = self.para.dropout
         self.hidden_size = self.para.hidden_size
         self.hidden_layer =self.para.hidden_layer
-        self.features = self.para.features
-        self.features_p = self.para.features_p
+        self.feature_s = self.para.feature_s
+        self.feature_tra = self.para.feature_tra
         self.placeholders = placeholders
         self.input_length = self.para.input_length
 

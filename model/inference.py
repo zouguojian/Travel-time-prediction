@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 import tensorflow as tf
-from models.temporal_attention import TemporalTransformer
+from model.temporal_attention import TemporalTransformer
 class InferenceClass(object):
     def __init__(self, para=None):
         self.para=para

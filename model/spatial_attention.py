@@ -218,5 +218,4 @@ class SpatialTransformer():
                     ### Feed Forward
                     self.enc = feedforward(self.enc, num_units=[4 * self.hidden_units, self.hidden_units])
                     # self.enc = self.enc + inputs
-        print('enc shape is : ', self.enc.shape)
         return self.enc
