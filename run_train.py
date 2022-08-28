@@ -104,7 +104,7 @@ class Model(object):
                                          X_Q = STE[:, self.input_length:,:,:])
             print('BridgeTransformer outs shape is : ', bridge_outs.shape) # (32, 12, 108, 64)
 
-            hidden_states = tf.gather(tf.concat([encoder_outs, bridge_outs], axis=1), indices=self.placeholders['trajectory_inds'], axis=2) # (32, 12, 108, 64)
+            hidden_states = tf.gather(tf.concat([encoder_outs, bridge_outs], axis=1), indices=self.placeholders['trajectory_inds'], axis=2) # (32, 24, 5, 64)
             print(hidden_states.shape)
             inference=InferenceClass(para=self.hp)
             self.pre_s= inference.inference(out_hiddens=bridge_outs)
@@ -115,7 +115,8 @@ class Model(object):
             DeepModel = DeepFM(self.hp)
             self.pre_tra = DeepModel.inference(X=self.placeholders['feature_tra'],
                                                feature_inds=self.placeholders['feature_inds'],
-                                               keep_prob=self.placeholders['dropout'])
+                                               keep_prob=self.placeholders['dropout'],
+                                               hiddens=hidden_states)
         self.loss1 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
         self.loss2 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
         self.loss = 0.5 * self.loss1 + 0.5 * self.loss2
@@ -141,7 +142,7 @@ class Model(object):
         self.saver = tf.train.Saver(var_list=tf.trainable_variables())
 
     def re_current(self, a, max, min):
-        return [num * (max - min) + min for num in a]
+        return a * (max - min) + min
 
     def run_epoch(self):
         '''

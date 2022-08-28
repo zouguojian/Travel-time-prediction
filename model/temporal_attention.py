@@ -188,18 +188,18 @@ class TemporalTransformer():
         :return:
         '''
         with tf.variable_scope("temporal_encoder"):
-            enc = hiddens
-            dec = hidden
+            enc = hidden
+            dec = hiddens
             ## Blocks
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     ### Multihead Attention
-                    dec = multihead_attention(queries=dec,
-                                              keys=enc,
+                    enc = multihead_attention(queries=enc,
+                                              keys=dec,
                                               num_units=self.hidden_units,
                                               num_heads=self.num_heads,
                                               dropout_rate=self.dropout_rate,
                                               is_training=self.is_training)
                     ### Feed Forward
-                    dec = feedforward(dec, num_units=[4 * self.hidden_units, self.hidden_units])
-        return dec
+                    enc = feedforward(enc, num_units=[4 * self.hidden_units, self.hidden_units])
+        return enc

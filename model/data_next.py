@@ -196,7 +196,7 @@ class DataClass(object):
                        (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1)//7, # week
                        (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1),    # day
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
-                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4],    # minute
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4]//15,    # minute
                        label, # speed label
                        self.get_one_hot([self.vehicle_id[data_tra[low,0]]],array_length=len(self.vehicle_id)),                        # vehicle id
                        self.get_one_hot([data_tra[low, 1]],array_length=25),                                                          # vehicle type
