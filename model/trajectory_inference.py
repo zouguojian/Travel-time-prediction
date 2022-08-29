@@ -105,7 +105,7 @@ class DeepFM(object):
             x_trajectory_separate = tf.add(x=x_trajectory_separate, y=x_common)  # (N, 5, 1, 64)
 
             hiddens = tf.transpose(hiddens, perm=[0, 2, 1, 3])
-            hiddens = tf.reshape(hiddens, shape=[-1, self.input_length + self.input_length, self.emb_size])
+            hiddens = tf.reshape(hiddens, shape=[-1, self.input_length + self.output_length, self.emb_size])
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])
             T = TemporalTransformer(self.hp)
             x_trajectory_separate = T.encoder(hiddens=hiddens, hidden=x_trajectory_separate)
