@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/hyparameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/trajectory_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/trajectory_inference.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +65,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="280">
@@ -78,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="95" column="64" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="64" />
+            <state relative-caret-position="265">
+              <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -132,9 +131,9 @@
         <option value="$PROJECT_DIR$/model/temporal_attention.py" />
         <option value="$PROJECT_DIR$/model/data_next.py" />
         <option value="$PROJECT_DIR$/run_train.py" />
-        <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
         <option value="$PROJECT_DIR$/model/bridge.py" />
         <option value="$PROJECT_DIR$/model/hyparameter.py" />
+        <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
       </list>
     </option>
   </component>
@@ -542,16 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="95" column="64" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="64" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -563,6 +552,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="172" column="60" lean-forward="true" selection-start-line="172" selection-start-column="60" selection-end-line="172" selection-end-column="60" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>

@@ -25,13 +25,6 @@ class DeepFM(object):
         # num of fields
         self.field_cnt = self.hp.field_cnt
 
-    # def add_placeholders(self):
-    #     self.X = tf.placeholder('float32', [None, self.p])
-    #     self.y = tf.placeholder('int64', [None,])
-    #     # index of none-zero features
-    #     self.feature_inds = tf.placeholder('int64', [None, self.field_cnt])
-    #     self.keep_prob = tf.placeholder('float32')
-
     def inference(self, X=None, feature_inds=[], keep_prob=0.0, hiddens=None):
         '''
         forward propagation
