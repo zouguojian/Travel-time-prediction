@@ -87,7 +87,6 @@ class Model(object):
         :return:
         '''
         with tf.variable_scope(name_or_scope='speed_model'):
-
             timestamp = [self.h_emd, self.m_emd]
             position = self.p_emd
             speed = FC(self.placeholders['feature_s'], units=[self.emb_size, self.emb_size],

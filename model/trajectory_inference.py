@@ -103,6 +103,14 @@ class DeepFM(object):
             T = TemporalTransformer(self.hp)
             x_trajectory_separate = T.encoder(hiddens=hiddens, hidden=x_trajectory_separate)
             x_trajectory_separate = tf.reshape(x_trajectory_separate, shape=[-1, self.trajectory_length, self.emb_size]) # (N, 5, 64)
+
+            x_trajectory_separate = tf.layers.conv1d(inputs=x_trajectory_separate,
+                                                        filters=self.emb_size,
+                                                        kernel_size=3,
+                                                        padding='VALID',
+                                                        kernel_initializer=tf.truncated_normal_initializer(),
+                                                        name='conv_1',strides=2)
+
             x_trajectory_sum = tf.reduce_sum(x_trajectory_separate, axis=1) # (N, 64)
 
             print('x_trajectory_sum shape is : ', x_trajectory_sum.shape)
