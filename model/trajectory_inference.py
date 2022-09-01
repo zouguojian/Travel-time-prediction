@@ -90,7 +90,8 @@ class DeepFM(object):
             x_common = tf.reshape(x_common, [-1, (self.field_cnt - self.trajectory_length * 2) * self.k]) # (N, 10 * 64)
             x_common = tf.expand_dims(x_common, axis=1) # (N, 1, 10 * 64)
             x_common = tf.expand_dims(x_common, axis=1)  # (N, 1, 1, 10 * 64)
-            x_common = tf.layers.dense(x_common, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(), name='x_common')
+
+            x_common = tf.layers.dense(x_common, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01), name='x_common')
             x_trajectory_distances = x_trajectory[:, -(self.trajectory_length * 2):-(self.trajectory_length * 1), :] # (N, 5, 64)
             x_trajectory_route_id = x_trajectory[:, -(self.trajectory_length * 1):, :] # (N, 5, 64)
             x_trajectory_separate = tf.add(x=x_trajectory_distances, y=x_trajectory_route_id) # (N, 5, 64)

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/trajectory_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/trajectory_inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +28,7 @@
         <counts>
           <entry key="csv" value="11" />
           <entry key="md" value="1" />
-          <entry key="py" value="51" />
+          <entry key="py" value="52" />
           <entry key="txt" value="8" />
         </counts>
       </usages-collector>
@@ -36,13 +36,13 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="19" />
-          <entry key="Python" value="51" />
+          <entry key="Python" value="52" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="505" />
-          <entry key="py" value="9666" />
+          <entry key="py" value="9721" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -50,7 +50,7 @@
         <counts>
           <entry key="Markdown" value="505" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="9666" />
+          <entry key="Python" value="9721" />
         </counts>
       </usages-collector>
     </session>
@@ -81,11 +81,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="108" column="70" lean-forward="true" selection-start-line="108" selection-start-column="70" selection-end-line="108" selection-end-column="70" />
+            <state relative-caret-position="456">
+              <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/temporal_attention.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
         </entry>
@@ -129,16 +138,16 @@
         <option value="$PROJECT_DIR$/model/st_block.py" />
         <option value="$PROJECT_DIR$/model/spatial_attention.py" />
         <option value="$PROJECT_DIR$/model/utils.py" />
-        <option value="$PROJECT_DIR$/model/temporal_attention.py" />
         <option value="$PROJECT_DIR$/model/data_next.py" />
         <option value="$PROJECT_DIR$/model/bridge.py" />
         <option value="$PROJECT_DIR$/model/hyparameter.py" />
-        <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
         <option value="$PROJECT_DIR$/run_train.py" />
+        <option value="$PROJECT_DIR$/model/temporal_attention.py" />
+        <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="38" />
     <option name="y" value="23" />
     <option name="width" value="1402" />
@@ -326,7 +335,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="23" width="1402" height="796" extended-state="0" />
+    <frame x="38" y="23" width="1402" height="796" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.173063" />
@@ -489,13 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/temporal_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="196" column="58" selection-start-line="196" selection-start-column="58" selection-end-line="196" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/deepfm.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -564,10 +566,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/temporal_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="108" column="70" lean-forward="true" selection-start-line="108" selection-start-column="70" selection-end-line="108" selection-end-column="70" />
+        <state relative-caret-position="456">
+          <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
