@@ -171,7 +171,7 @@ class Model(object):
         for i in range(int(iterate.shape_tra[0] * self.divide_ratio) * self.epoch // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time, trajectory_inds = self.sess.run(train_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds,_ = self.sess.run(train_next)
 
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
@@ -232,7 +232,7 @@ class Model(object):
                 self.input_length + self.output_length)) // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time, trajectory_inds = self.sess.run(test_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds, dates = self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
@@ -254,7 +254,7 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra), feed_dict=feed_dict)
-            # print(pre_tra * 60, total_time * 60)
+            print(dates, pre_tra * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
             label_s_list.append(label_s)
