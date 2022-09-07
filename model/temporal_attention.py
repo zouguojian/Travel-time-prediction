@@ -62,9 +62,9 @@ def multihead_attention(queries,
             num_units = queries.get_shape().as_list[-1]
 
         # Linear projections
-        Q = tf.layers.dense(queries, num_units, activation=tf.nn.relu)  # (N, T_q, C)
-        K = tf.layers.dense(keys, num_units, activation=tf.nn.relu)  # (N, T_k, C)
-        V = tf.layers.dense(keys, num_units, activation=tf.nn.relu)  # (N, T_k, C)
+        Q = tf.layers.dense(queries, num_units, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))  # (N, T_q, C)
+        K = tf.layers.dense(keys, num_units, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))  # (N, T_k, C)
+        V = tf.layers.dense(keys, num_units, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))  # (N, T_k, C)
 
         # Split and concat
         Q_ = tf.concat(tf.split(Q, num_heads, axis=2), axis=0)  # (h*N, T_q, C/h)
@@ -90,7 +90,7 @@ def multihead_attention(queries,
         outputs = tf.concat(tf.split(outputs, num_heads, axis=0), axis=2)  # (N, T_q, C)
 
         # Residual connection
-        outputs += tf.layers.dense(queries, num_units, activation=tf.nn.relu) # gangdong
+        outputs += tf.layers.dense(queries, num_units, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
         # Normalize
         outputs = normalize(outputs) # (N, T_q, C)
@@ -114,12 +114,12 @@ def feedforward(inputs, num_units=[2048, 512], scope="multihead_attention", reus
     with tf.variable_scope(scope, reuse=reuse):
         # Inner layer
         params = {"inputs": inputs, "filters": num_units[0], "kernel_size": 1,
-                  "activation": tf.nn.relu, "use_bias": True}
+                  "activation": tf.nn.relu, "use_bias": True, "kernel_initializer": tf.truncated_normal_initializer(stddev=0.01)}
         outputs = tf.layers.conv1d(**params)
 
         # Readout layer
         params = {"inputs": outputs, "filters": num_units[1], "kernel_size": 1,
-                  "activation": None, "use_bias": True}
+                  "activation": None, "use_bias": True, "kernel_initializer": tf.truncated_normal_initializer(stddev=0.01)}
         outputs = tf.layers.conv1d(**params)
 
         # Residual connection

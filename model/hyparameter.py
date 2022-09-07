@@ -10,7 +10,7 @@ class parameter(object):
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
-        self.parser.add_argument('--epoch', type=int, default=10, help='epoch')
+        self.parser.add_argument('--epoch', type=int, default=50, help='epoch')
         self.parser.add_argument('--step', type=int, default=1, help='step')
         self.parser.add_argument('--batch_size', type=int, default=64, help='batch size')
         self.parser.add_argument('--learning_rate', type=float, default=0.0005, help='learning rate')
@@ -21,14 +21,14 @@ class parameter(object):
         self.parser.add_argument('--feature_tra', type=int, default=30542, help='number of the trajectory feature elements')
         self.parser.add_argument('--trajectory_length', type=int, default=5, help='length of trajectory')
         self.parser.add_argument('--num_heads', type=int, default=4, help='total number of head attentions')
-        self.parser.add_argument('--num_blocks', type=int, default=2, help='total number of attention layers')
+        self.parser.add_argument('--num_blocks', type=int, default=1, help='total number of attention layers')
 
         #每个点表示a->b路线，目前8个收费站
         self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
         self.parser.add_argument('--feature_s', type=int, default=1, help='number of the speed feature elements')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=12, help='input length')
-        self.parser.add_argument('--output_length', type=int, default=12, help='output length')
+        self.parser.add_argument('--output_length', type=int, default=6, help='output length')
 
         self.parser.add_argument('--hidden1', type=int, default=32, help='number of units in hidden layer 1')
         self.parser.add_argument('--gcn_output_size', type=int, default=64, help='model string')

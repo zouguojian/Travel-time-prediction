@@ -1,6 +1,8 @@
 # -- coding: utf-8 --
 import tensorflow as tf
+
 from model.utils import *
+
 
 def normalize(inputs,
               epsilon=1e-8,
@@ -34,7 +36,7 @@ def normalize(inputs,
 
 def multihead_attention(queries,
                         keys,
-                        values = None,
+                        values=None,
                         num_units=None,
                         num_heads=8,
                         scope="multihead_attention",
@@ -165,10 +167,10 @@ def label_smoothing(inputs, epsilon=0.1):
 class BridgeTransformer():
     def __init__(self, arg):
         self.arg = arg
-        self.emb_size=self.arg.emb_size
+        self.emb_size = self.arg.emb_size
         self.is_training = arg.is_training
-        self.input_length=self.arg.input_length
-        self.output_length=self.arg.output_length
+        self.input_length = self.arg.input_length
+        self.output_length = self.arg.output_length
         self.hidden_units = arg.emb_size
         self.batch = arg.batch_size
         self.site_num = arg.site_num
@@ -177,7 +179,7 @@ class BridgeTransformer():
         self.num_blocks = arg.num_blocks
         self.dropout_rate = arg.dropout
 
-    def encoder(self, X = None, X_Q = None, X_P = None):
+    def encoder(self, X=None, X_Q=None, X_P=None):
         '''
         :param hiddens: [N, input_length, site_num, emb_size]
         :param hidden: [N, output_length, site_num, emb_size]
@@ -189,24 +191,24 @@ class BridgeTransformer():
         :return: [N, output_length, site_num, emb_size]
         '''
         with tf.variable_scope("bridge_encoder"):
-            X  = tf.reshape(tf.transpose(X,[0,2,1,3]), shape=[-1, self.input_length, self.emb_size])
-            X_P = tf.reshape(tf.transpose(X_P,[0,2,1,3]), shape=[-1, self.input_length, self.emb_size])
-            X_Q = tf.reshape(tf.transpose(X_Q,[0,2,1,3]), shape=[-1, self.output_length, self.emb_size])
-            
+            X = tf.reshape(tf.transpose(X, [0, 2, 1, 3]), shape=[-1, self.input_length, self.emb_size])
+            X_P = tf.reshape(tf.transpose(X_P, [0, 2, 1, 3]), shape=[-1, self.input_length, self.emb_size])
+            X_Q = tf.reshape(tf.transpose(X_Q, [0, 2, 1, 3]), shape=[-1, self.output_length, self.emb_size])
+
             ## Blocks
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     # Multihead Attention
-                    X_Q = multihead_attention(queries=X_Q, # future time steps
-                                            keys=X_P,    # historical time steps
-                                            values= X,   # historical inputs
-                                            num_units=self.hidden_units,
-                                            num_heads= self.num_heads, # self.num_heads
-                                            dropout_rate=self.dropout_rate,
-                                            is_training=self.is_training)
+                    X_Q = multihead_attention(queries=X_Q,  # future time steps
+                                              keys=X_P,  # historical time steps
+                                              values=X,  # historical inputs
+                                              num_units=self.hidden_units,
+                                              num_heads=self.num_heads,  # self.num_heads
+                                              dropout_rate=self.dropout_rate,
+                                              is_training=self.is_training)
                     # Feed Forward
                     X_Q = feedforward(X_Q, num_units=[4 * self.hidden_units, self.hidden_units])
-        X = tf.reshape(X_Q,shape=[-1, self.site_num, self.output_length, self.hidden_units])
+        X = tf.reshape(X_Q, shape=[-1, self.site_num, self.output_length, self.hidden_units])
         X = tf.transpose(X, [0, 2, 1, 3])
         return X
 

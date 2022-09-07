@@ -54,34 +54,8 @@ class InferenceClass(object):
         :param out_hiddens: [N, output_length, site_num, emb_size]
         :return:
         '''
-        results_speed = tf.layers.dense(inputs=tf.transpose(out_hiddens, [0, 2, 1, 3]), units=64, activation=tf.nn.relu, name='layer_spped_1')
-        results_speed = tf.layers.dense(inputs=results_speed, units=1, activation=tf.nn.relu, name='layer_speed_2')
+        results_speed = tf.layers.dense(inputs=tf.transpose(out_hiddens, [0, 2, 1, 3]), units=64, activation=tf.nn.relu)
+        results_speed = tf.layers.dense(inputs=results_speed, units=1, activation=tf.nn.relu)
         results_speed = tf.squeeze(results_speed, axis=-1, name='output_y')
 
         return results_speed# [N, site_num, output_length]
-
-    def dynamic_inference(self, features=None, STE=None):
-        '''
-        :param features: [N, output_length, site_num, emb_size]
-        :return:
-        '''
-        pres = list()
-        features = tf.reshape(tf.transpose(features, perm=[0, 2, 1, 3]),
-                              shape=[-1, self.para.input_length, self.para.emb_size])
-        for i in range(self.para.output_length):
-            pre_features = STE[:,i:i+1,:,:]
-            pre_features = tf.reshape(tf.transpose(pre_features, perm=[0, 2, 1, 3]),
-                                      shape=[-1, 1, self.para.emb_size])  # 3-D
-
-            print('in the decoder step, the input_features shape is : ', features.shape)
-            print('in the decoder step, the pre_features shape is : ', pre_features.shape)
-            T = TemporalTransformer(arg=self.para)
-            x_t = T.encoder(hiddens = features,
-                            hidden = pre_features) # [-1, 1, hidden_size]
-            x = tf.squeeze(x_t, axis=1)
-            x = tf.reshape(x, shape=[-1, self.para.site_num, self.para.emb_size])
-            x = tf.layers.dense(inputs=x, units=64, name='layer_1', activation=tf.nn.relu, reuse=tf.AUTO_REUSE)
-            pre = tf.layers.dense(inputs=x, units=1, name='layer_2', activation=tf.nn.relu, reuse=tf.AUTO_REUSE)
-            pres.append(pre)
-
-        return tf.concat(pres, axis=-1, name='output_y')
