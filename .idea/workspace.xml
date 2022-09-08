@@ -41,7 +41,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="505" />
-          <entry key="py" value="9764" />
+          <entry key="py" value="9774" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -49,7 +49,7 @@
         <counts>
           <entry key="Markdown" value="505" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="9764" />
+          <entry key="Python" value="9774" />
         </counts>
       </usages-collector>
     </session>
@@ -103,8 +103,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
+            <state relative-caret-position="263">
+              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -160,7 +160,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="77" />
     <option name="y" value="92" />
     <option name="width" value="1402" />
@@ -588,8 +588,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
+        <state relative-caret-position="263">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>

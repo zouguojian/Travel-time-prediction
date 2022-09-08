@@ -55,7 +55,6 @@ class DeepFM(object):
                                                          tf.pow(tf.matmul(X, v), 2),
                                                          tf.matmul(tf.pow(X, 2), tf.pow(v, 2))),
                                                      1, keep_dims=True))
-
             # shape of [None, 1]
             y_fm = tf.add(self.linear_terms, self.interaction_terms)
 
@@ -102,12 +101,9 @@ class DeepFM(object):
             print('x_trajectory_sum shape is : ', x_trajectory_sum.shape)
 
         with tf.variable_scope('spatio_temporal_deep_fm_fusion', reuse=False):
-            # add FM output and DNN output
-            # y_out = y_dnn + x_trajectory_sum
+            # add FM output and holistic output
             x = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu,
                                 kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out = tf.layers.dense(x, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            # y_out=tf.reduce_sum(y_out, axis=1)
             # y_out = tf.add_n([y_fm, y_dnn])
-
         return y_out
