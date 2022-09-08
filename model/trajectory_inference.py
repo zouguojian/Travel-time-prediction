@@ -59,35 +59,6 @@ class DeepFM(object):
             # shape of [None, 1]
             y_fm = tf.add(self.linear_terms, self.interaction_terms)
 
-        # three-hidden-layer neural network, network shape of (200-200-200)
-        with tf.variable_scope('DNN', reuse=False):
-            # embedding layer, 切分出对应字段的的隐藏空间特征值
-            y_embedding_input = tf.reshape(tf.gather(v, feature_inds), [-1, self.field_cnt * self.k])
-            # first hidden layer
-            w1 = tf.get_variable('w1_dnn', shape=[self.field_cnt * self.k, self.emb_size],
-                                 initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
-            b1 = tf.get_variable('b1_dnn', shape=[self.emb_size],
-                                 initializer=tf.constant_initializer(0.001))
-            y_hidden_l1 = tf.nn.relu(tf.matmul(y_embedding_input, w1) + b1)
-            # second hidden layer
-            w2 = tf.get_variable('w2', shape=[self.emb_size, self.emb_size],
-                                 initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
-            b2 = tf.get_variable('b2', shape=[self.emb_size],
-                                 initializer=tf.constant_initializer(0.001))
-            y_hidden_l2 = tf.nn.relu(tf.matmul(y_hidden_l1, w2) + b2)
-            # third hidden layer
-            w3 = tf.get_variable('w1', shape=[self.emb_size, self.emb_size],
-                                 initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
-            b3 = tf.get_variable('b1', shape=[self.emb_size],
-                                 initializer=tf.constant_initializer(0.001))
-            y_hidden_l3 = tf.nn.relu(tf.matmul(y_hidden_l2, w3) + b3)
-            # output layer
-            w_out = tf.get_variable('w_out', shape=[self.emb_size, 1],
-                                    initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
-            b_out = tf.get_variable('b_out', shape=[1],
-                                    initializer=tf.constant_initializer(0.001))
-            y_dnn = tf.nn.relu(tf.matmul(y_hidden_l3, w_out) + b_out)
-
         with tf.variable_scope('separate_and_sum_trajectory', reuse=False):
             x_trajectory = tf.gather(v, feature_inds)  # (N, 17, 64)
             x_common = x_trajectory[:, :-(self.trajectory_length * 2), :]  # (N, 7, 64)
