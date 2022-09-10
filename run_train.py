@@ -50,8 +50,7 @@ class Model(object):
             'day': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_day'),
             'hour': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_hour'),
             'minute': tf.placeholder(tf.int32, shape=(None, self.site_num), name='input_minute'),
-            'feature_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.feature_s],
-                                        name='input_s'),
+            'feature_s': tf.placeholder(tf.float32, shape=[None, self.input_length, self.site_num, self.feature_s], name='input_s'),
             'label_s': tf.placeholder(tf.float32, shape=[None, self.site_num, self.output_length], name='label_s'),
             'feature_tra': tf.placeholder(tf.float32, shape=[None, self.feature_tra], name='input_tra'),
             'label_tra': tf.placeholder(tf.float32, shape=[None, self.trajectory_length], name='label_tra'),
@@ -133,7 +132,10 @@ class Model(object):
             tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
         self.loss2 = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sum + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
-        self.loss = 0.3 * self.loss1 + 0.7 * self.loss2
+        self.loss3 = tf.reduce_mean(
+            tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sep + 1e-10 - self.placeholders['label_tra']), axis=0)))
+
+        self.loss = 0.3 * self.loss1 + 0.7 * self.loss2 + 0.4 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
