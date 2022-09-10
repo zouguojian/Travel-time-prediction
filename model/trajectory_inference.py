@@ -102,8 +102,11 @@ class DeepFM(object):
 
         with tf.variable_scope('spatio_temporal_deep_fm_fusion', reuse=False):
             # add FM output and holistic output
-            x = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu,
-                                kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            y_out = tf.layers.dense(x, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            x_1 = tf.layers.dense(x_trajectory_separate, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            y_out_1 = tf.layers.dense(x_1, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            y_out_1 = tf.squeeze(y_out_1, axis=-1)  # (N, 5)
+
+            x_2 = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            y_out_2 = tf.layers.dense(x_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             # y_out = tf.add_n([y_fm, y_dnn])
-        return y_out
+        return y_out_1, y_out_2

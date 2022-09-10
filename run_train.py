@@ -125,14 +125,14 @@ class Model(object):
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
-            self.pre_tra = DeepModel.inference(X=self.placeholders['feature_tra'],
-                                               feature_inds=self.placeholders['feature_inds'],
-                                               keep_prob=self.placeholders['dropout'],
-                                               hiddens=hidden_states)
+            self.pre_tra_sep, self.pre_tra_sum = DeepModel.inference(X=self.placeholders['feature_tra'],
+                                                                       feature_inds=self.placeholders['feature_inds'],
+                                                                       keep_prob=self.placeholders['dropout'],
+                                                                       hiddens=hidden_states)
         self.loss1 = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
         self.loss2 = tf.reduce_mean(
-            tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
+            tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sum + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
         self.loss = 0.3 * self.loss1 + 0.7 * self.loss2
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
@@ -253,7 +253,7 @@ class Model(object):
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra), feed_dict=feed_dict)
+            pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra_sum), feed_dict=feed_dict)
             print(dates, pre_tra * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
