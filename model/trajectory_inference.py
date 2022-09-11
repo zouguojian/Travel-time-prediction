@@ -1,6 +1,5 @@
 # -- coding: utf-8 --
 import tensorflow as tf
-
 from model.temporal_attention import TemporalTransformer
 
 
@@ -55,6 +54,7 @@ class DeepFM(object):
                                                          tf.pow(tf.matmul(X, v), 2),
                                                          tf.matmul(tf.pow(X, 2), tf.pow(v, 2))),
                                                      1, keep_dims=True))
+
             # shape of [None, 1]
             y_fm = tf.add(self.linear_terms, self.interaction_terms)
 
@@ -86,27 +86,34 @@ class DeepFM(object):
             T = TemporalTransformer(self.hp)
             x_trajectory_separate = T.encoder(hiddens=hiddens, hidden=x_trajectory_separate)
             # x_trajectory_separate = tf.squeeze(x_trajectory_separate, axis=2) # (N, 5, 64)
-            x_trajectory_sum = tf.reshape(x_trajectory_separate,
+            x_trajectory_separate = tf.reshape(x_trajectory_separate,
                                                shape=[-1, self.trajectory_length, self.emb_size])  # (N, 5, 64)
 
-            # x_trajectory_separate = tf.layers.conv1d(inputs=x_trajectory_separate,
-            #                                             filters=self.emb_size,
-            #                                             kernel_size=3,
-            #                                             padding='VALID',
-            #                                             kernel_initializer=tf.truncated_normal_initializer(),
-            #                                             name='conv_1', strides=2)
+            x_trajectory_sum = tf.layers.conv1d(inputs=x_trajectory_separate,
+                                                filters=self.emb_size,
+                                                kernel_size=3,
+                                                padding='VALID',
+                                                kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
+                                                name='conv_1', strides=2)
 
             x_trajectory_sum = tf.reduce_sum(x_trajectory_sum, axis=1)  # (N, 64)
 
             print('x_trajectory_sum shape is : ', x_trajectory_sum.shape)
 
         with tf.variable_scope('spatio_temporal_deep_fm_fusion', reuse=False):
-            # add FM output and holistic output
-            x_1 = tf.layers.dense(x_trajectory_separate, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            # add FM output and DNN output
+            x_1 = tf.layers.dense(x_trajectory_separate, units=self.k, activation=tf.nn.relu,
+                                  kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_1 = tf.layers.dense(x_1, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_1 = tf.squeeze(y_out_1, axis=-1)  # (N, 5)
 
-            x_2 = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            x_2 = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu,
+                                  kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_2 = tf.layers.dense(x_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            # y_out = tf.add_n([y_fm, y_dnn])
+            # y_out_2 = tf.add_n([y_fm, y_out_2])
+
+            y_out_2 = tf.concat([y_fm, y_out_2], axis=-1)
+            y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
+                                      kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
         return y_out_1, y_out_2

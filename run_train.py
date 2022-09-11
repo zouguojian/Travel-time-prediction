@@ -135,7 +135,7 @@ class Model(object):
         self.loss3 = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sep + 1e-10 - self.placeholders['label_tra']), axis=0)))
 
-        self.loss = 0.3 * self.loss1 + 0.7 * self.loss2 + 0.4 * self.loss3
+        self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
@@ -198,6 +198,8 @@ class Model(object):
             feed_dict.update({self.placeholders['dropout']: self.dropout})
 
             loss, _ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
+            # loss1, _ = self.sess.run((self.loss1, self.train_op), feed_dict=feed_dict)
+            # loss, _ = self.sess.run((self.loss2, self.train_op), feed_dict=feed_dict)
             print("after %d steps,the training average loss value is : %.6f" % (i, loss))
 
             # validate processing
@@ -256,7 +258,7 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra_sum), feed_dict=feed_dict)
-            print(dates, pre_tra * 60, total_time * 60)
+            # print(dates, pre_tra * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra)
             label_s_list.append(label_s)
