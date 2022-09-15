@@ -221,6 +221,7 @@ class Model(object):
         '''
         label_s_list, pre_s_list = list(), list()
         label_tra_sum_list, pre_tra_sum_list = list(), list()
+        label_tra_sep_list, pre_tra_sep_list = list(), list()
 
         # with tf.Session() as sess:
         model_file = tf.train.latest_checkpoint(self.hp.save_path)
@@ -257,22 +258,23 @@ class Model(object):
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            pre_s, pre_tra = self.sess.run((self.pre_s, self.pre_tra_sum), feed_dict=feed_dict)
-            print(dates, pre_tra * 60, total_time * 60)
+            pre_s, pre_tra_sep, pre_tra_sum = self.sess.run((self.pre_s, self.pre_tra_sep, self.pre_tra_sum), feed_dict=feed_dict)
+            # print(dates, pre_tra_sum * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
-            pre_tra_sum_list.append(pre_tra)
+            pre_tra_sum_list.append(pre_tra_sum)
+            label_tra_sep_list.append(separate_trajectory_time)
+            pre_tra_sep_list.append(pre_tra_sep)
             label_s_list.append(label_s)
             pre_s_list.append(pre_s)
 
-        label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60,
-                                        [-1, 1])  # total trajectory travel time for label
-        pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60,
-                                      [-1, 1])  # total trajectory travel time for prediction
+        label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
+        pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for prediction
 
-        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32),
-                                  [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
-        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
-                                [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
+        label_tra_sep_list = np.reshape(np.array(label_tra_sep_list, dtype=np.float32) * 60, [-1, 1])  # seperate trajectory travel time for label
+        pre_tra_sep_list = np.reshape(np.array(pre_tra_sep_list, dtype=np.float32) * 60, [-1, 1])  # seperate trajectory travel time for prediction
+
+        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
+        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
         if self.hp.normalize:
             label_s_list = self.re_current(label_s_list, max_s, min_s)
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
@@ -280,7 +282,11 @@ class Model(object):
         print('speed prediction result >>>')
         mae_s, rmse_s, mape_s, cor_s, r2_s = metric(pre_s_list, label_s_list)  # 产生预测指标
 
-        print('travel time prediction result >>>')
-        mae_tra, rmse_tra, mape_tra, cor_tra, r2_tra = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
+        print('entire travel time prediction result >>>')
+        mae_tra_sum, rmse_tra_sum, mape_tra_sum, cor_tra_sum, r2_tra_sum = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
-        return mae_tra
+
+        print('seperate travel time prediction result >>>')
+        mae_tra_sep, rmse_tra_sep, mape_tra_sep, cor_tra_sep, r2_tra_sep = metric(pred=pre_tra_sep_list, label=label_tra_sep_list)  # 产生预测指标
+
+        return mae_tra_sum
