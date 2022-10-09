@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 import utils
-import base
+import baseline.DeepTTE.models.base as base
 import numpy as np
 
 from torch.autograd import Variable

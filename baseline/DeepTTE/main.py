@@ -2,7 +2,7 @@ import os
 import json
 import time
 import utils
-import models
+import baseline.DeepTTE.models as models
 import logger
 import inspect
 import datetime
@@ -57,9 +57,9 @@ def train(model, elogger, train_set, eval_set):
     optimizer = optim.Adam(model.parameters(), lr = 1e-3)
 
     for epoch in range(args.epochs):
-        print ('Training on epoch {}'.format(epoch))
+        print('Training on epoch {}'.format(epoch))
         for input_file in train_set:
-            print ('Train on file {}'.format(input_file))
+            print('Train on file {}'.format(input_file))
 
             # data loader, return two dictionaries, attr and traj
             data_iter = data_loader.get_loader(input_file, args.batch_size)
@@ -78,9 +78,8 @@ def train(model, elogger, train_set, eval_set):
                 optimizer.step()
 
                 running_loss += loss.data[0]
-                print '\r Progress {:.2f}%, average loss {}'.format((idx + 1) * 100.0 / len(data_iter), running_loss / (idx + 1.0)),
-            print
-            elogger.log('Training Epoch {}, File {}, Loss {}'.format(epoch, input_file, running_loss / (idx + 1.0)))
+                print('Progress {:.2f}%, average loss {}'.format((idx + 1) * 100.0 / len(data_iter), running_loss / (idx + 1.0)))
+                elogger.log('Training Epoch {}, File {}, Loss {}'.format(epoch, input_file, running_loss / (idx + 1.0)))
 
         # evaluate the model after each epoch
         evaluate(model, elogger, eval_set, save_result = False)
@@ -120,7 +119,7 @@ def evaluate(model, elogger, files, save_result = False):
 
             running_loss += loss.data[0]
 
-        print 'Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0))
+        print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
         elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
 
     if save_result: fs.close()
