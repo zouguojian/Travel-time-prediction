@@ -2,7 +2,7 @@ import os
 import json
 import time
 import utils
-import baseline.DeepTTE.models as models
+from baseline.DeepTTE import models
 import logger
 import inspect
 import datetime
@@ -125,7 +125,8 @@ def evaluate(model, elogger, files, save_result = False):
     if save_result: fs.close()
 
 def get_kwargs(model_class):
-    model_args = inspect.getargspec(model_class.__init__).args
+    # model_args = inspect.getargspec(model_class.__init__).args
+    model_args = inspect.getfullargspec(model_class.__init__).args
     shell_args = args._get_kwargs()
 
     kwargs = dict(shell_args)
@@ -138,10 +139,11 @@ def get_kwargs(model_class):
 
 def run():
     # get the model arguments
-    kwargs = get_kwargs(models.DeepTTE.Net)
+    object = models.TTE.Net
+    kwargs = get_kwargs(object)
 
     # model instance
-    model = models.DeepTTE.Net(**kwargs)
+    model = models.TTE.Net(**kwargs)
 
     # experiment logger
     elogger = logger.Logger(args.log_file)

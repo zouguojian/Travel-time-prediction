@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +45,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="505" />
-          <entry key="py" value="10136" />
+          <entry key="py" value="10201" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -55,7 +53,7 @@
         <counts>
           <entry key="Markdown" value="505" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="10136" />
+          <entry key="Python" value="10201" />
         </counts>
       </usages-collector>
     </session>
@@ -95,25 +93,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="140" column="38" selection-start-line="140" selection-start-column="31" selection-end-line="140" selection-end-column="38" />
+            <state relative-caret-position="156">
+              <caret line="144" column="36" lean-forward="true" selection-start-line="144" selection-start-column="36" selection-end-line="144" selection-end-column="36" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-622">
-              <caret line="78" column="17" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -186,8 +172,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="52" />
-    <option name="y" value="90" />
+    <option name="x" value="76" />
+    <option name="y" value="61" />
     <option name="width" value="1402" />
     <option name="height" value="796" />
   </component>
@@ -213,13 +199,6 @@
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
               <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
@@ -393,7 +372,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="52" y="90" width="1402" height="796" extended-state="0" />
+    <frame x="115" y="93" width="1402" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.173063" />
@@ -682,6 +661,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-994">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -694,20 +680,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="140" column="38" selection-start-line="140" selection-start-column="31" selection-end-line="140" selection-end-column="38" />
+        <state relative-caret-position="156">
+          <caret line="144" column="36" lean-forward="true" selection-start-line="144" selection-start-column="36" selection-end-line="144" selection-end-column="36" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-622">
-          <caret line="78" column="17" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
