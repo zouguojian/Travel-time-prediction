@@ -56,10 +56,10 @@ def train(model, elogger, train_set, eval_set):
 
     optimizer = optim.Adam(model.parameters(), lr = 1e-3)
 
-    for epoch in xrange(args.epochs):
-        print 'Training on epoch {}'.format(epoch)
+    for epoch in range(args.epochs):
+        print ('Training on epoch {}'.format(epoch))
         for input_file in train_set:
-            print 'Train on file {}'.format(input_file)
+            print ('Train on file {}'.format(input_file))
 
             # data loader, return two dictionaries, attr and traj
             data_iter = data_loader.get_loader(input_file, args.batch_size)

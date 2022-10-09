@@ -6,7 +6,8 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
 import numpy as np
-import ujson as json
+# import ujson as json
+import json
 
 class MySet(Dataset):
     def __init__(self, input_file):
