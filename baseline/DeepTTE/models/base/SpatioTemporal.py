@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-import GeoConv
+from baseline.DeepTTE.models.base import GeoConv
 import numpy as np
 
 from torch.autograd import Variable
@@ -20,20 +20,17 @@ class Net(nn.Module):
         self.pooling_method = pooling_method
 
         self.geo_conv = GeoConv.Net(kernel_size = kernel_size, num_filter = num_filter)
-	#num_filter: output size of each GeoConv + 1:distance of local path + attr_size: output size of attr component
-	if rnn == 'lstm':
-            self.rnn = nn.LSTM(input_size = num_filter + 1 + attr_size, \
-                                      hidden_size = 128, \
-                                      num_layers = 2, \
-                                      batch_first = True
-            )
+        # num_filter: output size of each GeoConv + 1:distance of local path + attr_size: output size of attr component
+        if rnn == 'lstm':
+            self.rnn = nn.LSTM(input_size = num_filter + 1 + attr_size,
+                                      hidden_size = 128,
+                                      num_layers = 2,
+                                      batch_first = True)
         elif rnn == 'rnn':
-            self.rnn = nn.RNN(input_size = num_filter + 1 + attr_size, \
-                              hidden_size = 128, \
-                              num_layers = 1, \
-                              batch_first = True
-            )
-
+            self.rnn = nn.RNN(input_size = num_filter + 1 + attr_size,
+                              hidden_size = 128,
+                              num_layers = 1,
+                              batch_first = True)
 
         if pooling_method == 'attention':
             self.attr2atten = nn.Linear(attr_size, 128)

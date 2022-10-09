@@ -7,6 +7,3 @@ class Logger:
     def log(self, content):
         self.file.write(content + '\n')
         self.file.flush()
-
-
-

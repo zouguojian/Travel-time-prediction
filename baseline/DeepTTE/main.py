@@ -3,6 +3,7 @@ import json
 import time
 import utils
 from baseline.DeepTTE import models
+from baseline.DeepTTE.models import TTE
 import logger
 import inspect
 import datetime
@@ -20,26 +21,20 @@ import numpy as np
 
 parser = argparse.ArgumentParser()
 # basic args
-parser.add_argument('--task', type = str)
-parser.add_argument('--batch_size', type = int, default = 64)
+parser.add_argument('--task', type = str, default='train')
+parser.add_argument('--batch_size', type = int, default = 10)
 parser.add_argument('--epochs', type = int, default = 100)
-
 # evaluation args
-parser.add_argument('--weight_file', type = str)
-parser.add_argument('--result_file', type = str)
-
+parser.add_argument('--weight_file', type = str, default = './saved_weights/weight')
+parser.add_argument('--result_file', type = str, default = './result/deeptte.res')
 # cnn args
-parser.add_argument('--kernel_size', type = int)
-
+parser.add_argument('--kernel_size', type = int, default=3)
 # rnn args
-parser.add_argument('--pooling_method', type = str)
-
+parser.add_argument('--pooling_method', type = str, default= 'attention')
 # multi-task args
-parser.add_argument('--alpha', type = float)
-
+parser.add_argument('--alpha', type = float, default=0.1)
 # log file name
-parser.add_argument('--log_file', type = str)
-
+parser.add_argument('--log_file', type = str, default='run_log')
 args = parser.parse_args()
 
 config = json.load(open('./config.json', 'r'))
@@ -138,12 +133,13 @@ def get_kwargs(model_class):
     return kwargs
 
 def run():
+    # model instance
     # get the model arguments
-    object = models.TTE.Net
-    kwargs = get_kwargs(object)
+    kwargs = get_kwargs(TTE.Net)
 
     # model instance
-    model = models.TTE.Net(**kwargs)
+    model = TTE.Net(**kwargs)
+    # model = TTE.Net(kernel_size = args, num_filter = 32, pooling_method = 'attention', num_final_fcs = 3, final_fc_size = 128, alpha = 0.3)
 
     # experiment logger
     elogger = logger.Logger(args.log_file)
