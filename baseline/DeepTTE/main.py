@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser()
 # basic args
 parser.add_argument('--task', type = str, default='test')
 parser.add_argument('--batch_size', type = int, default = 10)
-parser.add_argument('--epochs', type = int, default = 100)
+parser.add_argument('--epochs', type = int, default = 10)
 # evaluation args
 parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE')
 parser.add_argument('--result_file', type = str, default = './result/deeptte.res')
@@ -106,6 +106,7 @@ def evaluate(model, elogger, files, save_result = False):
 
         for idx, (attr, traj) in enumerate(data_iter):
             attr, traj = utils.to_var(attr), utils.to_var(traj)
+            print(traj['lngs'].shape)
 
             pred_dict, loss = model.eval_on_batch(attr, traj, config)
 

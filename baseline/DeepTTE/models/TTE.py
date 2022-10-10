@@ -105,9 +105,9 @@ class Net(nn.Module):
         self.attr_net = Attr.Net()
 
         # spatio-temporal component
-        self.spatio_temporal = SpatioTemporal.Net(attr_size = self.attr_net.out_size(), \
-                                                       kernel_size = self.kernel_size, \
-                                                       num_filter = self.num_filter, \
+        self.spatio_temporal = SpatioTemporal.Net(attr_size = self.attr_net.out_size(),
+                                                       kernel_size = self.kernel_size,
+                                                       num_filter = self.num_filter,
                                                        pooling_method = self.pooling_method
         )
 
