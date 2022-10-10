@@ -106,16 +106,14 @@ def evaluate(model, elogger, files, save_result = False):
 
         for idx, (attr, traj) in enumerate(data_iter):
             attr, traj = utils.to_var(attr), utils.to_var(traj)
-            print(traj['lngs'].shape)
 
             pred_dict, loss = model.eval_on_batch(attr, traj, config)
 
             if save_result: write_result(fs, pred_dict, attr)
+            running_loss += loss.data
 
-            running_loss += loss.data[0]
-
-            print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
-            elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
+        print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
+        elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
 
     if save_result: fs.close()
 

@@ -34,7 +34,7 @@ class MySet(Dataset):
         # self.lengths = map(lambda x: len(x['lngs']), self.content)
 
         ### Python 3 conversion
-        with open('./data/' + input_file, 'r') as f:
+        with open('./data/' + input_file, 'r', encoding='utf-8') as f:
             ### readLines() outputs a list of strings, each strings represents a dict with \n at the end
             self.content = f.readlines()
             ### json.loads() returns each string as a dict, content is now a map object i.e. list of dicts

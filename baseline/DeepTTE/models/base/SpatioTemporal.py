@@ -81,7 +81,7 @@ class Net(nn.Module):
         # concat the loc_conv and the attributes
         conv_locs = torch.cat((conv_locs, expand_attr_t), dim = 2)
 
-        lens = map(lambda x: x - self.kernel_size + 1, traj['lens'])
+        lens = list(map(lambda x: x - self.kernel_size + 1, traj['lens']))
 
         packed_inputs = nn.utils.rnn.pack_padded_sequence(conv_locs, lens, batch_first = True)
 
