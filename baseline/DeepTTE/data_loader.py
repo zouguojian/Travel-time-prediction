@@ -74,6 +74,7 @@ class BatchSampler:
         chunk_size = self.batch_size * 100
 
         chunks = (self.count + chunk_size - 1) // chunk_size
+        # print('chunks',chunks)
 
         # re-arrange indices to minimize the padding
         for i in range(chunks):
@@ -92,6 +93,9 @@ class BatchSampler:
 
 def get_loader(input_file, batch_size):
     dataset = MySet(input_file = input_file)
+    # for i, length in enumerate(dataset.lengths):
+    #     print('length is : ',i, length)
+    # print('length is : ', len(list(dataset)))
 
     batch_sampler = BatchSampler(dataset, batch_size)
 

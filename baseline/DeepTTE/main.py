@@ -25,7 +25,7 @@ parser.add_argument('--task', type = str, default='test')
 parser.add_argument('--batch_size', type = int, default = 10)
 parser.add_argument('--epochs', type = int, default = 100)
 # evaluation args
-parser.add_argument('--weight_file', type = str, default = './saved_weights/weight')
+parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE')
 parser.add_argument('--result_file', type = str, default = './result/deeptte.res')
 # cnn args
 parser.add_argument('--kernel_size', type = int, default=3)
@@ -60,7 +60,6 @@ def train(model, elogger, train_set, eval_set):
             data_iter = data_loader.get_loader(input_file, args.batch_size)
 
             running_loss = 0.0
-
             for idx, (attr, traj) in enumerate(data_iter):
                 # transform the input to pytorch variable
                 attr, traj = utils.to_var(attr), utils.to_var(traj)
@@ -80,9 +79,9 @@ def train(model, elogger, train_set, eval_set):
         evaluate(model, elogger, eval_set, save_result = False)
 
         # save the weight file after each epoch
-        weight_name = '{}_{}'.format(args.log_file, str(datetime.datetime.now()))
-        elogger.log('Save weight file {}'.format(weight_name))
-        torch.save(model.state_dict(), './saved_weights/' + weight_name)
+        # weight_name = '{}_{}'.format(args.log_file, str(datetime.datetime.now()))
+        # elogger.log('Save weight file {}'.format(weight_name))
+        torch.save(model.state_dict(), args.weight_file)
 
 def write_result(fs, pred_dict, attr):
     pred = pred_dict['pred'].data.cpu().numpy()
