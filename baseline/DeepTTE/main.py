@@ -71,9 +71,9 @@ def train(model, elogger, train_set, eval_set):
                 loss.backward()
                 optimizer.step()
 
-                running_loss += loss.data[0]
+                running_loss += loss.data
                 print('Progress {:.2f}%, average loss {}'.format((idx + 1) * 100.0 / len(data_iter), running_loss / (idx + 1.0)))
-                elogger.log('Training Epoch {}, File {}, Loss {}'.format(epoch, input_file, running_loss / (idx + 1.0)))
+            elogger.log('Training Epoch {}, File {}, Loss {}'.format(epoch, input_file, running_loss / (idx + 1.0)))
 
         # evaluate the model after each epoch
         evaluate(model, elogger, eval_set, save_result = False)

@@ -6,7 +6,8 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
 import numpy as np
-import ujson as json
+# import ujson as json
+import json
 
 """
 Each JSON file contains a certain number of trips represented as a dict with the following keys:
