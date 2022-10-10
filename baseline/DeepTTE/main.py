@@ -21,7 +21,7 @@ import numpy as np
 
 parser = argparse.ArgumentParser()
 # basic args
-parser.add_argument('--task', type = str, default='train')
+parser.add_argument('--task', type = str, default='test')
 parser.add_argument('--batch_size', type = int, default = 10)
 parser.add_argument('--epochs', type = int, default = 100)
 # evaluation args
@@ -114,8 +114,8 @@ def evaluate(model, elogger, files, save_result = False):
 
             running_loss += loss.data[0]
 
-        print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
-        elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
+            print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
+            elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
 
     if save_result: fs.close()
 

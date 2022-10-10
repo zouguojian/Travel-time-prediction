@@ -12,14 +12,14 @@ import json
 class MySet(Dataset):
     def __init__(self, input_file):
         self.content = open('./data/' + input_file, 'r').readlines()
-        self.content = map(lambda x: json.loads(x), self.content)
-        self.lengths = map(lambda x: len(x['lngs']), self.content)
+        self.content = map(lambda x: json.loads(x), list(self.content))
+        self.lengths = map(lambda x: len(x['lngs']), list(self.content))
 
     def __getitem__(self, idx):
         return self.content[idx]
 
     def __len__(self):
-        return len(self.content)
+        return len(list(self.content))
 
 def collate_fn(data):
     stat_attrs = ['dist', 'time']
@@ -60,7 +60,9 @@ class BatchSampler:
         self.count = len(dataset)
         self.batch_size = batch_size
         self.lengths = dataset.lengths
-        self.indices = range(self.count)
+        # print(dataset.lengths)
+        # print(list(range(self.count)))
+        self.indices = list(range(self.count))
 
     def __iter__(self):
         '''
@@ -93,12 +95,11 @@ def get_loader(input_file, batch_size):
 
     batch_sampler = BatchSampler(dataset, batch_size)
 
-    data_loader = DataLoader(dataset = dataset, \
-                             batch_size = 1, \
-                             collate_fn = lambda x: collate_fn(x), \
+    data_loader = DataLoader(dataset = dataset,
+                             batch_size = 1,
+                             collate_fn = lambda x: collate_fn(x),
                              num_workers = 4,
                              batch_sampler = batch_sampler,
-                             pin_memory = True
-    )
+                             pin_memory = True)
 
     return data_loader
