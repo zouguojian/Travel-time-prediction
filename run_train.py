@@ -138,12 +138,12 @@ class Model(object):
         maes_3 = tf.losses.absolute_difference(self.pre_tra_sep, self.placeholders['label_tra'])
         self.loss3 = tf.reduce_mean(maes_3)
 
-        self.loss1 = tf.reduce_mean(
-            tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
-        self.loss2 = tf.reduce_mean(
-            tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sum + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
-        self.loss3 = tf.reduce_mean(
-            tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sep + 1e-10 - self.placeholders['label_tra']), axis=0)))
+        # self.loss1 = tf.reduce_mean(
+        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
+        # self.loss2 = tf.reduce_mean(
+        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sum + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
+        # self.loss3 = tf.reduce_mean(
+        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sep + 1e-10 - self.placeholders['label_tra']), axis=0)))
 
         self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
