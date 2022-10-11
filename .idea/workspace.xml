@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/weights/MT-STAN/model.ckpt.meta" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +48,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="505" />
-          <entry key="py" value="11644" />
+          <entry key="py" value="11648" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -60,7 +56,7 @@
         <counts>
           <entry key="Markdown" value="505" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="11644" />
+          <entry key="Python" value="11648" />
         </counts>
       </usages-collector>
     </session>
@@ -79,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-421">
-              <caret line="149" column="107" lean-forward="true" selection-start-line="149" selection-start-column="107" selection-end-line="149" selection-end-column="107" />
+            <state relative-caret-position="370">
+              <caret line="144" column="41" selection-start-line="144" selection-start-column="41" selection-end-line="144" selection-end-column="41" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -172,8 +168,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="44" />
-    <option name="y" value="54" />
+    <option name="x" value="354" />
+    <option name="y" value="23" />
     <option name="width" value="1445" />
     <option name="height" value="796" />
   </component>
@@ -233,11 +229,6 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="weights" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -412,7 +403,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.359375" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.203125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -784,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-421">
-          <caret line="149" column="107" lean-forward="true" selection-start-line="149" selection-start-column="107" selection-end-line="149" selection-end-column="107" />
+        <state relative-caret-position="370">
+          <caret line="144" column="41" selection-start-line="144" selection-start-column="41" selection-end-line="144" selection-end-column="41" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>

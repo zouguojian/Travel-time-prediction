@@ -142,6 +142,7 @@ class Model(object):
         self.loss4 = tf.reduce_mean(maes_4)
 
         if self.hp.model_name == 'FM' or self.hp.model_name == 'Deep':   # merely use the FM or Deep to extract individual travel features
+            self.pre_tra_sum = self.y_dfm
             self.loss = self.loss4
         else: # entire neural network MT-STAN
             self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
