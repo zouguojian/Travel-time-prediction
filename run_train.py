@@ -138,13 +138,6 @@ class Model(object):
         maes_3 = tf.losses.absolute_difference(self.pre_tra_sep, self.placeholders['label_tra'])
         self.loss3 = tf.reduce_mean(maes_3)
 
-        # self.loss1 = tf.reduce_mean(
-        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
-        # self.loss2 = tf.reduce_mean(
-        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sum + 1e-10 - self.placeholders['label_tra_sum']), axis=0)))
-        # self.loss3 = tf.reduce_mean(
-        #     tf.sqrt(tf.reduce_mean(tf.square(self.pre_tra_sep + 1e-10 - self.placeholders['label_tra']), axis=0)))
-
         self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
@@ -280,8 +273,8 @@ class Model(object):
         label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
         pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for prediction
 
-        label_tra_sep_list = np.reshape(np.array(label_tra_sep_list, dtype=np.float32) * 60, [-1, 1])  # seperate trajectory travel time for label
-        pre_tra_sep_list = np.reshape(np.array(pre_tra_sep_list, dtype=np.float32) * 60, [-1, 1])  # seperate trajectory travel time for prediction
+        label_tra_sep_list = np.reshape(np.array(label_tra_sep_list, dtype=np.float32) * 60, [-1, self.trajectory_length])  # seperate trajectory travel time for label
+        pre_tra_sep_list = np.reshape(np.array(pre_tra_sep_list, dtype=np.float32) * 60, [-1, self.trajectory_length])  # seperate trajectory travel time for prediction
 
         label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
         pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
@@ -297,6 +290,8 @@ class Model(object):
         # describe(label_list, predict_list)   #预测值可视化
 
         print('seperate travel time prediction result >>>')
-        mae_tra_sep, rmse_tra_sep, mape_tra_sep, cor_tra_sep, r2_tra_sep = metric(pred=pre_tra_sep_list, label=label_tra_sep_list)  # 产生预测指标
+        for i in range(self.trajectory_length):
+            print('road segment index is : ', i+1)
+            mae_tra_sep, rmse_tra_sep, mape_tra_sep, cor_tra_sep, r2_tra_sep = metric(pred=pre_tra_sep_list[:,i], label=label_tra_sep_list[:,i])  # 产生预测指标
 
         return mae_tra_sum
