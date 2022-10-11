@@ -124,10 +124,20 @@ class Model(object):
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
-            self.pre_tra_sep, self.pre_tra_sum = DeepModel.inference(X=self.placeholders['feature_tra'],
-                                                                       feature_inds=self.placeholders['feature_inds'],
-                                                                       keep_prob=self.placeholders['dropout'],
-                                                                       hiddens=hidden_states)
+            self.pre_tra_sep, self.pre_tra_sum, self.y_fm = DeepModel.inference(X=self.placeholders['feature_tra'],
+                                                                                   feature_inds=self.placeholders['feature_inds'],
+                                                                                   keep_prob=self.placeholders['dropout'],
+                                                                                   hiddens=hidden_states)
+
+        maes_1 = tf.losses.absolute_difference(self.pre_s, self.placeholders['label_s'])
+        self.loss1 = tf.reduce_mean(maes_1)
+
+        maes_2 = tf.losses.absolute_difference(self.pre_tra_sum, self.placeholders['label_tra_sum'])
+        self.loss2 = tf.reduce_mean(maes_2)
+
+        maes_3 = tf.losses.absolute_difference(self.pre_tra_sep, self.placeholders['label_tra'])
+        self.loss3 = tf.reduce_mean(maes_3)
+
         self.loss1 = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pre_s + 1e-10 - self.placeholders['label_s']), axis=0)))
         self.loss2 = tf.reduce_mean(

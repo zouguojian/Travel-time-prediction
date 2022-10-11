@@ -101,19 +101,22 @@ class DeepFM(object):
             print('x_trajectory_sum shape is : ', x_trajectory_sum.shape)
 
         with tf.variable_scope('spatio_temporal_deep_fm_fusion', reuse=False):
-            # add FM output and DNN output
+            # separate time
             x_1 = tf.layers.dense(x_trajectory_separate, units=self.k, activation=tf.nn.relu,
                                   kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_1 = tf.layers.dense(x_1, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_1 = tf.squeeze(y_out_1, axis=-1)  # (N, 5)
 
+            # sum time
             x_2 = tf.layers.dense(x_trajectory_sum, units=self.k, activation=tf.nn.relu,
                                   kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_2 = tf.layers.dense(x_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             # y_out_2 = tf.add_n([y_fm, y_out_2])
 
+            # the combination between sptio-temporal attention network with DeepFM
             y_out_2 = tf.concat([y_fm, y_out_2], axis=-1)
             y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
                                       kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-        return y_out_1, y_out_2
+
+        return y_out_1, y_out_2, y_fm
