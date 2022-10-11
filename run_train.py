@@ -124,7 +124,7 @@ class Model(object):
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
             DeepModel = DeepFM(self.hp)
-            self.pre_tra_sep, self.pre_tra_sum, self.y_fm = DeepModel.inference(X=self.placeholders['feature_tra'],
+            self.pre_tra_sep, self.pre_tra_sum, self.y_dfm = DeepModel.inference(X=self.placeholders['feature_tra'],
                                                                                    feature_inds=self.placeholders['feature_inds'],
                                                                                    keep_prob=self.placeholders['dropout'],
                                                                                    hiddens=hidden_states)
@@ -138,7 +138,13 @@ class Model(object):
         maes_3 = tf.losses.absolute_difference(self.pre_tra_sep, self.placeholders['label_tra'])
         self.loss3 = tf.reduce_mean(maes_3)
 
-        self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
+        maes_4 = tf.losses.absolute_difference(self.y_dfm, self.placeholders['label_tra_sum'])
+        self.loss4 = tf.reduce_mean(maes_4)
+
+        if self.hp.model_name == 'FM' or self.hp.model_name == 'Deep':   # merely use the FM or Deep to extract individual travel features
+            self.loss = self.loss4
+        else: # entire neural network MT-STAN
+            self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step.....................................#')
@@ -289,9 +295,10 @@ class Model(object):
         mae_tra_sum, rmse_tra_sum, mape_tra_sum, cor_tra_sum, r2_tra_sum = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
 
-        print('seperate travel time prediction result >>>')
-        for i in range(self.trajectory_length):
-            print('road segment index is : ', i+1)
-            mae_tra_sep, rmse_tra_sep, mape_tra_sep, cor_tra_sep, r2_tra_sep = metric(pred=pre_tra_sep_list[:,i], label=label_tra_sep_list[:,i])  # 产生预测指标
+        if self.hp.model_name !='FM' or self.hp.model_name !='Deep':
+            print('seperate travel time prediction result >>>')
+            for i in range(self.trajectory_length):
+                print('road segment index is : ', i+1)
+                mae_tra_sep, rmse_tra_sep, mape_tra_sep, cor_tra_sep, r2_tra_sep = metric(pred=pre_tra_sep_list[:,i], label=label_tra_sep_list[:,i])  # 产生预测指标
 
         return mae_tra_sum
