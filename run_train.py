@@ -129,6 +129,8 @@ class Model(object):
                                                                                    keep_prob=self.placeholders['dropout'],
                                                                                    hiddens=hidden_states)
 
+        # hidden_states = tf.gather(encoder_outs, indices=self.placeholders['trajectory_inds'],
+        #                           axis=2)  # (32, 24, 5, 64)
         maes_1 = tf.losses.absolute_difference(self.pre_s, self.placeholders['label_s'])
         self.loss1 = tf.reduce_mean(maes_1)
 

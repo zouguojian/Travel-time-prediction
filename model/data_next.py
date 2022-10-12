@@ -218,7 +218,8 @@ class DataClass(object):
                                                [len(self.vehicle_id), 25, 5, 31, 24, 60, 60, self.trajectory_length, self.site_num]), # each element index
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
-                       np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), data_tra[low, 2])
+                       np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), # trajectory 对应的路径 index
+                       data_tra[low, 2])     # 每辆车的出发时间
 
                 low += 1
             else:

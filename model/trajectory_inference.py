@@ -54,9 +54,10 @@ class DeepFM(object):
                                                          tf.pow(tf.matmul(X, v), 2),
                                                          tf.matmul(tf.pow(X, 2), tf.pow(v, 2))),
                                                      1, keep_dims=True))
-
             # shape of [None, 1]
             y_fm = tf.add(self.linear_terms, self.interaction_terms)
+
+
 
         with tf.variable_scope('separate_and_sum_trajectory', reuse=False):
             x_trajectory = tf.gather(v, feature_inds)  # (N, 17, 64)
@@ -114,7 +115,7 @@ class DeepFM(object):
             # y_out_2 = tf.add_n([y_fm, y_out_2])
 
             # the combination between sptio-temporal attention network with DeepFM
-            y_out_2 = tf.concat([y_fm, y_out_2], axis=-1)
+            y_out_2 = tf.concat([self.linear_terms, self.interaction_terms, y_out_2], axis=-1)
             y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
                                       kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
