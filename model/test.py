@@ -1,15 +1,9 @@
 # -- coding: utf-8 --
-import datetime
 
-# 6/13/2021 10:05:05 AM
+import numpy as np
 
-a = [2,3,5,6,2,4,1,0,3,2,1,2,3,2,1,2]
+a = np.random.random([32, 12, 200])
 
-s = dict()
+print(a.shape)
 
-i=0
-for char in set(a):
-       s[char] =i
-       i+=1
-
-print(s)
+print(a[:,[2,3,4,5]].shape)

@@ -129,9 +129,9 @@ class Model(object):
                                                                                    keep_prob=self.placeholders['dropout'],
                                                                                    hiddens=hidden_states)
 
-        # hidden_states = tf.gather(encoder_outs, indices=self.placeholders['trajectory_inds'],
-        #                           axis=2)  # (32, 24, 5, 64)
-        maes_1 = tf.losses.absolute_difference(self.pre_s, self.placeholders['label_s'])
+        self.pre_s = tf.gather(self.pre_s,  indices=self.placeholders['trajectory_inds'], axis=1)  # (32, 108, 6)
+        self.pre_s_o = tf.gather(self.placeholders['label_s'], indices=self.placeholders['trajectory_inds'], axis=1)
+        maes_1 = tf.losses.absolute_difference(self.pre_s, self.pre_s_o)
         self.loss1 = tf.reduce_mean(maes_1)
 
         maes_2 = tf.losses.absolute_difference(self.pre_tra_sum, self.placeholders['label_tra_sum'])
@@ -276,7 +276,7 @@ class Model(object):
             pre_tra_sum_list.append(pre_tra_sum)
             label_tra_sep_list.append(separate_trajectory_time)
             pre_tra_sep_list.append(pre_tra_sep)
-            label_s_list.append(label_s)
+            label_s_list.append(label_s[:,trajectory_inds[0]])
             pre_s_list.append(pre_s)
 
         label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
@@ -285,8 +285,8 @@ class Model(object):
         label_tra_sep_list = np.reshape(np.array(label_tra_sep_list, dtype=np.float32) * 60, [-1, self.trajectory_length])  # seperate trajectory travel time for label
         pre_tra_sep_list = np.reshape(np.array(pre_tra_sep_list, dtype=np.float32) * 60, [-1, self.trajectory_length])  # seperate trajectory travel time for prediction
 
-        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
-        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32), [-1, self.site_num, self.output_length]).transpose([1, 0, 2])
+        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32), [-1, self.trajectory_length, self.output_length]).transpose([1, 0, 2])
+        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32), [-1, self.trajectory_length, self.output_length]).transpose([1, 0, 2])
         if self.hp.normalize:
             label_s_list = self.re_current(label_s_list, max_s, min_s)
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
