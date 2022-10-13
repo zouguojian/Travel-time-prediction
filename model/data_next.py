@@ -20,6 +20,7 @@ dragon_dragon={('78000F', '780011'): 28, ('780011', '780013'): 29, ('780011', '7
                ('79007A', '78001D'): 72, ('79007A', '79001C'): 73, ('79007C', '780063'): 74, ('79007C', '790062'): 75,
                ('79007C', '79007A'): 76, ('79007E', '780067'): 77, ('79007E', '79007C'): 78, ('790080', '79007E'): 79}
 route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]
+max_road_leangth = 22193.94
 
 class DataClass(object):
     def __init__(self, hp=None):
@@ -195,7 +196,7 @@ class DataClass(object):
                 yield (data_s[(speed_low -self.input_length) * self.site_num : speed_low * self.site_num, 5:6],                         # speed
                        (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1)//7, # week
                        (data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 2]-1),    # day
-                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],    # hour
+                       data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 3],        # hour
                        data_s[(speed_low -self.input_length) * self.site_num : (speed_low + self.output_length) * self.site_num, 4]//15,    # minute
                        label, # speed label
                        self.get_one_hot([self.vehicle_id[data_tra[low,0]]],array_length=len(self.vehicle_id)),                        # vehicle id

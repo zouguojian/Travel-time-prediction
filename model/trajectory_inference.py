@@ -38,26 +38,45 @@ class DeepFM(object):
         '''
         v = tf.Variable(tf.truncated_normal(shape=[self.p, self.k], mean=0, stddev=0.01), dtype='float32')
         # p 总的轨迹数据元素长度
+
         # Factorization Machine
-        with tf.variable_scope('FM', reuse=False):
-            b = tf.get_variable('bias', shape=[1],
-                                initializer=tf.zeros_initializer())
-            w1 = tf.get_variable('w1', shape=[self.p, 1],
-                                 initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
-            # shape of [None, 1]
-            self.linear_terms = tf.add(tf.matmul(X, w1), b)
+        if self.hp.model_name == 'DNN':
+            with tf.variable_scope('DNN',reuse=False):
+                # embedding layer
+                y_embedding_input = tf.reshape(tf.gather(v, feature_inds), [-1, (7+self.trajectory_length*2)*self.k])
+                # first hidden layer
+                y_hidden_l1 = tf.layers.dense(y_embedding_input, units=self.k, activation=tf.nn.relu,
+                                      kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
-            # shape of [None, 1]
-            self.interaction_terms = tf.multiply(0.5,
-                                                 tf.reduce_mean(
-                                                     tf.subtract(
-                                                         tf.pow(tf.matmul(X, v), 2),
-                                                         tf.matmul(tf.pow(X, 2), tf.pow(v, 2))),
-                                                     1, keep_dims=True))
-            # shape of [None, 1]
-            y_fm = tf.add(self.linear_terms, self.interaction_terms)
+                # second hidden layer
+                y_hidden_l2 = tf.layers.dense(y_hidden_l1, units=self.k, activation=tf.nn.relu,
+                                      kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+                # third hidden layer
+                y_hidden_l3 = tf.layers.dense(y_hidden_l2, units=self.k, activation=tf.nn.relu,
+                                              kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
+                # output layer
+                y_fm = tf.layers.dense(y_hidden_l3, units=1, activation=tf.nn.relu,
+                                              kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
+        else:
+            with tf.variable_scope('FM', reuse=False):
+                b = tf.get_variable('bias', shape=[1],
+                                    initializer=tf.zeros_initializer())
+                w1 = tf.get_variable('w1', shape=[self.p, 1],
+                                     initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
+                # shape of [None, 1]
+                self.linear_terms = tf.add(tf.matmul(X, w1), b)
+
+                # shape of [None, 1]
+                self.interaction_terms = tf.multiply(0.5,
+                                                     tf.reduce_mean(
+                                                         tf.subtract(
+                                                             tf.pow(tf.matmul(X, v), 2),
+                                                             tf.matmul(tf.pow(X, 2), tf.pow(v, 2))),
+                                                         1, keep_dims=True))
+                # shape of [None, 1]
+                y_fm = tf.add(self.linear_terms, self.interaction_terms)
 
         with tf.variable_scope('separate_and_sum_trajectory', reuse=False):
             x_trajectory = tf.gather(v, feature_inds)  # (N, 17, 64)
@@ -85,7 +104,8 @@ class DeepFM(object):
             hiddens = tf.reshape(hiddens, shape=[-1, self.output_length + self.input_length, self.emb_size])
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])
             T = TemporalTransformer(self.hp)
-            x_trajectory_separate = T.encoder(hiddens=hiddens, hidden=x_trajectory_separate)
+            x_trajectory_separate = T.encoder(hiddens=hiddens[:, -(1 + self.input_length):],
+                                              hidden=x_trajectory_separate)
             # x_trajectory_separate = tf.squeeze(x_trajectory_separate, axis=2) # (N, 5, 64)
             x_trajectory_separate = tf.reshape(x_trajectory_separate,
                                                shape=[-1, self.trajectory_length, self.emb_size])  # (N, 5, 64)
@@ -115,9 +135,10 @@ class DeepFM(object):
             # y_out_2 = tf.add_n([y_fm, y_out_2])
 
             # the combination between sptio-temporal attention network with DeepFM
-            y_out_2 = tf.concat([self.linear_terms, self.interaction_terms, y_out_2], axis=-1)
-            y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
-                                      kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            if self.hp.model_name != 'DNN':
+                y_out_2 = tf.concat([self.linear_terms, self.interaction_terms, y_out_2], axis=-1)
+                y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
+                                          kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+                y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
         return y_out_1, y_out_2, y_fm

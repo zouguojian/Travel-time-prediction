@@ -44,14 +44,13 @@ def train(model, elogger, train_set, eval_set):
     elogger.log(str(model))
     elogger.log(str(args._get_kwargs()))
 
-    model.train()
-
     if torch.cuda.is_available():
         model.cuda()
 
     optimizer = optim.Adam(model.parameters(), lr = 1e-3)
 
     for epoch in range(args.epochs):
+        model.train()
         print('Training on epoch {}'.format(epoch))
         for input_file in train_set:
             print('Train on file {}'.format(input_file))

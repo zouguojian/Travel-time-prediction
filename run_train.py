@@ -143,7 +143,7 @@ class Model(object):
         maes_4 = tf.losses.absolute_difference(self.y_dfm, self.placeholders['label_tra_sum'])
         self.loss4 = tf.reduce_mean(maes_4)
 
-        if self.hp.model_name == 'FM' or self.hp.model_name == 'Deep':   # merely use the FM or Deep to extract individual travel features
+        if self.hp.model_name == 'FM' or self.hp.model_name == 'DNN':   # merely use the FM or Deep to extract individual travel features
             self.pre_tra_sum = self.y_dfm
             self.loss = self.loss4
         else: # entire neural network MT-STAN
@@ -298,7 +298,7 @@ class Model(object):
         mae_tra_sum, rmse_tra_sum, mape_tra_sum, cor_tra_sum, r2_tra_sum = metric(pred=pre_tra_sum_list, label=label_tra_sum_list)  # 产生预测指标
         # describe(label_list, predict_list)   #预测值可视化
 
-        if self.hp.model_name !='FM' or self.hp.model_name !='Deep':
+        if self.hp.model_name !='FM' and self.hp.model_name !='DNN':
             print('seperate travel time prediction result >>>')
             for i in range(self.trajectory_length):
                 print('road segment index is : ', i+1)
