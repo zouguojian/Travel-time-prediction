@@ -139,9 +139,9 @@ def get_loader(input_file, batch_size):
 
     batch_sampler = BatchSampler(dataset, batch_size)
 
-    data_loader = DataLoader(dataset = dataset, \
-                             batch_size = 1, \
-                             collate_fn = lambda x: collate_fn(x), \
+    data_loader = DataLoader(dataset = dataset,
+                             batch_size = 1,
+                             collate_fn = lambda x: collate_fn(x),
                              num_workers = 4,
                              batch_sampler = batch_sampler,
                              pin_memory = True)

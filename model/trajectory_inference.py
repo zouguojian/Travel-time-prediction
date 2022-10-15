@@ -99,7 +99,7 @@ class DeepFM(object):
             x_trajectory_separate = tf.layers.dense(x_trajectory_separate, units=self.k, activation=tf.nn.relu,
                                                     kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             # x_trajectory_separate = tf.layers.dense(x_trajectory_separate, units=self.k, kernel_initializer=tf.truncated_normal_initializer(), name='x_common_2')
-
+            # hiddens shape is [N, 24, 5, 64]
             hiddens = tf.transpose(hiddens, perm=[0, 2, 1, 3])
             hiddens = tf.reshape(hiddens, shape=[-1, self.output_length + self.input_length, self.emb_size])
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])

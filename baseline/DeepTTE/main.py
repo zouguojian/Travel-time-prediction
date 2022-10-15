@@ -39,6 +39,13 @@ args = parser.parse_args()
 
 config = json.load(open('./config.json', 'r'))
 
+"""
+distance gap length: 16
+lngs length: 16
+states length: 16
+time gap length: 16
+"""
+
 def train(model, elogger, train_set, eval_set):
     # record the experiment setting
     elogger.log(str(model))
