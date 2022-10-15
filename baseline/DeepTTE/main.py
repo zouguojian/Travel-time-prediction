@@ -44,6 +44,18 @@ distance gap length: 16
 lngs length: 16
 states length: 16
 time gap length: 16
+
+time_gap
+dist
+lats
+driverID
+weekID
+states
+timeID
+dateID
+time
+lngs
+dist_gap
 """
 
 def train(model, elogger, train_set, eval_set):
