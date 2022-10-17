@@ -53,7 +53,7 @@ The GPS points in a path should be resampled with nearly equal distance.
 
 Furthermore, repalce the config file according to your own data, including the dist_mean, time_mean, lngs_mean, etc.
 
-* route_1  
+* route_1 (number of driver id is 'driverID', 30224)  
     "dist_gap_mean": 9.59178799999548,
     "dist_gap_std": 6.929101195820786,
     "time_gap_mean": 383.94512807028354,
@@ -65,4 +65,6 @@ Furthermore, repalce the config file according to your own data, including the d
     "dist_mean": 47.95894000001783,
     "dist_std": 1.7834622667578515e-11,
     "time_mean":  1919.7256403514048,
-    "time_std": 1646.7810113131948,
+    "time_std": 1646.7810113131948,  
+    
+* route_1 (number of driver id is 'driverID', )

@@ -24,12 +24,12 @@ import numpy as np
 
 parser = argparse.ArgumentParser()
 # basic args
-parser.add_argument('--task', type = str, default='train')
-parser.add_argument('--batch_size', type = int, default = 32)
-parser.add_argument('--epochs', type = int, default = 10)
+parser.add_argument('--task', type = str, default='test')
+parser.add_argument('--batch_size', type = int, default = 64)
+parser.add_argument('--epochs', type = int, default = 50)
 # evaluation args
-parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE')
-parser.add_argument('--result_file', type = str, default = './result/deeptte.res')
+parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE-2')
+parser.add_argument('--result_file', type = str, default = './result/deeptte-2.res')
 # cnn args
 parser.add_argument('--kernel_size', type = int, default=3)
 # rnn args
@@ -183,7 +183,6 @@ def evaluate(model, elogger, files, save_result = False):
         print('Evaluate on file {}, loss {}'.format(input_file, running_loss / (idx + 1.0)))
         elogger.log('Evaluate File {}, Loss {}'.format(input_file, running_loss / (idx + 1.0)))
 
-    print(pre_list)
     pre_list = np.reshape(np.array(pre_list),[-1,1])
     label_list = np.reshape(np.array(label_list),[-1,1])
     print(pre_list.shape)

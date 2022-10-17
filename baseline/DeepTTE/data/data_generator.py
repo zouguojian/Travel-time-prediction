@@ -8,6 +8,11 @@ import numpy as np
 route_1= {1:[106.3369005,38.51238957],2:[106.3350869,38.48446767],3:[106.3105628,38.41086277],4:[106.288999,38.3862921],
           5:[106.2373622,38.30641865],6:[106.1630849,38.11581089]}
 
+route_2= {1:[106.3874922,38.51951203],2:[106.3750702,38.49668628],3:[106.36004,38.454279],4:[106.3391155,38.38970528],
+          5:[106.2373622,38.30641865],6:[106.1630849,38.11581089]}
+
+route_3={1:[106.3258034,38.15921159],2:[106.3931248,38.33870753],3:[106.4132934,38.34501497],4:[106.4015837,38.36557882]}
+
 def get_source_data(file_path=None): # obtain the source data
     '''
     :return:
@@ -134,7 +139,7 @@ def mean_std(file=None, la_ln={}):
     return
 
 print('beginning')
-# generator(file='trajectory_1.csv', to_file='train_1', is_training=True, divide_ratio=0.8, la_ln=route_1)
+generator(file='trajectory_3.csv', to_file='train_3', is_training=True, divide_ratio=0.8, la_ln=route_3)
 
 # mean_std(file='trajectory_1.csv',la_ln=route_1)
 
