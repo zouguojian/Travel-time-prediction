@@ -11,7 +11,7 @@
     "lats_std": 0.04154695076189434,
     "time_mean": 1555.75269436,
     "time_std": 646.373021152,
-    "train_set": ["train_00", "train_01", "train_02", "train_03"],
-    "eval_set": ["train_04"],
-    "test_set": ["test"]
+    "train_set": ["train_1"],
+    "eval_set": ["test_1"],
+    "test_set": ["test_1"]
 }

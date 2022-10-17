@@ -8,7 +8,7 @@ import numpy as np
 from torch.autograd import Variable
 
 class Net(nn.Module):
-    embed_dims = [('driverID', 24000, 16), ('weekID', 7, 3), ('timeID', 1440, 8)]
+    embed_dims = [('driverID', 30224, 16), ('weekID', 7, 3), ('timeID', 1440, 8)]
 
     def __init__(self):
         super(Net, self).__init__()
