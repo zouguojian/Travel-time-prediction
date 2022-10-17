@@ -15,14 +15,17 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
+import tensorflow as tf
+
+
 from torch.autograd import Variable
 
 import numpy as np
 
 parser = argparse.ArgumentParser()
 # basic args
-parser.add_argument('--task', type = str, default='test')
-parser.add_argument('--batch_size', type = int, default = 10)
+parser.add_argument('--task', type = str, default='train')
+parser.add_argument('--batch_size', type = int, default = 32)
 parser.add_argument('--epochs', type = int, default = 10)
 # evaluation args
 parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE')
@@ -90,6 +93,8 @@ def train(model, elogger, train_set, eval_set):
     elogger.log(str(model))
     elogger.log(str(args._get_kwargs()))
 
+    max_mae= 100
+
     if torch.cuda.is_available():
         model.cuda()
 
@@ -105,6 +110,7 @@ def train(model, elogger, train_set, eval_set):
             data_iter = data_loader.get_loader(input_file, args.batch_size)
 
             running_loss = 0.0
+            progbar = tf.keras.utils.Progbar(len(data_iter))
             for idx, (attr, traj) in enumerate(data_iter):
                 # transform the input to pytorch variable
                 attr, traj = utils.to_var(attr), utils.to_var(traj)
@@ -117,16 +123,23 @@ def train(model, elogger, train_set, eval_set):
                 optimizer.step()
 
                 running_loss += loss.data
-                print('Progress {:.2f}%, average loss {}'.format((idx + 1) * 100.0 / len(data_iter), running_loss / (idx + 1.0)))
+                # print('Progress {:.2f}%, average loss {}'.format((idx + 1) * 100.0 / len(data_iter), running_loss / (idx + 1.0)))
+                progbar.update(idx)
+                if idx % 100 == 0:
+                    mae = evaluate(model, elogger, eval_set, save_result=False)
+                    if max_mae > mae:
+                        print("the validate average loss value is : %.6f" % (mae))
+                        max_mae = mae
+                        torch.save(model.state_dict(), args.weight_file)
             elogger.log('Training Epoch {}, File {}, Loss {}'.format(epoch, input_file, running_loss / (idx + 1.0)))
 
         # evaluate the model after each epoch
-        evaluate(model, elogger, eval_set, save_result = False)
+        # evaluate(model, elogger, eval_set, save_result = False)
 
         # save the weight file after each epoch
         # weight_name = '{}_{}'.format(args.log_file, str(datetime.datetime.now()))
         # elogger.log('Save weight file {}'.format(weight_name))
-        torch.save(model.state_dict(), args.weight_file)
+        # torch.save(model.state_dict(), args.weight_file)
 
 def write_result(fs, pred_dict, attr):
     pred = pred_dict['pred'].data.cpu().numpy()
@@ -174,9 +187,10 @@ def evaluate(model, elogger, files, save_result = False):
     pre_list = np.reshape(np.array(pre_list),[-1,1])
     label_list = np.reshape(np.array(label_list),[-1,1])
     print(pre_list.shape)
-    metric(pred=pre_list, label=label_list)
+    mae, rmse, mape, cor, r2=metric(pred=pre_list, label=label_list)
 
     if save_result: fs.close()
+    return mae
 
 def get_kwargs(model_class):
     # model_args = inspect.getargspec(model_class.__init__).args

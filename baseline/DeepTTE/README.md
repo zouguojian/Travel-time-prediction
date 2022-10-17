@@ -52,3 +52,17 @@ Each sample is a json string. The key contains:
 The GPS points in a path should be resampled with nearly equal distance.
 
 Furthermore, repalce the config file according to your own data, including the dist_mean, time_mean, lngs_mean, etc.
+
+* route_1  
+    "dist_gap_mean": 9.59178799999548,
+    "dist_gap_std": 6.929101195820786,
+    "time_gap_mean": 383.94512807028354,
+    "time_gap_std": 777.4550845532493,
+    "lngs_mean": 106.27866605000001,
+    "lngs_std":  0.061595111085666114,
+    "lats_mean": 38.36937360833333,
+    "lats_std": 0.13163407178348177,
+    "dist_mean": 47.95894000001783,
+    "dist_std": 1.7834622667578515e-11,
+    "time_mean":  1919.7256403514048,
+    "time_std": 1646.7810113131948,
