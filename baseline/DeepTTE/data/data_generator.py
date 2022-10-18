@@ -12,6 +12,8 @@ route_2= {1:[106.3874922,38.51951203],2:[106.3750702,38.49668628],3:[106.36004,3
           5:[106.2373622,38.30641865],6:[106.1630849,38.11581089]}
 
 route_3={1:[106.3258034,38.15921159],2:[106.3931248,38.33870753],3:[106.4132934,38.34501497],4:[106.4015837,38.36557882]}
+route_4={1:[106.3369005,38.51238957],2:[106.3350869,38.48446767],3:[106.3317006,38.50169292],4:[106.4015837,38.36557882],
+         5:[106.4732185,38.32327352],6:[106.4873792,38.30340663]}
 
 def get_source_data(file_path=None): # obtain the source data
     '''
@@ -139,13 +141,13 @@ def mean_std(file=None, la_ln={}):
     return
 
 print('beginning')
-generator(file='trajectory_3.csv', to_file='train_3', is_training=True, divide_ratio=0.8, la_ln=route_3)
+# generator(file='trajectory_4.csv', to_file='train_4', is_training=False, divide_ratio=0.8, la_ln=route_4)
 
-# mean_std(file='trajectory_1.csv',la_ln=route_1)
-
-# data = get_source_data(file_path='trajectory_1.csv')
-# data = data.values
-# vehicle_id = get_vehicle_id(data[:, 0])
-# print(len(vehicle_id))
+mean_std(file='trajectory_4.csv',la_ln=route_4)
+#
+data = get_source_data(file_path='trajectory_4.csv')
+data = data.values
+vehicle_id = get_vehicle_id(data[:, 0])
+print(len(vehicle_id))
 
 print('finished')
