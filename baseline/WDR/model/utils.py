@@ -2,68 +2,6 @@
 import numpy as np
 import scipy.sparse as sp
 from scipy.sparse.linalg.eigen.arpack import eigsh
-from model import tf_utils
-import tensorflow as tf
-
-def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):
-    if isinstance(units, int):
-        units = [units]
-        activations = [activations]
-    elif isinstance(units, tuple):
-        units = list(units)
-        activations = list(activations)
-    assert type(units) == list
-    for num_unit, activation in zip(units, activations):
-        x = tf_utils.conv2d(
-            x, output_dims=num_unit, kernel_size=[1, 1], stride=[1, 1],
-            padding='VALID', use_bias=use_bias, activation=activation,
-            bn=bn, bn_decay=bn_decay, is_training=is_training)
-    return x
-
-def gatedFusion(HS, HT, D, bn, bn_decay, is_training):
-    '''
-    gated fusion
-    HS:     [batch_size, num_step, N, D]
-    HT:     [batch_size, num_step, N, D]
-    D:      output dims
-    return: [batch_size, num_step, N, D]
-    '''
-    XS = FC(
-        HS, units=D, activations=None,
-        bn=bn, bn_decay=bn_decay,
-        is_training=is_training, use_bias=False)
-    XT = FC(
-        HT, units=D, activations=None,
-        bn=bn, bn_decay=bn_decay,
-        is_training=is_training, use_bias=True)
-    z = tf.nn.sigmoid(tf.add(XS, XT))
-    H = tf.add(tf.multiply(z, HS), tf.multiply(1 - z, HT))
-    H = FC(
-        H, units=[D, D], activations=[tf.nn.relu, None],
-        bn=bn, bn_decay=bn_decay, is_training=is_training)
-    return H
-
-def STEmbedding(SE, TE, T, D, bn, bn_decay, is_training):
-    '''
-    spatio-temporal embedding
-    SE:     [N, D]
-    TE:     [batch_size, P + Q, 2] (dayofweek, timeofday)
-    T:      num of time steps in one day
-    D:      output dims
-    retrun: [batch_size, P + Q, N, D]
-    '''
-    # spatial embedding
-    SE = FC(
-        SE, units=[D, D], activations=[tf.nn.relu, None],
-        bn=bn, bn_decay=bn_decay, is_training=is_training)
-    # temporal embedding
-    TE = tf.add_n(TE)
-    # TE = tf.concat((TE), axis=-1)
-    TE = FC(
-        TE, units=[D, D], activations=[tf.nn.relu, None],
-        bn=bn, bn_decay=bn_decay, is_training=is_training)
-    return tf.add(SE, TE)
-    # return tf.concat([SE, TE],axis=-1)
 
 def parse_index_file(filename):
     """Parse index file."""

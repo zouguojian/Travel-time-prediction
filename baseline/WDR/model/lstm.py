@@ -35,5 +35,5 @@ class LstmClass(object):
         '''
         # out put the store data
         with tf.variable_scope('encoder_lstm'):
-            self.ouputs, self.state = tf.nn.dynamic_rnn(cell=self.e_mlstm, inputs=inputs,initial_state=self.e_initial_state,dtype=tf.float32)
+            self.ouputs, self.state = tf.nn.dynamic_rnn(cell=self.e_mlstm, inputs=inputs, initial_state=self.e_initial_state,dtype=tf.float32)
         return self.ouputs[:,-1,:] # shape[batch size, hidden size]

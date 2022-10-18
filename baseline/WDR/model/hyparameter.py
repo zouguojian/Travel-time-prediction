@@ -5,8 +5,8 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/MT-STAN/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='MT-STAN', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/WDR/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='WDR', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
@@ -24,16 +24,11 @@ class parameter(object):
         self.parser.add_argument('--num_blocks', type=int, default=1, help='total number of attention layers')
 
         #每个点表示a->b路线，目前8个收费站
-        self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
+        self.parser.add_argument('--emb_size', type=int, default=20, help='embedding size')
         self.parser.add_argument('--feature_s', type=int, default=1, help='number of the speed feature elements')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=12, help='input length')
         self.parser.add_argument('--output_length', type=int, default=6, help='output length')
-
-        self.parser.add_argument('--hidden1', type=int, default=32, help='number of units in hidden layer 1')
-        self.parser.add_argument('--gcn_output_size', type=int, default=64, help='model string')
-        self.parser.add_argument('--weight_decay', type=float, default=5e-4, help='weight for L2 loss on embedding matrix')
-        self.parser.add_argument('--max_degree', type=int, default=3, help='maximum Chebyshev polynomial degree')
 
         self.parser.add_argument('--hidden_size', type=int, default=64, help='hidden size')
         self.parser.add_argument('--hidden_layer', type=int, default=1, help='hidden layer')
