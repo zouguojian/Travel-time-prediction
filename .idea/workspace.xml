@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/baseline/WDR/model/lstm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/data/data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/data/data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/result/deeptte-1.res" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/result/deeptte-1.res" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/generate_trajectory.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/generate_trajectory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/routeline.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/routeline.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/result/deeptte-5.res" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/result/deeptte-5.res" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/DeepTTE/saved_weights/DeepTTE-5" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/DeepTTE/saved_weights/DeepTTE-5" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,8 +35,8 @@
           <entry key="csv" value="18" />
           <entry key="json" value="9" />
           <entry key="log" value="6" />
-          <entry key="md" value="3" />
-          <entry key="py" value="155" />
+          <entry key="md" value="5" />
+          <entry key="py" value="163" />
           <entry key="res" value="5" />
           <entry key="sh" value="2" />
           <entry key="test" value="8" />
@@ -50,97 +48,95 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="9" />
-          <entry key="Markdown" value="3" />
+          <entry key="Markdown" value="5" />
           <entry key="PLAIN_TEXT" value="57" />
-          <entry key="Python" value="155" />
+          <entry key="Python" value="163" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="815" />
-          <entry key="py" value="15062" />
+          <entry key="md" value="839" />
+          <entry key="py" value="15436" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="815" />
+          <entry key="Markdown" value="839" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="15062" />
+          <entry key="Python" value="15436" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="71" column="99" lean-forward="true" selection-start-line="71" selection-start-column="99" selection-end-line="71" selection-end-column="99" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/generate_trajectory.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
-              <folding>
-                <element signature="e#22#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/data/data_generator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="133" column="32" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="32" />
-              <folding>
-                <element signature="e#22#41#0" expanded="true" />
-                <marker date="1666060115459" expanded="true" signature="3626:3631" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/config.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/README.md">
+        <entry file="file://$PROJECT_DIR$/baseline/WDR/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="136">
-                <caret line="113" column="39" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
+              <first_editor relative-caret-position="150">
+                <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="81" column="55" selection-start-line="81" selection-start-column="55" selection-end-line="81" selection-end-column="68" />
+              <folding>
+                <element signature="e#22#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/data_next.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="209" column="136" selection-start-line="209" selection-start-column="136" selection-end-line="209" selection-end-column="144" />
+              <folding>
+                <element signature="e#22#45#0" expanded="true" />
+                <marker date="1665643915862" expanded="true" signature="5768:5774" ph="..." />
+                <marker date="1665643915862" expanded="true" signature="6869:6875" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="196" column="35" selection-start-line="196" selection-start-column="26" selection-end-line="196" selection-end-column="35" />
+              <folding>
+                <element signature="e#22#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/baseline/WDR/model/lstm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="21" selection-start-column="21" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -181,7 +177,6 @@
         <option value="$PROJECT_DIR$/model/deepfm.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/baseline/ha.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/model/encoder.py" />
         <option value="$PROJECT_DIR$/model/utils.py" />
         <option value="$PROJECT_DIR$/model/temporal_attention.py" />
@@ -210,6 +205,10 @@
         <option value="$PROJECT_DIR$/baseline/DeepTTE/README.md" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/config.json" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/main.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/baseline/WDR/model/lstm.py" />
+        <option value="$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py" />
+        <option value="$PROJECT_DIR$/baseline/WDR/README.md" />
       </list>
     </option>
   </component>
@@ -241,34 +240,24 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
+              <item name="WDR" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
+              <item name="WDR" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -435,13 +424,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="32" width="1440" height="796" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22057787" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.48295453" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28267047" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -459,35 +449,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/deepfm.py" />
-    <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="531" selection-start-line="531" selection-end-line="531" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/bridge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="60" column="58" selection-start-line="60" selection-start-column="58" selection-end-line="60" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/st_block.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/ha.py" />
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/__init__.py" />
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py" />
@@ -566,25 +527,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="99" column="67" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/data/train_1.txt" />
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/data/trajectory_1.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1">
           <caret column="78" selection-start-column="35" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/data_next.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3240">
-          <caret line="216" column="77" selection-start-line="216" selection-start-column="77" selection-end-line="216" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -668,29 +615,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="230" column="46" selection-start-line="230" selection-start-column="46" selection-end-line="230" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
           <caret line="67" column="68" selection-start-line="67" selection-start-column="68" selection-end-line="67" selection-end-column="68" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="218" selection-start-line="218" selection-end-line="222" selection-end-column="90" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -742,6 +672,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/data/data_generator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
@@ -753,23 +693,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/generate_trajectory.py">
+    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
-          <folding>
-            <element signature="e#22#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="120">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -783,20 +710,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/config.json">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="287">
+            <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/generate_trajectory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        <state relative-caret-position="247">
+          <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
+          <folding>
+            <element signature="e#22#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+        <state relative-caret-position="222">
+          <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="53" column="66" lean-forward="true" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/WDR/model/lstm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="808">
+          <caret line="230" column="46" selection-start-line="230" selection-start-column="46" selection-end-line="230" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="196" column="35" selection-start-line="196" selection-start-column="26" selection-end-line="196" selection-end-column="35" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/data_next.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="209" column="136" selection-start-line="209" selection-start-column="136" selection-end-line="209" selection-end-column="144" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+            <marker date="1665643915862" expanded="true" signature="5768:5774" ph="..." />
+            <marker date="1665643915862" expanded="true" signature="6869:6875" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="81" column="55" selection-start-line="81" selection-start-column="55" selection-end-line="81" selection-end-column="68" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="71" column="99" lean-forward="true" selection-start-line="71" selection-start-column="99" selection-end-line="71" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/WDR/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="150">
+            <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

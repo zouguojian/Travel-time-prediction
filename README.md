@@ -19,8 +19,6 @@ tf.disable_v2_behavior()部分代码即可正常运行
 ---
 
 ### Experimental Results
-#### HA
-
 #### DeepTTE
 
 #### CTTE
