@@ -38,9 +38,16 @@ class DeepFM(object):
 
         # Factorization Machine (FM)
         with tf.variable_scope('Wide', reuse=False):
-            self.linear_terms = tf.layers.dense(X, units=256, activation=tf.nn.relu,
-                                  kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
-                                                bias_initializer=tf.zeros_initializer())
+            # self.linear_terms = tf.layers.dense(X, units=256, activation=tf.nn.relu,
+            #                       kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
+            #                                     bias_initializer=tf.zeros_initializer())
+
+            b = tf.get_variable('bias', shape=[256],
+                                initializer=tf.zeros_initializer())
+            w1 = tf.get_variable('w1', shape=[self.p, 256],
+                                    initializer=tf.truncated_normal_initializer(mean=0, stddev=1e-2))
+            # shape of [None, 1]
+            self.linear_terms = tf.add(tf.matmul(X, w1), b)
 
             # shape of [None, 1]
             self.interaction_terms = tf.multiply(0.5,
@@ -78,7 +85,7 @@ class DeepFM(object):
         # MLP
         with tf.variable_scope('MLP', reuse=False):
             concatnation= tf.concat([y_fm,y_hidden_l3,lstm_h],axis=-1)
-            pre = tf.layers.dense(concatnation, units=1)
+            pre = tf.layers.dense(concatnation, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
         # shape is [N,1]
         return pre
