@@ -18,6 +18,16 @@ tf.disable_v2_behavior()；
 tf.disable_v2_behavior()部分代码即可正常运行
 ---
 
+#### noted the dataset changes
+* 需要改动的地方分别为:hyparameter.py和data_next.py  
+>self.parser.add_argument('--save_path', type=str, default='weights/WDR-2/', help='save path')
+self.parser.add_argument('--field_cnt', type=int, default=17, help='the number of filed for trajectory features')
+>self.parser.add_argument('--feature_tra', type=int, default=30542, help='number of the trajectory feature elements')
+>self.parser.add_argument('--trajectory_length', type=int, default=5, help='length of trajectory')
+
+>route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]
+>max_road_leangth = 22193.94
+
 ### Experimental Results
 #### DeepTTE
 
