@@ -5,7 +5,7 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/WDR/', help='save path')
+        self.parser.add_argument('--save_path', type=str, default='weights/WDR-2/', help='save path')
         self.parser.add_argument('--model_name', type=str, default='WDR', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
