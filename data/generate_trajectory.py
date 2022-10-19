@@ -45,6 +45,7 @@ def generate_tra(file_name_list=None, pre_filename='data_list/', target_file='tr
         data['key_date'] = pd.to_datetime(data.start_time)
         data = data.sort_values(by='key_date', axis=0, ascending=True) # 按照时间的顺序进行升序排序
         for line in data.values:
+            if int(line[3])>16: continue
             dict_roads[dragon_dragon[file_name]]['start_sets'][line[2]+ '+' +line[4]] = line[:9]  # 车牌+开始时间的字典
             # dict_roads[dragon_dragon[file_name]]['end_sets'][line[2] + '+' + line[5]] = line[2:9] # 车牌+结束时间的字典
     print('# data load finished #')
@@ -65,8 +66,8 @@ def generate_tra(file_name_list=None, pre_filename='data_list/', target_file='tr
             writer.writerow(new_whole_trajectory[2:])
     write_file.close()
 
-file_name_list = [('780019', '78001B'),('78001B','780079'),('780079','78007B'),('78007B','78007D'),('78007D','78007F')]
-generate_tra(file_name_list=file_name_list,target_file='trajectory_4.csv')
+file_name_list = [('78005D', '78005F'),('78005F', '780061'),('780061', '780063'),('780063', '780021'),('780021', '780023')]
+generate_tra(file_name_list=file_name_list,target_file='trajectory_2.csv')
 
 # keys = ['entry_id', 'exit_id', 'vehicle_id', 'vehicle_type', 'start_time',
 #        'end_time', 'distance', 'travel_time', 'speed', 'key_date']

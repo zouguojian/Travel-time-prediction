@@ -175,6 +175,7 @@ class Model(object):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
             element_index, separate_trajectory_time, total_time, trajectory_inds, dates = self.sess.run(test_next)
+            print(x_s[0,0])
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
