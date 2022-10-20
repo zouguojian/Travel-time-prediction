@@ -31,7 +31,7 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 >data1-feature_tra: 30542
 >data2-feature_tra: 32274
 >data3-feature_tra: 1385
->data4-feature_tra: 
+>data4-feature_tra: 10284
 
 ### Experimental Results
 #### DeepTTE
