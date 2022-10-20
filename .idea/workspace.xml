@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/baseline/WDR/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="104">
-              <caret line="129" column="60" lean-forward="true" selection-start-line="129" selection-start-column="60" selection-end-line="129" selection-end-column="60" />
+              <caret line="129" column="60" selection-start-line="129" selection-start-column="60" selection-end-line="129" selection-end-column="60" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -210,7 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="103" />
     <option name="y" value="135" />
     <option name="width" value="1440" />
@@ -752,7 +749,7 @@
     <entry file="file://$PROJECT_DIR$/baseline/WDR/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
-          <caret line="129" column="60" lean-forward="true" selection-start-line="129" selection-start-column="60" selection-end-line="129" selection-end-column="60" />
+          <caret line="129" column="60" selection-start-line="129" selection-start-column="60" selection-end-line="129" selection-end-column="60" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
