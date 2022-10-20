@@ -103,9 +103,13 @@ class DeepFM(object):
             hiddens = tf.transpose(hiddens, perm=[0, 2, 1, 3])
             hiddens = tf.reshape(hiddens, shape=[-1, self.output_length + self.input_length, self.emb_size])
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])
-            T = TemporalTransformer(self.hp)
-            x_trajectory_separate = T.encoder(hiddens=hiddens[:, -(1 + self.input_length):],
-                                              hidden=x_trajectory_separate)
+
+            if self.hp.model_name=='Hatt':
+                x_trajectory_separate = hiddens[:, self.input_length-1:self.input_length,] + x_trajectory_separate
+            else:
+                T = TemporalTransformer(self.hp)
+                x_trajectory_separate = T.encoder(hiddens=hiddens[:, -(1 + self.input_length):],
+                                                  hidden=x_trajectory_separate)
             # x_trajectory_separate = tf.squeeze(x_trajectory_separate, axis=2) # (N, 5, 64)
             x_trajectory_separate = tf.reshape(x_trajectory_separate,
                                                shape=[-1, self.trajectory_length, self.emb_size])  # (N, 5, 64)
