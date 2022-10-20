@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/trajectory_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/trajectory_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/weights/DNN-2/model.ckpt.meta" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="112" column="92" lean-forward="true" selection-start-line="112" selection-start-column="92" selection-end-line="112" selection-end-column="92" />
+            <state relative-caret-position="159">
+              <caret line="106" selection-start-line="106" selection-end-line="111" selection-end-column="79" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -774,8 +773,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="112" column="92" lean-forward="true" selection-start-line="112" selection-start-column="92" selection-end-line="112" selection-end-column="92" />
+        <state relative-caret-position="159">
+          <caret line="106" selection-start-line="106" selection-end-line="111" selection-end-column="79" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
