@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/WDR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/model/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/model/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/generate_trajectory.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/generate_trajectory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/trajectory_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/trajectory_2.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,28 +30,28 @@
           <entry key="csv" value="18" />
           <entry key="json" value="9" />
           <entry key="log" value="6" />
-          <entry key="md" value="9" />
-          <entry key="py" value="197" />
+          <entry key="md" value="10" />
+          <entry key="py" value="199" />
           <entry key="res" value="5" />
           <entry key="sh" value="2" />
           <entry key="test" value="8" />
           <entry key="test_1" value="3" />
           <entry key="train_00" value="6" />
-          <entry key="txt" value="10" />
+          <entry key="txt" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="9" />
-          <entry key="Markdown" value="9" />
-          <entry key="PLAIN_TEXT" value="58" />
-          <entry key="Python" value="197" />
+          <entry key="Markdown" value="10" />
+          <entry key="PLAIN_TEXT" value="59" />
+          <entry key="Python" value="199" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="953" />
+          <entry key="md" value="977" />
           <entry key="py" value="15640" />
           <entry key="txt" value="31" />
         </counts>
@@ -63,7 +59,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="953" />
+          <entry key="Markdown" value="977" />
           <entry key="PLAIN_TEXT" value="31" />
           <entry key="Python" value="15640" />
         </counts>
@@ -84,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline/WDR/model/hyparameter.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="254">
-              <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
+              <caret line="20" column="68" lean-forward="true" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -96,11 +92,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline/WDR/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
+            <state relative-caret-position="153">
+              <caret line="94" column="33" lean-forward="true" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="318">
+                <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -109,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/baseline/WDR/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="98">
+              <first_editor relative-caret-position="163">
                 <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
               </first_editor>
               <second_editor />
@@ -120,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline/WDR/model/data_next.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1478">
-              <caret line="154" column="49" lean-forward="true" selection-start-line="154" selection-start-column="49" selection-end-line="154" selection-end-column="49" />
+            <state relative-caret-position="202">
+              <caret line="21" selection-start-line="21" selection-end-line="22" selection-end-column="27" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -205,12 +213,12 @@
         <option value="$PROJECT_DIR$/baseline/WDR/model/utils.py" />
         <option value="$PROJECT_DIR$/model/hyparameter.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/baseline/WDR/README.md" />
-        <option value="$PROJECT_DIR$/baseline/WDR/main.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/model/data_next.py" />
         <option value="$PROJECT_DIR$/data/generate_trajectory.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/model/hyparameter.py" />
+        <option value="$PROJECT_DIR$/baseline/WDR/main.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -248,6 +256,11 @@
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -276,7 +289,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (2)">
+  <component name="RunManager" selected="Python.generate_trajectory">
     <configuration name="data_next" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Travel-time-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -391,9 +404,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.generate_trajectory" />
         <item itemvalue="Python.main (2)" />
         <item itemvalue="Python.data_next" />
-        <item itemvalue="Python.generate_trajectory" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.main (1)" />
       </list>
@@ -414,13 +427,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17406625" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17406625" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4161932" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.39914772" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -438,13 +452,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/run.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="40" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.conda/envs/KECG/lib/python3.7/site-packages/torch/nn/utils/rnn.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -714,23 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="285">
-            <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="87" selection-start-line="16" selection-start-column="87" selection-end-line="16" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -748,16 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/WDR/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="98">
-            <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/generate_trajectory.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -768,20 +748,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/WDR/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="163">
+            <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/WDR/model/data_next.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1478">
-          <caret line="154" column="49" lean-forward="true" selection-start-line="154" selection-start-column="49" selection-end-line="154" selection-end-column="49" />
+        <state relative-caret-position="202">
+          <caret line="21" selection-start-line="21" selection-end-line="22" selection-end-column="27" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="20" column="68" lean-forward="true" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/WDR/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
+        <state relative-caret-position="153">
+          <caret line="94" column="33" lean-forward="true" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
@@ -791,7 +791,17 @@
     <entry file="file://$PROJECT_DIR$/baseline/WDR/model/hyparameter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
-          <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
+          <caret line="20" column="68" lean-forward="true" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="318">
+            <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

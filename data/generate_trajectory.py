@@ -66,8 +66,8 @@ def generate_tra(file_name_list=None, pre_filename='data_list/', target_file='tr
             writer.writerow(new_whole_trajectory[2:])
     write_file.close()
 
-file_name_list = [('78005D', '78005F'),('78005F', '780061'),('780061', '780063'),('780063', '780021'),('780021', '780023')]
-generate_tra(file_name_list=file_name_list,target_file='trajectory_2.csv')
+file_name_list = [('780019', '78001B'),('78001B','780079'),('780079','78007B'),('78007B','78007D'),('78007D','78007F')]
+generate_tra(file_name_list=file_name_list,target_file='trajectory_4.csv')
 
 # keys = ['entry_id', 'exit_id', 'vehicle_id', 'vehicle_type', 'start_time',
 #        'end_time', 'distance', 'travel_time', 'speed', 'key_date']
