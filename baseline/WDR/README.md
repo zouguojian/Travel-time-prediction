@@ -21,5 +21,9 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 >route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]
 >max_road_leangth = 22193.94
 
+>data1-feature_tra: 30542
+>data2-feature_tra: 32274
+>data3-feature_tra: 1385
+>data4-feature_tra: 
 
 

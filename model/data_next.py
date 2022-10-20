@@ -223,6 +223,7 @@ class DataClass(object):
                        data_tra[low, 2])     # 每辆车的出发时间
 
                 low += 1
+            elif datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S') < data_s[(speed_low + 1) * self.site_num, -1]: low += 1
             else:
                 speed_low+=1
 
