@@ -18,7 +18,6 @@ tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 logs_path = "board"
 
-
 class Model(object):
     def __init__(self, hp):
         self.hp = hp
