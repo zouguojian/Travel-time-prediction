@@ -146,6 +146,8 @@ class Model(object):
         if self.hp.model_name == 'FM' or self.hp.model_name == 'DNN':   # merely use the FM or Deep to extract individual travel features
             self.pre_tra_sum = self.y_dfm
             self.loss = self.loss4
+        elif self.hp.model_name == 'No-Mult':
+            self.loss = self.loss2
         else: # entire neural network MT-STAN
             self.loss = 0.3 * self.loss1 + 0.4 * self.loss2 + 0.3 * self.loss3
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
