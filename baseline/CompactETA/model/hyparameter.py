@@ -5,8 +5,8 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/WDR-2/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='WDR', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/CompactETA-1/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='CompactETA', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
@@ -41,7 +41,7 @@ class parameter(object):
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
         self.parser.add_argument('--file_test', type=str, default='data/test.csv', help='test set file address')
 
-        self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_2.csv', help='trajectory file address')
+        self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_1.csv', help='trajectory file address')
 
         self.parser.add_argument('--file_adj', type=str,default='data/adjacent.csv', help='adj file address')
 
