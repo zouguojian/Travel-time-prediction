@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
-from baseline.CompactETA.model.gat import *
+from baseline.CTTE.model.gat import *
 import numpy as np
+from baseline.CTTE.model.lstm import LstmClass
 
 def positional_encoding(inputs,
                         maxlen,
@@ -125,6 +126,19 @@ class CTTEClass(object):
             position_emb = positional_encoding(link, maxlen=self.trajectory_length)
             link = 0.3 * tf.multiply(x=position_emb, y=link) + link
             link = tf.reduce_sum(link, axis=1)  # shape is [N, dim]
+
+
+        # lstm
+        with tf.variable_scope('LSTM', reuse=False):
+            distances = tf.gather(v, feature_inds)[:, -(self.trajectory_length * 2):-self.trajectory_length] # (N, trajectory length, 64)
+            links= tf.gather(v, feature_inds)[:, -self.trajectory_length:] # (N, trajectory length, 64)
+
+            time_series = tf.concat([distances, speed], axis=-1)  # incorporate the traffic states into global features
+            # time_series=tf.gather(v, feature_inds)[:,-self.trajectory_length:,:]  # (N, trajectory length, 64)
+            time_series = tf.layers.dense(time_series, units=256, activation=tf.nn.relu,
+                                          kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            rnn=LstmClass(batch_size=self.batch_size, nodes=256)
+            lstm_h=rnn.encoding(inputs=time_series)
 
         # MLP
         with tf.variable_scope('MLP', reuse=False):

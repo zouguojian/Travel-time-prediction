@@ -61,6 +61,19 @@ def dropout(x, drop, is_training):
         lambda: x)
     return x
 
+def SE(SE_file=None):
+    # spatial embedding
+    f = open(SE_file, mode = 'r')
+    lines = f.readlines()
+    temp = lines[0].split(' ')
+    N, dims = int(temp[0]), int(temp[1])
+    SE = np.zeros(shape = (N, dims), dtype = np.float32)
+    for line in lines[1 :]:
+        temp = line.split(' ')
+        index = int(temp[0])
+        SE[index] = temp[1 :]
+    return SE # shape is [site num, dim]
+
 def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):
     if isinstance(units, int):
         units = [units]
