@@ -111,8 +111,8 @@ class CompactETAClass(object):
         # learning the link relation embedding, but for line that do not not to use, JUST source road index map is okay, OR
         # LIKE me to transform the line to adjacent matrix.
         with tf.variable_scope('GAT', reuse=False):
-            link=tf.gather(v, feature_inds)[:,-(self.trajectory_length * 2):-self.trajectory_length]  # (N, trajectory length, 64)
-            link =tf.concat([link, speed], axis=-1) # incorporate the traffic states into global features
+            distances=tf.gather(v, feature_inds)[:,-(self.trajectory_length * 2):-self.trajectory_length]  # (N, trajectory length, 64)
+            link =tf.concat([distances, speed], axis=-1) # incorporate the traffic states into global features
             link = tf.layers.dense(link, units=64, activation=tf.nn.relu,
                                           kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             Spatial = SpatialTransformer(arg=self.hp)

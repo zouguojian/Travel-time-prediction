@@ -24,7 +24,7 @@ class WDRClass(object):
         # num of fields
         self.field_cnt = self.hp.field_cnt
 
-    def inference(self, X=None, feature_inds=[], keep_prob=0.0):
+    def inference(self, X=None, feature_inds=[], keep_prob=0.0, speed=None):
         '''
         forward propagation
         :param X:
@@ -76,7 +76,9 @@ class WDRClass(object):
 
         # lstm
         with tf.variable_scope('LSTM', reuse=False):
-            time_series=tf.gather(v, feature_inds)[:,-self.trajectory_length:,:]  # (N, trajectory length, 64)
+            distances = tf.gather(v, feature_inds)[:, -(self.trajectory_length * 2):-self.trajectory_length] # (N, trajectory length, 64)
+            time_series = tf.concat([distances, speed], axis=-1)  # incorporate the traffic states into global features
+            # time_series=tf.gather(v, feature_inds)[:,-self.trajectory_length:,:]  # (N, trajectory length, 64)
             time_series = tf.layers.dense(time_series, units=256, activation=tf.nn.relu,
                                           kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
             rnn=LstmClass(batch_size=self.batch_size, nodes=256)

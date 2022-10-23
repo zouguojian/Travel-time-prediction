@@ -8,7 +8,7 @@ import datetime
 from baseline.WDR.model.hyparameter import parameter
 from baseline.WDR.model.wdr_inf import WDRClass
 from baseline.WDR.model.data_next import DataClass
-from baseline.WDR.model.utils import construct_feed_dict, one_hot_concatenation, metric
+from baseline.WDR.model.utils import construct_feed_dict, one_hot_concatenation, metric, FC
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -65,12 +65,19 @@ class Model(object):
         :param is_training: True
         :return:
         '''
-        print('#................................feature cross....................................#')
+        print('#................................model loading....................................#')
+
+        speed = FC(self.placeholders['feature_s'], units=[self.emb_size, self.emb_size],
+                   activations=[tf.nn.relu, None],
+                   bn=False, bn_decay=0.99, is_training=self.is_training)
+        speed = tf.gather(speed, indices=self.placeholders['trajectory_inds'], axis=2)  # (32, 24, 5, 64)
+
         with tf.variable_scope(name_or_scope='trajectory_model'):
             WDRModel = WDRClass(self.hp)
             self.y_wdr = WDRModel.inference(X=self.placeholders['feature_tra'],
-                                               feature_inds=self.placeholders['feature_inds'],
-                                               keep_prob=self.placeholders['dropout'])
+                                            feature_inds=self.placeholders['feature_inds'],
+                                            keep_prob=self.placeholders['dropout'],
+                                            speed=speed[:, self.input_length - 1])
 
         mae = tf.losses.absolute_difference(self.y_wdr, self.placeholders['label_tra_sum'])
         mape = tf.divide(mae, self.placeholders['label_tra_sum'])
