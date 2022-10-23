@@ -74,13 +74,19 @@ class Model(object):
 
         with tf.variable_scope(name_or_scope='trajectory_model'):
             CTTEModel = CTTEClass(self.hp)
-            self.y = CTTEModel.inference(speed=speed[:, self.input_length-1],
-                                                 feature_inds=self.placeholders['feature_inds'],
-                                                 keep_prob=self.placeholders['dropout'])
+            self.pre_s, self.pre_t = CTTEModel.inference(speed=speed[:, :self.input_length], # (32, 12, 5, 64)
+                                                         feature_inds=self.placeholders['feature_inds'],
+                                                         keep_prob=self.placeholders['dropout'])
 
-        mae = tf.losses.absolute_difference(self.y, self.placeholders['label_tra_sum'])
+        self.pre_s_o = tf.gather(self.placeholders['label_s'], indices=self.placeholders['trajectory_inds'], axis=1)
+        self.loss_1 = tf.losses.mean_squared_error(labels=self.pre_s, predictions=self.pre_s_o)
+
+        mae = tf.losses.absolute_difference(self.pre_t, self.placeholders['label_tra_sum'])
         mape = tf.divide(mae, self.placeholders['label_tra_sum'])
-        self.loss = tf.reduce_mean(mape)
+        self.loss_2 = tf.reduce_mean(mape)
+
+        self.loss = self.loss_1 + self.loss_2
+
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
         print('#...............................in the training step...............................#')
@@ -201,7 +207,7 @@ class Model(object):
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            y = self.sess.run((self.y), feed_dict=feed_dict)
+            y = self.sess.run((self.pre_t), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(y)

@@ -1,4 +1,4 @@
-from baseline.st_grat.data.node2vec import node2vec
+from baseline.CTTE.node2vec import node2vec
 import numpy as np
 import networkx as nx
 from gensim.models import Word2Vec

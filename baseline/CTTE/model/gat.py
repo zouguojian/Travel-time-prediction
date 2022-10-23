@@ -72,16 +72,10 @@ def multihead_attention(queries,
         K_ = tf.concat(tf.split(K, num_heads, axis=2), axis=0)  # (h*N, T_k, C/h)
         V_ = tf.concat(tf.split(V, num_heads, axis=2), axis=0)  # (h*N, T_k, C/h)
 
-        outputs = list()
-        for i in range(Q_.shape[1]):
-            # adj_matrix shape is [1, 5, 5, 1]
-            K_1 = tf.multiply(x=tf.convert_to_tensor(adj_matrix[:,i],dtype=tf.float32), y=K_) # (h*N, T_k, C/h)
-            outputs.append(tf.matmul(Q_[:,i:i+1], tf.transpose(K_1, [0, 2, 1])))  # according to the paper, we rewrite the GAT
-        outputs=tf.concat(outputs, axis=1)
         # print(outputs.shape)
 
         # Multiplication
-        # outputs = tf.matmul(Q_, tf.transpose(K_, [0, 2, 1]))  # (h*N, T_q, T_k)
+        outputs = tf.matmul(Q_, tf.transpose(K_, [0, 2, 1]))  # (h*N, T_q, T_k)
         # Using the adjacent matrix to multiply the outputs
 
 

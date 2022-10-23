@@ -5,8 +5,8 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/CompactETA-1/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='CompactETA', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/CTTE-1/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='CTTE', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
@@ -24,7 +24,7 @@ class parameter(object):
         self.parser.add_argument('--num_blocks', type=int, default=3, help='total number of attention layers')
 
         #每个点表示a->b路线，目前8个收费站
-        self.parser.add_argument('--emb_size', type=int, default=20, help='embedding size')
+        self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
         self.parser.add_argument('--feature_s', type=int, default=1, help='number of the speed feature elements')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=12, help='input length')

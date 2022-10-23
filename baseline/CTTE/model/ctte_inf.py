@@ -1,71 +1,7 @@
 # -- coding: utf-8 --
 from baseline.CTTE.model.gat import *
-import numpy as np
 from baseline.CTTE.model.lstm import LstmClass
-
-def positional_encoding(inputs,
-                        maxlen,
-                        masking=True,
-                        scope="positional_encoding"):
-    '''Sinusoidal Positional_Encoding. See 3.5
-    inputs: 3d tensor. (N, T, E)
-    maxlen: scalar. Must be >= T
-    masking: Boolean. If True, padding positions are set to zeros.
-    scope: Optional scope for `variable_scope`.
-    returns
-    3d tensor that has the same shape as inputs.
-    '''
-
-    E = inputs.get_shape().as_list()[-1] # static
-    N, T = tf.shape(inputs)[0], tf.shape(inputs)[1] # dynamic
-    with tf.variable_scope(scope, reuse=tf.AUTO_REUSE):
-        # position indices
-        position_ind = tf.tile(tf.expand_dims(tf.range(T), 0), [N, 1]) # (N, T)
-
-        # First part of the PE function: sin and cos argument
-        position_enc = np.array([
-            [pos / np.power(10000, (i-i%2)/E) for i in range(E)]
-            for pos in range(maxlen)])
-
-        # Second part, apply the cosine to even columns and sin to odds.
-        # position_enc[:, 0::2] = np.sin(position_enc[:, 0::2])  # dim 2i
-        # position_enc[:, 1::2] = np.cos(position_enc[:, 1::2])  # dim 2i+1
-
-        position_enc = np.cos(position_enc)
-
-        position_enc = tf.convert_to_tensor(position_enc, tf.float32) # (maxlen, E)
-
-        # lookup
-        outputs = tf.nn.embedding_lookup(position_enc, position_ind)
-
-        # masks
-        if masking:
-            outputs = tf.where(tf.equal(inputs, 0), inputs, outputs)
-
-        return tf.to_float(outputs)
-
-def adj(trajecroty_len=5, adj_matrix=None):
-    '''
-    :param trajecroty_len:
-    :param adj_matrix: shape is [1, 5, 5, 1]
-    :return:
-    '''
-    if adj_matrix is not None:return adj_matrix
-    else:
-        adj_matrix = np.zeros(shape=[trajecroty_len,trajecroty_len])
-        for i in range(trajecroty_len):
-            if i!=0 and i!=trajecroty_len-1:
-                adj_matrix[i,i-1]=1
-                adj_matrix[i,i+1]=1
-                adj_matrix[i,i] =1
-            elif i==0:
-                adj_matrix[i,i+1]=1
-                adj_matrix[i,i] =1
-            else:
-                adj_matrix[i,i-1]=1
-                adj_matrix[i,i] =1
-    adj_matrix=np.reshape(adj_matrix,[1, trajecroty_len, trajecroty_len, 1])
-    return adj_matrix
+from baseline.CTTE.model.resent import ResnetClass
 
 class CTTEClass(object):
     """
@@ -106,53 +42,45 @@ class CTTEClass(object):
         # global operation
         with tf.variable_scope('Global', reuse=False):
             g = tf.reshape(tf.gather(v, feature_inds[:, :-(self.trajectory_length * 2)]), [-1, 7 * self.k])
+            global_h = tf.nn.relu(g)
+            global_h = tf.layers.dense(global_h, units=self.emb_size, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            global_h = tf.nn.sigmoid(global_h) # shape is [N, dim]
 
-        # GAT (we used the gat to model long road correlation which contains several local path)
-        # if you have demand data like original paper data, YOU can use architecture connection relationship (0 or 1) to
-        # learning the link relation embedding, but for line that do not not to use, JUST source road index map is okay, OR
-        # LIKE me to transform the line to adjacent matrix.
-        with tf.variable_scope('GAT', reuse=False):
-            distances=tf.gather(v, feature_inds)[:,-(self.trajectory_length * 2):-self.trajectory_length]  # (N, trajectory length, 64)
-            link =tf.concat([distances, speed], axis=-1) # incorporate the traffic states into global features
-            link = tf.layers.dense(link, units=64, activation=tf.nn.relu,
-                                          kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            Spatial = SpatialTransformer(arg=self.hp)
-            # position embedding
-
-            link=Spatial.encoder(link,adj_matrix=adj(self.trajectory_length)) # shape is [N, trajectory length, dim]
-
-        # Position
-        with tf.variable_scope('POSITION', reuse=False):
-            position_emb = positional_encoding(link, maxlen=self.trajectory_length)
-            link = 0.3 * tf.multiply(x=position_emb, y=link) + link
-            link = tf.reduce_sum(link, axis=1)  # shape is [N, dim]
-
-
-        # lstm
+        # LSTM
         with tf.variable_scope('LSTM', reuse=False):
             distances = tf.gather(v, feature_inds)[:, -(self.trajectory_length * 2):-self.trajectory_length] # (N, trajectory length, 64)
             links= tf.gather(v, feature_inds)[:, -self.trajectory_length:] # (N, trajectory length, 64)
-
-            time_series = tf.concat([distances, speed], axis=-1)  # incorporate the traffic states into global features
+            # (32, 12, 5, 64)
+            speed = tf.transpose(speed, [0, 2, 1, 3])
+            speed = tf.reshape(speed,shape=[self.batch_size, self.trajectory_length, self.input_length*self.emb_size])
+            time_series = tf.concat([distances, links, speed], axis=-1)  # incorporate the traffic states into global features
+            # [N, trajectory length, dim * n]
             # time_series=tf.gather(v, feature_inds)[:,-self.trajectory_length:,:]  # (N, trajectory length, 64)
-            time_series = tf.layers.dense(time_series, units=256, activation=tf.nn.relu,
+            time_series = tf.layers.dense(time_series, units=64, activation=tf.nn.relu,
                                           kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            rnn=LstmClass(batch_size=self.batch_size, nodes=256)
-            lstm_h=rnn.encoding(inputs=time_series)
+            rnn=LstmClass(batch_size=self.batch_size, nodes=64)
+            lstm_hs=rnn.encoding(inputs=time_series)
+
+        # ATTENTION
+        with tf.variable_scope('ATTENTION', reuse=False):
+            Spatial = SpatialTransformer(arg=self.hp)
+            spatial_hs=Spatial.encoder(lstm_hs) # shape is [N, trajectory length, dim]
+
+        # ResNet
+        with tf.variable_scope('RESNET', reuse=False):
+            Resnet = ResnetClass(self.hp)
+            resnet_h = Resnet.cnn(x=lstm_hs) # [N, dim]
 
         # MLP
         with tf.variable_scope('MLP', reuse=False):
-            concatnation= tf.concat([g, link],axis=-1)
-            # first hidden layer
-            y_hidden_l1 = tf.layers.dense(concatnation, units=64, activation=tf.nn.relu,
-                                  kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
-            # second hidden layer
-            y_hidden_l2 = tf.layers.dense(y_hidden_l1, units=64, activation=tf.nn.relu,
-                                  kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-            # third hidden layer
+            # speed
+            pre_s = tf.layers.dense(spatial_hs, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
-            pre = tf.layers.dense(y_hidden_l2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            # travel time estimation
+
+            global_h= tf.multiply(x=resnet_h, y=global_h)
+            pre_t = tf.layers.dense(global_h, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
         # shape is [N,1]
-        return pre
+        return pre_s, pre_t
