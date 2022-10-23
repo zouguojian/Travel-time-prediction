@@ -6,7 +6,7 @@ import os
 import argparse
 import datetime
 from baseline.WDR.model.hyparameter import parameter
-from baseline.WDR.model.wdr_inf import DeepFM
+from baseline.WDR.model.wdr_inf import WDRClass
 from baseline.WDR.model.data_next import DataClass
 from baseline.WDR.model.utils import construct_feed_dict, one_hot_concatenation, metric
 
@@ -67,8 +67,8 @@ class Model(object):
         '''
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
-            DeepModel = DeepFM(self.hp)
-            self.y_wdr = DeepModel.inference(X=self.placeholders['feature_tra'],
+            WDRModel = WDRClass(self.hp)
+            self.y_wdr = WDRModel.inference(X=self.placeholders['feature_tra'],
                                                feature_inds=self.placeholders['feature_inds'],
                                                keep_prob=self.placeholders['dropout'])
 

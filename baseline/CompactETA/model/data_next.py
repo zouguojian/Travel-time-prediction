@@ -2,7 +2,7 @@
 import tensorflow as tf
 import numpy as np
 import argparse
-from baseline.WDR.model.hyparameter import parameter
+from baseline.CompactETA.model.hyparameter import parameter
 import pandas as pd
 import datetime
 

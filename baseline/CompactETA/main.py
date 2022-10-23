@@ -5,10 +5,10 @@ import numpy as np
 import os
 import argparse
 import datetime
-from baseline.WDR.model.hyparameter import parameter
-from baseline.WDR.model.wdr_inf import DeepFM
-from baseline.WDR.model.data_next import DataClass
-from baseline.WDR.model.utils import construct_feed_dict, one_hot_concatenation, metric
+from baseline.CompactETA.model.hyparameter import parameter
+from baseline.CompactETA.model.eta_inf import CompactETAClass
+from baseline.CompactETA.model.data_next import DataClass
+from baseline.CompactETA.model.utils import construct_feed_dict, one_hot_concatenation, metric,FC
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -65,14 +65,20 @@ class Model(object):
         :param is_training: True
         :return:
         '''
-        print('#................................feature cross....................................#')
-        with tf.variable_scope(name_or_scope='trajectory_model'):
-            DeepModel = DeepFM(self.hp)
-            self.y_wdr = DeepModel.inference(X=self.placeholders['feature_tra'],
-                                               feature_inds=self.placeholders['feature_inds'],
-                                               keep_prob=self.placeholders['dropout'])
+        print('#................................model loading....................................#')
 
-        mae = tf.losses.absolute_difference(self.y_wdr, self.placeholders['label_tra_sum'])
+        speed = FC(self.placeholders['feature_s'], units=[self.emb_size, self.emb_size],
+                   activations=[tf.nn.relu, None],
+                   bn=False, bn_decay=0.99, is_training=self.is_training)
+        speed = tf.gather(speed, indices=self.placeholders['trajectory_inds'], axis=2)  # (32, 24, 5, 64)
+
+        with tf.variable_scope(name_or_scope='trajectory_model'):
+            CompactETAModel = CompactETAClass(self.hp)
+            self.y = CompactETAModel.inference(speed=speed[:, self.input_length-1],
+                                                 feature_inds=self.placeholders['feature_inds'],
+                                                 keep_prob=self.placeholders['dropout'])
+
+        mae = tf.losses.absolute_difference(self.y, self.placeholders['label_tra_sum'])
         mape = tf.divide(mae, self.placeholders['label_tra_sum'])
         self.loss = tf.reduce_mean(mape)
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
@@ -195,10 +201,10 @@ class Model(object):
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            y_wdr = self.sess.run((self.y_wdr), feed_dict=feed_dict)
+            y = self.sess.run((self.y), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
-            pre_tra_sum_list.append(y_wdr)
+            pre_tra_sum_list.append(y)
 
         label_tra_sum_list = np.reshape(np.array(label_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for label
         pre_tra_sum_list = np.reshape(np.array(pre_tra_sum_list, dtype=np.float32) * 60, [-1, 1])  # total trajectory travel time for prediction
@@ -213,7 +219,7 @@ def main(argv=None):
     :param argv:
     :return:
     '''
-    print('#......................................beginning........................................#')
+    print('#.....................................beginning.....................................#')
     para = parameter(argparse.ArgumentParser())
     para = para.get_para()
 
@@ -234,7 +240,7 @@ def main(argv=None):
     else:
         pre_model.evaluate()
 
-    print('#...................................finished............................................#')
+    print('#..................................finished.........................................#')
 
 
 if __name__ == '__main__':

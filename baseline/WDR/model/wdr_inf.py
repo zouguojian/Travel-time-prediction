@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 from baseline.WDR.model.lstm import *
-class DeepFM(object):
+class WDRClass(object):
     """
     Deep FM with FTRL optimization
     """

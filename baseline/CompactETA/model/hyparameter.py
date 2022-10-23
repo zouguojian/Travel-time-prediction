@@ -18,10 +18,10 @@ class parameter(object):
         self.parser.add_argument('--site_num', type=int, default=108, help='total number of road')
         self.parser.add_argument('--k', type=int, default=64, help='latent vector dimension')
         self.parser.add_argument('--field_cnt', type=int, default=17, help='the number of filed for trajectory features')
-        self.parser.add_argument('--feature_tra', type=int, default=32274, help='number of the trajectory feature elements')
+        self.parser.add_argument('--feature_tra', type=int, default=30542, help='number of the trajectory feature elements')
         self.parser.add_argument('--trajectory_length', type=int, default=5, help='length of trajectory')
-        self.parser.add_argument('--num_heads', type=int, default=4, help='total number of head attentions')
-        self.parser.add_argument('--num_blocks', type=int, default=1, help='total number of attention layers')
+        self.parser.add_argument('--num_heads', type=int, default=1, help='total number of head attentions')
+        self.parser.add_argument('--num_blocks', type=int, default=3, help='total number of attention layers')
 
         #每个点表示a->b路线，目前8个收费站
         self.parser.add_argument('--emb_size', type=int, default=20, help='embedding size')
