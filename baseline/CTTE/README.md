@@ -13,10 +13,13 @@ and estimating customized travel time at personal level, within a multi-task
 learning structure. 
 
 #### Note  
-global preference features for driver in highway network, we need to note that 
-we replace the original driving behavior because we impossible to 
-calculate the any driver's travel behavior real time, and we need the calculate the whole 
-travel time before departure. 
+In this paper, the data from the real time phone data to calculate the driving behavior. But, in the 
+highway, it is difficult to get the phone data, and the task is we need to accord the departure time and
+related features to estimate the travel time previously, and the whole travel data is come from tolls. 
+Therefor, for driver in highway network to predict the travel time before departure maybe it is not 
+available use phone data. In our WORK, we need to note that we replace the original driving behavior USE 
+Global preference features (departure time, vehicle ID, vehicle type, etc), and the data is from highway 
+network. 
    
    
 * 需要改动的地方分别为:hyparameter.py和data_next.py   

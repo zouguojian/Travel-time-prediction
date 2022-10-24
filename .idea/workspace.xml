@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/CTTE/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/ctte_inf.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/ctte_inf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/resent.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/resent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="1095" />
+          <entry key="md" value="1726" />
           <entry key="py" value="20142" />
           <entry key="txt" value="31" />
         </counts>
@@ -64,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="1095" />
+          <entry key="Markdown" value="1726" />
           <entry key="PLAIN_TEXT" value="31" />
           <entry key="Python" value="20142" />
         </counts>
@@ -110,8 +104,8 @@
         <entry file="file://$PROJECT_DIR$/baseline/CTTE/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="270">
-                <caret line="18" selection-start-line="18" selection-end-line="18" />
+              <first_editor relative-caret-position="266">
+                <caret line="21" column="3" lean-forward="true" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
               </first_editor>
               <second_editor />
             </state>
@@ -461,7 +455,7 @@
     <frame x="135" y="30" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17406625" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -891,8 +885,8 @@
     <entry file="file://$PROJECT_DIR$/baseline/CTTE/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="270">
-            <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <first_editor relative-caret-position="266">
+            <caret line="21" column="3" lean-forward="true" selection-start-line="21" selection-start-column="3" selection-end-line="21" selection-end-column="3" />
           </first_editor>
           <second_editor />
         </state>
