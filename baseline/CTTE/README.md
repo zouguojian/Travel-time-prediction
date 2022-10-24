@@ -13,7 +13,7 @@ and estimating customized travel time at personal level, within a multi-task
 learning structure. 
 
 #### Note  
-In this paper, the data from the real time phone data to calculate the driving behavior. But, in the 
+> In this paper, the data from the real time phone data to calculate the driving behavior. But, in the 
 highway, it is difficult to get the phone data, and the task is we need to estimate the travel time 
 previously according to the departure time and related features, and the whole travel data is come from tolls. 
 Therefore, for driver in highway network, to predict the travel time before we departure maybe it is not 
