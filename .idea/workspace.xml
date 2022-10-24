@@ -50,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="1808" />
+          <entry key="md" value="1901" />
           <entry key="py" value="20142" />
           <entry key="txt" value="31" />
         </counts>
@@ -58,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="1808" />
+          <entry key="Markdown" value="1901" />
           <entry key="PLAIN_TEXT" value="31" />
           <entry key="Python" value="20142" />
         </counts>
@@ -104,8 +104,8 @@
         <entry file="file://$PROJECT_DIR$/baseline/CTTE/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="219">
-                <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+              <first_editor relative-caret-position="189">
+                <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
               </first_editor>
               <second_editor />
             </state>
@@ -885,8 +885,8 @@
     <entry file="file://$PROJECT_DIR$/baseline/CTTE/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="219">
-            <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <first_editor relative-caret-position="189">
+            <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           </first_editor>
           <second_editor />
         </state>
