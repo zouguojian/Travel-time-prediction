@@ -10,7 +10,13 @@ bump judders, sharp turns, sharp slopes, frequent lane shifts, overspeeds,
 and sudden brakes). Finally, we demonstrate our solution on two typical 
 transportation problems, i.e., predicting traffic speed at holistic level 
 and estimating customized travel time at personal level, within a multi-task 
-learning structure.  
+learning structure. 
+
+#### Note  
+global preference features for driver in highway network, we need to note that 
+we replace the original driving behavior because we impossible to 
+calculate the any driver's travel behavior real time, and we need the calculate the whole 
+travel time before departure. 
    
    
 * 需要改动的地方分别为:hyparameter.py和data_next.py   

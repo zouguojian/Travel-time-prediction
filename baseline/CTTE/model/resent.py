@@ -17,8 +17,7 @@ class ResnetClass(object):
     def block(self, x, channels=[32, 32, 64], block_name=''):
         '''
         :param x:
-        :param in_channel:
-        :param out_channel:
+        :param channel:
         :param block_name:
         :return:
         '''
@@ -51,14 +50,10 @@ class ResnetClass(object):
         '''
         :param x1:
         :param x2:
-        :param h:
-        :param w:
-        :param in_channel:
-        :param out_channel:
+        :param channel:
         :param residual_name:
         :return:
         '''
-
         x = tf.layers.conv1d(inputs=x1,
                             filters=channel,
                             kernel_size=1,
@@ -71,31 +66,27 @@ class ResnetClass(object):
 
     def cnn(self, x):
         '''
-        :param x: [batch size, site num, features, channel]
-        :return: [batch size, height, channel]
+        :param x: [batch size, trajectory, dim]
+        :return: [batch size, dim]
         '''
-
         with tf.variable_scope(name_or_scope='resnet', reuse=False):
             block1 = self.block(x, channels=[32, 32, 64], block_name='block1')
             residual1 = self.residual_connected(x, block1, channel=64, residual_name='residual1')
-            print('residual 1 shape is : ', residual1.shape)
+            # print('residual 1 shape is : ', residual1.shape)
 
             block2 = self.block(residual1, channels=[32, 32, 64], block_name='block2')
             residual2 = self.residual_connected(residual1, block2, channel=64,residual_name='residual2')
-            print('residual 2 shape is : ', residual2.shape)
+            # print('residual 2 shape is : ', residual2.shape)
 
             block3 = self.block(residual2, channels=[32, 32, self.emb_size], block_name='block3')
             residual3 = self.residual_connected(residual2, block3, channel=self.emb_size, residual_name='residual3')
-            print('residual 3 shape is : ', residual3.shape)
+            # print('residual 3 shape is : ', residual3.shape)
 
-            # max_pool=tf.nn.avg_pool(residual4, ksize=[1, 2, 2, 1], strides=[1, 1, 2, 1], padding='SAME')
-
-            avr_pool = tf.layers.average_pooling1d(inputs=residual3, pool_size=self.trajectory_length, strides=1, padding='valid',
-                                        name='pooling')
-            print('max_pool output shape is : ', avr_pool.shape)
-
-        # cnn_shape = max_pool3.get_shape().as_list()
-        # nodes = cnn_shape[1] * cnn_shape[2] * cnn_shape[3]
-        # reshaped = tf.reshape(max_pool3, [cnn_shape[0], nodes])
-
+            avr_pool = tf.layers.average_pooling1d(inputs=residual3,
+                                                   pool_size=self.trajectory_length,
+                                                   strides=1,
+                                                   padding='valid',
+                                                   name='pooling')
+            avr_pool = tf.squeeze(avr_pool, axis=1)
+            # print('max_pool output shape is : ', avr_pool.shape)
         return avr_pool

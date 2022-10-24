@@ -8,15 +8,14 @@ import datetime
 from baseline.CTTE.model.hyparameter import parameter
 from baseline.CTTE.model.ctte_inf import CTTEClass
 from baseline.CTTE.model.data_next import DataClass
-from baseline.CTTE.model.utils import construct_feed_dict, one_hot_concatenation, metric,FC
+from baseline.CTTE.model.utils import construct_feed_dict, one_hot_concatenation, metric, FC, SE
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 logs_path = "board"
 
-
 class Model(object):
-    def __init__(self, hp):
+    def __init__(self, hp, SE_=None):
         self.hp = hp
         self.step = self.hp.step  # window length
         self.epoch = self.hp.epoch  # total training epochs
@@ -33,7 +32,7 @@ class Model(object):
         self.output_length = self.hp.output_length  # output length of speed data
         self.learning_rate = self.hp.learning_rate  # learning rate
         self.trajectory_length = self.hp.trajectory_length  # trajectory length
-
+        self.SE_=SE_   # spatial embedding
         self.initial_placeholder()
         self.model()
 
@@ -52,6 +51,7 @@ class Model(object):
             'label_tra_sum': tf.placeholder(tf.float32, shape=[None, 1], name='label_tra_sum'),
             'feature_inds': tf.placeholder(dtype=tf.int32, shape=[None, self.field_cnt], name='feature_inds'),
             'trajectory_inds': tf.placeholder(dtype=tf.int32, shape=[self.trajectory_length], name='feature_inds'),
+            'se': tf.placeholder(dtype=tf.float32, shape=[self.site_num, self.emb_size], name='spatial_embedding_for_road_network'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout')
         }
 
@@ -72,11 +72,15 @@ class Model(object):
                    bn=False, bn_decay=0.99, is_training=self.is_training)
         speed = tf.gather(speed, indices=self.placeholders['trajectory_inds'], axis=2)  # (32, 24, 5, 64)
 
+        SE_ = tf.gather(self.placeholders['se'], indices=self.placeholders['trajectory_inds'])  # (trajectory length, 64)
+
         with tf.variable_scope(name_or_scope='trajectory_model'):
             CTTEModel = CTTEClass(self.hp)
             self.pre_s, self.pre_t = CTTEModel.inference(speed=speed[:, :self.input_length], # (32, 12, 5, 64)
                                                          feature_inds=self.placeholders['feature_inds'],
-                                                         keep_prob=self.placeholders['dropout'])
+                                                         keep_prob=self.placeholders['dropout'],
+                                                         SE_=SE_)
+            print(self.pre_s.shape, self.pre_t.shape)
 
         self.pre_s_o = tf.gather(self.placeholders['label_s'], indices=self.placeholders['trajectory_inds'], axis=1)
         self.loss_1 = tf.losses.mean_squared_error(labels=self.pre_s, predictions=self.pre_s_o)
@@ -85,7 +89,7 @@ class Model(object):
         mape = tf.divide(mae, self.placeholders['label_tra_sum'])
         self.loss_2 = tf.reduce_mean(mape)
 
-        self.loss = self.loss_1 + self.loss_2
+        self.loss = self.loss_1 + 0.3 * self.loss_2
 
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
@@ -145,7 +149,8 @@ class Model(object):
                                             separate_trajectory_time=separate_trajectory_time,
                                             total_time=total_time,
                                             trajectory_inds=trajectory_inds,
-                                            placeholders=self.placeholders)
+                                            placeholders=self.placeholders,
+                                            se=self.se)
             feed_dict.update({self.placeholders['dropout']: self.dropout})
 
             loss, _ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
@@ -205,7 +210,8 @@ class Model(object):
                                             separate_trajectory_time=separate_trajectory_time,
                                             total_time=total_time,
                                             trajectory_inds=trajectory_inds,
-                                            placeholders=self.placeholders)
+                                            placeholders=self.placeholders,
+                                            se=self.se)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             y = self.sess.run((self.pre_t), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
@@ -237,8 +243,8 @@ def main(argv=None):
     else:
         para.batch_size = 1
         para.is_training = False
-
-    pre_model = Model(para)
+    SE_ = SE(para.file_SE)
+    pre_model = Model(para, SE_=SE_)
     pre_model.initialize_session()
 
     if int(val) == 1:

@@ -28,7 +28,7 @@ class parameter(object):
         self.parser.add_argument('--feature_s', type=int, default=1, help='number of the speed feature elements')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=12, help='input length')
-        self.parser.add_argument('--output_length', type=int, default=6, help='output length')
+        self.parser.add_argument('--output_length', type=int, default=1, help='output length')
 
         self.parser.add_argument('--hidden_size', type=int, default=64, help='hidden size')
         self.parser.add_argument('--hidden_layer', type=int, default=1, help='hidden layer')
@@ -40,7 +40,9 @@ class parameter(object):
         self.parser.add_argument('--file_train_s', type=str, default='/Users/guojianzou/Travel-time-prediction/data/train.csv', help='training_speed file address')
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
         self.parser.add_argument('--file_test', type=str, default='data/test.csv', help='test set file address')
-
+        self.parser.add_argument('--file_SE', type=str,
+                                 default='/Users/guojianzou/Travel-time-prediction/baseline/CTTE/node2vec/SE.txt',
+                                 help='spatial embedding file address')
         self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_1.csv', help='trajectory file address')
 
         self.parser.add_argument('--file_adj', type=str,default='data/adjacent.csv', help='adj file address')
