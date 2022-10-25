@@ -43,6 +43,15 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 #### MT-STAN [codes link](https://github.com/zouguojian/Travel-time-prediction)
 
 # Experimental Results
+
+|Model           |Beijing-Lhasa (G6)|6-2 steps|6-3 steps|6-4 steps|6-5 steps|6-6 steps|
+|  ----          | ----    |  ----   |  ----   |----     |----     |----     |
+| MAE            |6.617331 |6.617331 |6.617331 |6.617331 |6.617331 |6.617331 |
+| RMSE           |10.358577|10.358577|10.358577|10.358577|10.358577|10.358577|
+| MAPE           |0.426058 |0.426058 |0.426058 |0.426058 |0.426058 |0.426058 |
+| R              |0.942935 |0.942935 |0.942935 |0.942935 |0.942935 |0.942935 |
+| R<sup>2</sup>  |0.879848 |0.879848 |0.879848 |0.879848 |0.879848 |0.879848 | 
+
 #### DeepTTE
 
 #### CTTE
