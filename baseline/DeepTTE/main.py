@@ -28,8 +28,8 @@ parser.add_argument('--task', type = str, default='test')
 parser.add_argument('--batch_size', type = int, default = 64)
 parser.add_argument('--epochs', type = int, default = 50)
 # evaluation args
-parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE-5')
-parser.add_argument('--result_file', type = str, default = './result/deeptte-5.res')
+parser.add_argument('--weight_file', type = str, default = './saved_weights/DeepTTE-4')
+parser.add_argument('--result_file', type = str, default = './result/deeptte-4.res')
 # cnn args
 parser.add_argument('--kernel_size', type = int, default=3)
 # rnn args
