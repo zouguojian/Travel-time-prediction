@@ -150,7 +150,7 @@ class Model(object):
                                             total_time=total_time,
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders,
-                                            se=self.se)
+                                            se=self.SE_)
             feed_dict.update({self.placeholders['dropout']: self.dropout})
 
             loss, _ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
@@ -211,7 +211,7 @@ class Model(object):
                                             total_time=total_time,
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders,
-                                            se=self.se)
+                                            se=self.SE_)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             y = self.sess.run((self.pre_t), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
