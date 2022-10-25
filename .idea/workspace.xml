@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/wdr_inf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,12 +67,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="480">
-                <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+              <first_editor relative-caret-position="265">
+                <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
               </first_editor>
               <second_editor />
             </state>
@@ -107,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="82" column="53" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="53" />
+            <state relative-caret-position="133">
+              <caret line="74" column="98" lean-forward="true" selection-start-line="74" selection-start-column="98" selection-end-line="74" selection-end-column="98" />
             </state>
           </provider>
         </entry>
@@ -131,8 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-241">
-              <caret line="183" column="92" selection-start-line="183" selection-start-column="92" selection-end-line="183" selection-end-column="92" />
+            <state relative-caret-position="-2082">
+              <caret line="9" column="59" lean-forward="true" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -210,8 +203,6 @@
         <option value="$PROJECT_DIR$/baseline/CTTE/model/soft_attention.py" />
         <option value="$PROJECT_DIR$/baseline/CTTE/model/ctte_inf.py" />
         <option value="$PROJECT_DIR$/baseline/CTTE/model/resnet.py" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/README.md" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/utils.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" />
@@ -219,6 +210,8 @@
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/main.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -244,19 +237,6 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -426,12 +406,12 @@
     <frame x="67" y="54" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39204547" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.39204547" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -763,16 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="480">
-            <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2655">
@@ -830,13 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241">
-          <caret line="183" column="92" selection-start-line="183" selection-start-column="92" selection-end-line="183" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -876,8 +839,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="82" column="53" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="53" />
+        <state relative-caret-position="133">
+          <caret line="74" column="98" lean-forward="true" selection-start-line="74" selection-start-column="98" selection-end-line="74" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2082">
+          <caret line="9" column="59" lean-forward="true" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="265">
+            <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
