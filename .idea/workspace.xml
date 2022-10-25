@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/baseline/CoDriverETA/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +32,7 @@
           <entry key="json" value="9" />
           <entry key="log" value="6" />
           <entry key="md" value="20" />
-          <entry key="py" value="321" />
+          <entry key="py" value="323" />
           <entry key="res" value="5" />
           <entry key="sh" value="2" />
           <entry key="test" value="8" />
@@ -44,14 +46,14 @@
           <entry key="JSON" value="9" />
           <entry key="Markdown" value="20" />
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="321" />
+          <entry key="Python" value="323" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
           <entry key="md" value="2005" />
-          <entry key="py" value="20939" />
+          <entry key="py" value="20960" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -60,21 +62,39 @@
           <entry key="JSON" value="50" />
           <entry key="Markdown" value="2005" />
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="20939" />
+          <entry key="Python" value="20960" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="300">
-                <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+              <first_editor relative-caret-position="480">
+                <caret line="32" column="27" lean-forward="true" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -119,8 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/model/st_block.py" />
-        <option value="$PROJECT_DIR$/baseline/DeepTTE/data/test" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/utils.py" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/models/__init__.py" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/models/DeepTTE.py" />
@@ -170,12 +188,14 @@
         <option value="$PROJECT_DIR$/baseline/CTTE/model/ctte_inf.py" />
         <option value="$PROJECT_DIR$/baseline/CTTE/model/resnet.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/main.py" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="43" />
-    <option name="y" value="38" />
+    <option name="x" value="89" />
+    <option name="y" value="139" />
     <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
@@ -195,6 +215,19 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -361,7 +394,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="43" y="38" width="1440" height="796" extended-state="0" />
+    <frame x="89" y="139" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
@@ -387,20 +420,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/data_read.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-43">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/models/base/Attr.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/DeepTTE/data/data_generator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
@@ -794,10 +813,24 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="300">
-            <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <first_editor relative-caret-position="480">
+            <caret line="32" column="27" lean-forward="true" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="40" />
         </state>
       </provider>
     </entry>
