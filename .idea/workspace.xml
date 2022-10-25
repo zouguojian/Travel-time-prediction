@@ -50,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="2045" />
+          <entry key="md" value="2050" />
           <entry key="py" value="21438" />
           <entry key="txt" value="31" />
         </counts>
@@ -58,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="2045" />
+          <entry key="Markdown" value="2050" />
           <entry key="PLAIN_TEXT" value="31" />
           <entry key="Python" value="21438" />
         </counts>
@@ -71,8 +71,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="189">
-                <caret line="47" column="78" lean-forward="true" selection-start-line="47" selection-start-column="78" selection-end-line="47" selection-end-column="78" />
+              <first_editor relative-caret-position="292">
+                <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
               </first_editor>
               <second_editor />
             </state>
@@ -174,8 +174,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-151" />
-    <option name="y" value="319" />
+    <option name="x" value="-54" />
+    <option name="y" value="154" />
     <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
@@ -195,12 +195,6 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="DeepTTE" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -367,7 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-151" y="319" width="1440" height="796" extended-state="0" />
+    <frame x="-54" y="154" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
@@ -825,8 +819,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="189">
-            <caret line="47" column="78" lean-forward="true" selection-start-line="47" selection-start-column="78" selection-end-line="47" selection-end-column="78" />
+          <first_editor relative-caret-position="292">
+            <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
           </first_editor>
           <second_editor />
         </state>

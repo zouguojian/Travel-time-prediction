@@ -37,12 +37,14 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 # MT-STAN and Baselines （all methods' codes have been reproduced） 
 #### CoDriver ETA  [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/CoDriverETA)
 #### DeepTTE [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/DeepTTE)
-#### DWR [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/WDR)
+#### WDR [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/WDR)
 #### CompactETA [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/CompactETA)
 #### CTTE [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/CTTE)
 #### MT-STAN [codes link](https://github.com/zouguojian/Travel-time-prediction)
 
 # Experimental Results
+
+
 
 |Model           |Beijing-Lhasa (G6)|6-2 steps|6-3 steps|6-4 steps|6-5 steps|6-6 steps|
 |  ----          | ----    |  ----   |  ----   |----     |----     |----     |
@@ -51,6 +53,8 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 | MAPE           |0.426058 |0.426058 |0.426058 |0.426058 |0.426058 |0.426058 |
 | R              |0.942935 |0.942935 |0.942935 |0.942935 |0.942935 |0.942935 |
 | R<sup>2</sup>  |0.879848 |0.879848 |0.879848 |0.879848 |0.879848 |0.879848 | 
+
+
 
 #### DeepTTE
 
