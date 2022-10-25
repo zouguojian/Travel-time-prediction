@@ -2,7 +2,7 @@
 import tensorflow as tf
 import numpy as np
 import argparse
-from baseline.WDR.model.hyparameter import parameter
+from baseline.CoDriverETA.model.hyparameter import parameter
 import pandas as pd
 import datetime
 
@@ -221,6 +221,7 @@ class DataClass(object):
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
                        np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), # trajectory 对应的路径 index
+                       np.array([sum([data_tra[low, 4 + i * 4] for i in range(self.trajectory_length)])/1000.0/sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float), # average speed
                        data_tra[low, 2])     # 每辆车的出发时间
 
                 low += 1
@@ -257,7 +258,7 @@ class DataClass(object):
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.string))
+                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.float32, tf.string))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio))

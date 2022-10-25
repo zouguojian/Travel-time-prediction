@@ -1,14 +1,22 @@
-# WDR
+# CoDriverETA
 
-* WDR model has three main blocks: 1) the wide model is similar to the wide model 
-in Wide & Deep network. We use a second order cross-product transformation followed
- by an affine transformation to get a 256 dimensional output; 2) the deep model embeds
-  the sparse features into a 20 dimensional space, then processes the concatenated features
-   by a 3-hidden-layer MLP with a ReLU activation to get a 256 dimensional output. 
-   The size of all the three hidden layers in the MLP is 256; 3) the recurrent model is a 
-   variant of standard RNN. The feature of each road segment is first projected into a 256 
-   dimensional space by a fully connected layer with ReLU as the activation function. The 
-   transformed feature is then fed into to a standard LSTM with cell size 256. 
+* Estimated time of arrival (ETA) is one of the most important services in 
+intelligent transportation systems (ITS). Precise ETA ensures proper travel 
+scheduling of passengers as well as guarantees efficient decision-making on 
+ride-hailing platforms, which are used by an explosively growing number of 
+people in the past few years. Recently, machine learning-based methods have 
+been widely adopted to solve this time estimation problem and become state-of-the-art. 
+However, they do not well explore the personalization information, as many 
+drivers are short of personalized data and do not have sufficient trajectory 
+data in real applications. This data sparsity problem prevents existing methods 
+from obtaining higher prediction accuracy. In this article, we propose a novel 
+deep learning method to solve this problem. We introduce an auxiliary task to 
+learn an embedding of the personalized driving information under multi-task 
+learning framework. In this task, we discriminatively learn the embedding of 
+driving preference that preserves the historical statistics of driving speed. 
+For this purpose, we adapt the triplet network from face recognition to learn 
+the embedding by constructing triplets in the feature space. This simultaneously 
+learned embedding can effectively boost the prediction accuracy of the travel time.   
    
    
 * 需要改动的地方分别为:hyparameter.py和data_next.py  

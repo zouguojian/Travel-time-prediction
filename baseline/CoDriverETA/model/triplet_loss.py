@@ -3,7 +3,6 @@
 
 import tensorflow as tf
 
-
 def _pairwise_distances(embeddings, squared=False):
     """Compute the 2D matrix of distances between all the embeddings.
 

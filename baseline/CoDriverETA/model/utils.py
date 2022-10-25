@@ -162,7 +162,7 @@ def construct_feed_dict(x_s = None,
                         x_tra = None,
                         element_index = [],
                         separate_trajectory_time = [0.1],
-                        total_time = 0.1, trajectory_inds=[0], placeholders = None):
+                        total_time = 0.1, trajectory_inds=[0], placeholders = None, ave_s=None):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
@@ -175,6 +175,7 @@ def construct_feed_dict(x_s = None,
     feed_dict.update({placeholders['feature_tra']: x_tra})
     feed_dict.update({placeholders['label_tra']: separate_trajectory_time})
     feed_dict.update({placeholders['label_tra_sum']: total_time})
+    feed_dict.update({placeholders['ave_s']: ave_s})
     feed_dict.update({placeholders['feature_inds']: element_index})
     feed_dict.update({placeholders['trajectory_inds']: trajectory_inds[0]})
     return feed_dict
