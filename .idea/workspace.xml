@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="" />
+    <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
-          <entry key="md" value="1950" />
+          <entry key="md" value="1996" />
           <entry key="py" value="20939" />
           <entry key="txt" value="31" />
         </counts>
@@ -56,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="50" />
-          <entry key="Markdown" value="1950" />
+          <entry key="Markdown" value="1996" />
           <entry key="PLAIN_TEXT" value="31" />
           <entry key="Python" value="20939" />
         </counts>
@@ -69,8 +71,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="351">
-                <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+              <first_editor relative-caret-position="231">
+                <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
               </first_editor>
               <second_editor />
             </state>
@@ -792,8 +794,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="351">
-            <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+          <first_editor relative-caret-position="231">
+            <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
           </first_editor>
           <second_editor />
         </state>

@@ -34,7 +34,7 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 >data3-feature_tra: 1385  
 >data4-feature_tra: 10284  
 
-# MT-STAN and Baselines  
+# MT-STAN and Baselines （all methods' codes have been reproduced） 
 #### CoDriver ETA  [click](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline)
 #### DeepTTE [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/DeepTTE)
 #### DWR [codes link](https://github.com/zouguojian/Travel-time-prediction/tree/main/baseline/WDR)
