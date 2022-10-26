@@ -79,6 +79,8 @@ def multihead_attention(queries,
 
         # Activation
         outputs = tf.nn.softmax(outputs)  # (h*N, T_q, T_k)
+        attention_weights = tf.expand_dims(outputs, axis=1)
+        attention_weights = tf.concat(tf.split(attention_weights, num_heads, axis=0), axis=1)
 
         # Dropouts
         # outputs = tf.layers.dropout(outputs, rate=dropout_rate, training=tf.convert_to_tensor(is_training))
@@ -95,7 +97,8 @@ def multihead_attention(queries,
         # Normalize
         outputs = normalize(outputs) # (N, T_q, C)
 
-    return outputs
+    # [N, len, dim], [N, head, len, historical length]
+    return outputs, attention_weights
 
 
 def feedforward(inputs, num_units=[2048, 512], scope="multihead_attention", reuse=tf.AUTO_REUSE):
@@ -187,6 +190,7 @@ class TemporalTransformer():
         :param hour: [batch , time, site num, hidden size]
         :return:
         '''
+        self.attention_layer_weights = list()
         with tf.variable_scope("temporal_encoder"):
             enc = hidden
             dec = hiddens
@@ -194,12 +198,13 @@ class TemporalTransformer():
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     ### Multihead Attention
-                    enc = multihead_attention(queries=enc,
-                                              keys=dec,
-                                              num_units=self.hidden_units,
-                                              num_heads=self.num_heads,
-                                              dropout_rate=self.dropout_rate,
-                                              is_training=self.is_training)
+                    enc, weighs = multihead_attention(queries=enc,
+                                                      keys=dec,
+                                                      num_units=self.hidden_units,
+                                                      num_heads=self.num_heads,
+                                                      dropout_rate=self.dropout_rate,
+                                                      is_training=self.is_training)
                     ### Feed Forward
                     enc = feedforward(enc, num_units=[4 * self.hidden_units, self.hidden_units])
+                    self.attention_layer_weights.append(weighs)
         return enc

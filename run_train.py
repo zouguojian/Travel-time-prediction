@@ -7,9 +7,9 @@ import argparse
 import datetime
 
 from model.embedding import embedding
-from model.trajectory_inference import DeepFM
+from model.trajectory_inf import STANClass
 from model.data_next import DataClass
-from model.utils import construct_feed_dict, one_hot_concatenation, metric, FC, STEmbedding
+from model.utils import construct_feed_dict, one_hot_concatenation, metric, FC, STEmbedding,seaborn
 from model.st_block import ST_Block
 from model.bridge import BridgeTransformer
 from model.inference import InferenceClass
@@ -122,11 +122,13 @@ class Model(object):
 
         print('#................................feature cross....................................#')
         with tf.variable_scope(name_or_scope='trajectory_model'):
-            DeepModel = DeepFM(self.hp)
-            self.pre_tra_sep, self.pre_tra_sum, self.y_dfm = DeepModel.inference(X=self.placeholders['feature_tra'],
-                                                                                   feature_inds=self.placeholders['feature_inds'],
-                                                                                   keep_prob=self.placeholders['dropout'],
-                                                                                   hiddens=hidden_states)
+            STANClassModel = STANClass(self.hp)
+            self.pre_tra_sep, self.pre_tra_sum, self.y_dfm = STANClassModel.inference(X=self.placeholders['feature_tra'],
+                                                                                       feature_inds=self.placeholders['feature_inds'],
+                                                                                       keep_prob=self.placeholders['dropout'],
+                                                                                       hiddens=hidden_states)
+            self.holistic_weights = STANClassModel.holistic_weights
+            # is a list, containing the multi-head attention values on diffrenct LAYERS [[N, head, len, historical length],...]
 
         self.pre_s = tf.gather(self.pre_s,  indices=self.placeholders['trajectory_inds'], axis=1)  # (32, 108, 6)
         self.pre_s_o = tf.gather(self.placeholders['label_s'], indices=self.placeholders['trajectory_inds'], axis=1)
@@ -271,8 +273,12 @@ class Model(object):
                                             trajectory_inds=trajectory_inds,
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            pre_s, pre_tra_sep, pre_tra_sum = self.sess.run((self.pre_s, self.pre_tra_sep, self.pre_tra_sum), feed_dict=feed_dict)
+            pre_s, pre_tra_sep, pre_tra_sum, holistic_weights= self.sess.run((self.pre_s, self.pre_tra_sep, self.pre_tra_sum, self.holistic_weights), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
+            print('travel time is : ', separate_trajectory_time)
+            seaborn(x=holistic_weights[0][:,:,0,:])
+            print(holistic_weights[0].shape)
+
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra_sum)
             label_tra_sep_list.append(separate_trajectory_time)

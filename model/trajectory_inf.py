@@ -3,7 +3,7 @@ import tensorflow as tf
 from model.temporal_attention import TemporalTransformer
 
 
-class DeepFM(object):
+class STANClass(object):
     """
     Deep FM with FTRL optimization
     """
@@ -79,6 +79,7 @@ class DeepFM(object):
                 y_fm = tf.add(self.linear_terms, self.interaction_terms)
 
         with tf.variable_scope('separate_and_sum_trajectory', reuse=False):
+            self.holistic_weights =None
             x_trajectory = tf.gather(v, feature_inds)  # (N, 17, 64)
             x_common = x_trajectory[:, :-(self.trajectory_length * 2), :]  # (N, 7, 64)
             x_common = tf.reduce_sum(x_common[:, 2:, :], axis=1, keep_dims=True)  # (N, 1, 64)
@@ -105,11 +106,12 @@ class DeepFM(object):
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])
 
             if self.hp.model_name=='Hatt':
-                x_trajectory_separate = hiddens[:, self.input_length-1:self.input_length,] + x_trajectory_separate
+                x_trajectory_separate = hiddens[:, self.input_length-1:self.input_length] + x_trajectory_separate
             else:
                 T = TemporalTransformer(self.hp)
                 x_trajectory_separate = T.encoder(hiddens=hiddens[:, -(1 + self.input_length):],
                                                   hidden=x_trajectory_separate)
+                self.holistic_weights = T.attention_layer_weights
             # x_trajectory_separate = tf.squeeze(x_trajectory_separate, axis=2) # (N, 5, 64)
             x_trajectory_separate = tf.reshape(x_trajectory_separate,
                                                shape=[-1, self.trajectory_length, self.emb_size])  # (N, 5, 64)

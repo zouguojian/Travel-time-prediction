@@ -4,6 +4,7 @@ import scipy.sparse as sp
 from scipy.sparse.linalg.eigen.arpack import eigsh
 from model import tf_utils
 import tensorflow as tf
+import seaborn as sns
 
 def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):
     if isinstance(units, int):
@@ -198,6 +199,59 @@ def one_hot_concatenation(features=[]):
     '''
     features = np.concatenate(features, axis=-1)
     return features
+
+
+def seaborn(x =None):
+    '''
+    :param x:
+    :return:
+    '''
+    """
+    document: https://seaborn.pydata.org/generated/seaborn.heatmap.html#seaborn.heatmap
+    根据data传入的值画出热力图，一般是二维矩阵
+    vmin设置最小值, vmax设置最大值
+    cmap换用不同的颜色
+    center设置中心值
+    annot 是否在方格上写上对应的数字
+    fmt 写入热力图的数据类型，默认为科学计数，d表示整数，.1f表示保留一位小数
+    linewidths 设置方格之间的间隔
+    xticklabels，yticklabels填到横纵坐标的值。可以是bool，填或者不填。可以是int，以什么间隔填，可以是list
+    color: Accent, Accent_r, Blues, Blues_r, BrBG, BrBG_r, BuGn, BuGn_r, BuPu, BuPu_r, CMRmap, CMRmap_r, 
+    Dark2, Dark2_r, GnBu, GnBu_r, Greens, Greens_r, Greys, Greys_r, OrRd, OrRd_r, Oranges, Oranges_r, PRGn, 
+    PRGn_r, Paired, Paired_r, Pastel1, Pastel1_r, Pastel2, Pastel2_r, PiYG, PiYG_r, PuBu, PuBuGn, PuBuGn_r, 
+    PuBu_r, PuOr, PuOr_r, PuRd, PuRd_r, Purples, Purples_r, RdBu, RdBu_r, RdGy, RdGy_r, RdPu, RdPu_r, RdYlBu, 
+    RdYlBu_r, RdYlGn, RdYlGn_r, Reds, Reds_r, Set1, Set1_r, Set2, Set2_r, Set3, Set3_r, Spectral, Spectral_r, Wistia, 
+    Wistia_r, YlGn, YlGnBu, YlGnBu_r, YlGn_r, YlOrBr, YlOrBr_r, YlOrRd, YlOrRd_r, afmhot, afmhot_r, autumn, autumn_r, 
+    binary, binary_r, bone, bone_r, brg, brg_r, bwr, bwr_r, cividis, cividis_r, cool, cool_r, coolwarm, coolwarm_r, 
+    copper, copper_r, cubehelix, cubehelix_r, flag, flag_r, gist_earth, gist_earth_r, gist_gray, gist_gray_r, gist_heat, 
+    gist_heat_r, gist_ncar, gist_ncar_r, gist_rainbow, gist_rainbow_r, gist_stern, gist_stern_r, gist_yarg, gist_yarg_r, 
+    gnuplot, gnuplot2, gnuplot2_r, gnuplot_r, gray, gray_r, hot, hot_r, hsv, hsv_r, icefire, icefire_r, inferno, inferno_r, 
+    jet, jet_r, magma, magma_r, mako, mako_r, nipy_spectral, nipy_spectral_r, ocean, ocean_r, pink, pink_r, plasma, plasma_r, 
+    prism, prism_r, rainbow, rainbow_r, rocket, rocket_r, seismic, seismic_r, spring, spring_r, summer, summer_r, tab10, tab10_r, 
+    tab20, tab20_r, tab20b, tab20b_r, tab20c, tab20c_r, terrain, terrain_r, twilight, twilight_r, twilight_shifted, twilight_shifted_r, 
+    viridis, viridis_r, vlag, vlag_r, winter, winter_r
+
+    """
+    f, (ax1,ax2) = plt.subplots(nrows=2,ncols=2)
+    #
+    # sns.heatmap(x, annot=False, ax=ax1)
+    # sns.heatmap(x1, annot=False, ax=ax2)
+
+    sns.heatmap(x[:,0], annot=False,
+                yticklabels=[i+1 for i in range(x.shape[0])],
+                xticklabels=[i+1 for i in range(x.shape[2])],cbar=True, ax=ax1[0],cmap='Blues')
+    sns.heatmap(x[:,1], annot=False,
+                yticklabels=[i+1 for i in range(x.shape[0])],
+                xticklabels=[i+1 for i in range(x.shape[2])],cbar=True, ax=ax1[1], cmap='Greens')
+    sns.heatmap(x[:,2], annot=False,
+                yticklabels=[i+1 for i in range(x.shape[0])],
+                xticklabels=[i+1 for i in range(x.shape[2])],cbar=True, ax=ax2[0])
+    sns.heatmap(x[:,3], annot=False,
+                yticklabels=[i+1 for i in range(x.shape[0])],
+                xticklabels=[i+1 for i in range(x.shape[2])],cbar=True, ax=ax2[1],cmap='Greys')
+
+
+    plt.show()
 
 import matplotlib.pyplot as plt
 def describe(label, predict):
