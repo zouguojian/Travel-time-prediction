@@ -40,6 +40,7 @@ class ST_Block():
         # feature fusion
         x_t = tf.layers.dense(x_t, units=self.emb_size, activation=tf.nn.relu)
         x_t = tf.layers.dense(x_t, units=self.emb_size)
+
         x_t = tf.reshape(x_t, shape=[self.batch_size, self.site_num, self.input_length, self.emb_size])
         x_t = tf.transpose(x_t, perm=[0, 2, 1, 3])
 

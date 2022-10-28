@@ -275,9 +275,12 @@ class Model(object):
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_s, pre_tra_sep, pre_tra_sum, holistic_weights= self.sess.run((self.pre_s, self.pre_tra_sep, self.pre_tra_sum, self.holistic_weights), feed_dict=feed_dict)
             # print(dates, pre_tra_sum * 60, total_time * 60)
+            print(np.min(holistic_weights[0][:,:,0,:]))
             print('travel time is : ', separate_trajectory_time)
+            print(label_s[:,trajectory_inds[0]])
+            print(dates[0])
             seaborn(x=holistic_weights[0][:,:,0,:])
-            print(holistic_weights[0].shape)
+            # print(holistic_weights[0].shape)
 
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra_sum)
