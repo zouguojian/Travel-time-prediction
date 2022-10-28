@@ -20,11 +20,11 @@ tf.disable_v2_behavior()部分代码即可正常运行
 
 ## Noted the Dataset Changes
 * 需要改动的地方分别为:hyparameter.py和data_next.py  
->self.parser.add_argument('--save_path', type=str, default='weights/WDR-2/', help='save path')  
+>self.parser.add_argument('--save_path', type=str, default='weights/MT-STAN-1/', help='save path')  
 self.parser.add_argument('--field_cnt', type=int, default=17, help='the number of filed for trajectory features')  
 >self.parser.add_argument('--feature_tra', type=int, default=30542, help='number of the trajectory feature elements')  
 >self.parser.add_argument('--trajectory_length', type=int, default=5, help='length of trajectory')  
->self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_2.csv', help='trajectory file address')  
+>self.parser.add_argument('--file_train_t', type=str, default='/Users/guojianzou/Travel-time-prediction/data/trajectory_1.csv', help='trajectory file address')  
 
 >route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]  
 >max_road_leangth = 22193.94  
@@ -59,7 +59,7 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |Cross-network	 |5.181	   |28.649	 |9.341%   |12.060	 |53.237   |14.725%	 |1.306	   |1.698	 |5.730%  |
 |No-Holistic	 |5.146	   |28.618	 |9.239%   |12.032	 |53.301   |14.425%	 |1.250	   |1.683	 |5.484%  |
 |No-Multi-Task	 |5.159	   |28.625	 |9.325%   |12.008	 |53.388   |14.285%	 |1.156	   |1.538	 |4.995%  |
-|MT-STAN	     |5.130	   |28.615	 |9.190%   |11.978	 |53.087   |14.592%	 |1.229	   |1.656	 |5.386%  |
+|MT-STAN	     |5.130    |28.615	 |9.190%   |11.978	 |53.087   |14.592%	 |1.229	   |1.656	 |5.386%  |
 
 
 |Tsingtao-Yinchuan (G20)	|
@@ -77,10 +77,3 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |No-Holistic	 |4.179	   |28.685	 |8.842%   |
 |No-Multi-Task	 |4.181	   |28.705	 |8.765%   |
 |MT-STAN	     |4.167	   |28.672	 |8.774%   |
-
-
-#### DeepTTE
-
-#### CTTE
-
-#### MT-STAN
