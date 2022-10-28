@@ -16,7 +16,6 @@ tf.disable_v2_behavior()；
 > * 点击 main.py文件即可运行代码。
 > * 需要注意的是，我们在tensorflow的1.12和1.14版本环境中都可以运行，更高版本运行添加import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()部分代码即可正常运行
----
 
 ## Noted the Dataset Changes
 * 需要改动的地方分别为:hyparameter.py和data_next.py  
