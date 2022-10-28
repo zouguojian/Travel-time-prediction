@@ -45,7 +45,7 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 # Experimental Results
 
 
-
+|           |  	   | Beijing-Lhasa (G6_1)	 |         |      |  Beijing-Lhasa (G6_2) |     |  	   | Yinchuan-Kunming (G85)	|        |
 |Model           |MAE	   | RMSE	 |MAPE     |MAE	     | RMSE	   |MAPE     |MAE	   | RMSE	 |MAPE    |
 |  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |----     |----    |
 |DNN	         |5.187	   |28.663	 |9.376%   |12.089	 |53.375   |14.569%	 |1.256	   |1.679	 |5.434%  |
