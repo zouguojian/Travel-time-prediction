@@ -45,7 +45,9 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 # Experimental Results
 
 
-|           |  	   | Beijing-Lhasa (G6_1)	 |         |      |  Beijing-Lhasa (G6_2) |     |  	   | Yinchuan-Kunming (G85)	|        |
+|Beijing-Lhasa (G6_1)|  Beijing-Lhasa (G6_2) |  Yinchuan-Kunming (G85)	|
+|  ----              |  ----                 |  ----                    |
+
 |Model           |MAE	   | RMSE	 |MAPE     |MAE	     | RMSE	   |MAPE     |MAE	   | RMSE	 |MAPE    |
 |  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |----     |----    |
 |DNN	         |5.187	   |28.663	 |9.376%   |12.089	 |53.375   |14.569%	 |1.256	   |1.679	 |5.434%  |
@@ -60,6 +62,21 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |MT-STAN	     |5.130	   |28.615	 |9.190%   |11.978	 |53.087   |14.592%	 |1.229	   |1.656	 |5.386%  |
 
 
+|Tsingtao-Yinchuan (G20)	|
+|  ----          |
+
+|Model           |MAE	   | RMSE	 |MAPE     |
+|  ----          | ----    |  ----   |  ----   |
+|DNN	         |4.205	   |28.636	 |9.158%   |
+|CoDriver ETA	 |4.236	   |28.724	 |9.077%   |
+|DeepTTE	     |5.524	   |26.512	 |18.333%  |
+|DWR	         |4.212	   |28.687	 |8.989%   |
+|CompactETA	     |4.193	   |28.714	 |8.833%   |
+|CTTE	         |4.197	   |28.486	 |8.942%   |
+|Cross-network	 |4.222	   |28.702	 |9.065%   |
+|No-Holistic	 |4.179	   |28.685	 |8.842%   |
+|No-Multi-Task	 |4.181	   |28.705	 |8.765%   |
+|MT-STAN	     |4.167	   |28.672	 |8.774%   |
 
 
 #### DeepTTE
