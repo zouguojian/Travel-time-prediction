@@ -2,69 +2,53 @@
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-# -- coding: utf-8 --
-
-import  matplotlib.pyplot as plt
-import numpy as np
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 19 11:09:06 2018
-
-@author: butany
-"""
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from matplotlib.ticker import MaxNLocator
+import seaborn as sns
 
-a=np.divide(np.array([0]),np.array([0]))
-rmse = np.nan_to_num(a)
-print(rmse)
+DNN_mae =[5.187, 12.089, 1.256, 4.205]
+CoDriverETA_mae =[5.200, 12.104, 1.380, 4.236]
+DeepTTE_mae =[6.108, 13.106, 3.716, 5.524]
+WDR_mae =[5.172, 12.059, 1.406, 4.212]
+CompactETA_mae =[5.154, 12.075, 1.236, 4.193]
+CTTE_mae =[5.191, 11.963, 1.271, 4.197]
+MTSTAN_mae =[5.130, 11.978, 1.229, 4.167]
+# T_GCN_mae =[5.670292 ,5.675068 ,5.746703 ,5.863256 ,5.888195 ,5.831183]
+# AST_GAT_mae =[5.248924 ,5.258951 ,5.329265 ,5.428566 ,5.421416 ,5.314834]
+# GMAN_mae =[5.233438 ,5.208744 ,5.256062 ,5.329036 ,5.347667 ,5.204790]
+# STGIN_mae =[5.175827 ,5.100160 ,5.149714 ,5.222380 ,5.245451 ,5.150738]
 
-HA_mae =[6.185242 ,6.185242 ,6.185242 ,6.185242 ,6.185242 ,6.185242]
-ARIMA_mae =[5.883667 ,6.046000 ,6.104512 ,6.374540 ,6.360256 ,6.168883]
-LSTM_mae =[5.517776 ,5.632012 ,5.777946 ,5.946635 ,6.041769 ,6.079495]
-Bi_LSTM_mae =[5.524607 ,5.632932 ,5.771882 ,5.954062 ,6.055177 ,6.096319]
-FI_RNNs_mae =[5.520539 ,5.626097 ,5.768340 ,5.932466 ,6.028442 ,6.048296]
-PSPNN_mae =[5.386255 ,5.468801 ,5.567571 ,5.716054 ,5.768782 ,5.749586]
-MDL_mae =[5.429035 ,5.509909 ,5.627575 ,5.784230 ,5.813673 ,5.804645]
-T_GCN_mae =[5.670292 ,5.675068 ,5.746703 ,5.863256 ,5.888195 ,5.831183]
-AST_GAT_mae =[5.248924 ,5.258951 ,5.329265 ,5.428566 ,5.421416 ,5.314834]
-GMAN_mae =[5.233438 ,5.208744 ,5.256062 ,5.329036 ,5.347667 ,5.204790]
-STGIN_mae =[5.175827 ,5.100160 ,5.149714 ,5.222380 ,5.245451 ,5.150738]
-
-HA_rmse = [10.139710,10.139710,10.139710,10.139710,10.139710,10.139710]
-ARIMA_rmse =[9.429440 ,9.798609 ,9.769539 ,10.209594,10.030069,9.769304]
-LSTM_rmse =[9.125115 ,9.284576 ,9.433199 ,9.641906 ,9.626469 ,9.586535]
-Bi_LSTM_rmse =[9.129195 ,9.285857 ,9.423597 ,9.640355 ,9.636107 ,9.591586]
-FI_RNNs_rmse =[9.116093 ,9.267610 ,9.432268 ,9.622239 ,9.603523 ,9.569430]
-PSPNN_rmse =[8.880815 ,9.022358 ,9.145341 ,9.307195 ,9.271415 ,9.167632]
-MDL_rmse =[8.916788 ,9.076988 ,9.176666 ,9.381263 ,9.304234 ,9.256170]
-T_GCN_rmse =[9.134161 ,9.173527 ,9.245162 ,9.387154 ,9.317363 ,9.195807]
-AST_GAT_rmse =[8.705578 ,8.784430 ,8.828416 ,8.943468 ,8.809244 ,8.712925]
-GMAN_rmse =[8.730351 ,8.795372 ,8.797104 ,8.908348 ,8.818618 ,8.598270]
-STGIN_rmse =[8.644908 ,8.640150 ,8.701153 ,8.819650 ,8.724352 ,8.527315]
+DNN_rmse = [28.663, 53.375, 1.679, 28.636]
+CoDriverETA_rmse =[28.630, 53.209, 1.817, 28.724]
+DeepTTE_rmse =[29.718, 53.394, 5.944, 26.512]
+WDR_rmse =[28.666, 53.126, 1.827, 28.687]
+CompactETA_rmse =[28.641, 53.082, 1.620, 28.714]
+CTTE_rmse =[28.617, 53.182, 1.960, 28.486]
+MTSTAN_rmse =[28.615, 53.087, 1.656,28.672]
+# T_GCN_rmse =[9.134161 ,9.173527 ,9.245162 ,9.387154 ,9.317363 ,9.195807]
+# AST_GAT_rmse =[8.705578 ,8.784430 ,8.828416 ,8.943468 ,8.809244 ,8.712925]
+# GMAN_rmse =[8.730351 ,8.795372 ,8.797104 ,8.908348 ,8.818618 ,8.598270]
+# STGIN_rmse =[8.644908 ,8.640150 ,8.701153 ,8.819650 ,8.724352 ,8.527315]
 
 
-HA_mape = [0.126192 ,0.126192 ,0.126192 ,0.126192 ,0.126192 ,0.126192]
-ARIMA_mape =[0.102238 ,0.159162 ,0.130914 ,0.110670 ,0.129478 ,0.131120]
-LSTM_mape =[0.133428 ,0.140966 ,0.126444 ,0.119835 ,0.122028 ,0.134512]
-Bi_LSTM_mape =[0.132028 ,0.140429 ,0.127086 ,0.122740 ,0.127745 ,0.141035]
-FI_RNNs_mape =[0.137907 ,0.144544 ,0.130363 ,0.123199 ,0.129686 ,0.140039]
-PSPNN_mape =[0.130217 ,0.135699 ,0.120082 ,0.114041 ,0.116743 ,0.128589]
-MDL_mape =[0.130555 ,0.134097 ,0.120055 ,0.115990 ,0.117240 ,0.129795]
-T_GCN_mape =[0.138232 ,0.141509 ,0.124293 ,0.118078 ,0.119514 ,0.132048]
-AST_GAT_mape =[0.124102 ,0.128212 ,0.114900 ,0.110572 ,0.110653 ,0.121733]
-GMAN_mape =[0.130036 ,0.131432 ,0.116220 ,0.107743 ,0.111887 ,0.117915]
-STGIN_mape =[0.126175 ,0.127834 ,0.112100 ,0.104818 ,0.108805 ,0.117945]
+DNN_mape = [0.09376, 0.14569, 0.05434, 0.09158]
+CoDriverETA_mape =[0.09414, 0.15145, 0.05980, 0.09077]
+DeepTTE_mape =[0.12104, 0.17635, 0.13182, 0.18333]
+WDR_mape =[0.0925, 0.14720, 0.06171, 0.08989]
+CompactETA_mape =[0.09285, 0.15010, 0.05341, 0.08833]
+CTTE_mape =[0.09384, 0.14335, 0.05195, 0.08942]
+MTSTAN_mape =[0.09190, 0.14592, 0.05386,0.08774]
+# T_GCN_mape =[0.138232 ,0.141509 ,0.124293 ,0.118078 ,0.119514 ,0.132048]
+# AST_GAT_mape =[0.124102 ,0.128212 ,0.114900 ,0.110572 ,0.110653 ,0.121733]
+# GMAN_mape =[0.130036 ,0.131432 ,0.116220 ,0.107743 ,0.111887 ,0.117915]
+# STGIN_mape =[0.126175 ,0.127834 ,0.112100 ,0.104818 ,0.108805 ,0.117945]
 
 font2 = {'family' : 'Times New Roman',
 'weight' : 'normal',
 'size'   : 12.,
 }
-plt.ylabel('Loss(ug/m3)',font2)
 
 font1 = {'family' : 'Times New Roman',
 'weight' : 'normal',
@@ -72,15 +56,28 @@ font1 = {'family' : 'Times New Roman',
 }
 
 
-LSTM = pd.read_csv('results/LSTM.csv',encoding='utf-8').values[108:]
-Bi_LSTM = pd.read_csv('results/BILSTM.csv',encoding='utf-8').values[108:]
-FI_RNNs = pd.read_csv('results/FI-RNN.csv',encoding='utf-8').values[108:]
-GMAN = pd.read_csv('results/GMAN.csv',encoding='utf-8').values[108:]
-STGIN = pd.read_csv('results/STGIN.csv',encoding='utf-8').values
-PSPNN = pd.read_csv('results/PSPNN.csv',encoding='utf-8').values[108:]
-MDL = pd.read_csv('results/MDL.csv',encoding='utf-8').values[108:]
-AST_GAT=pd.read_csv('results/AST-GAT.csv',encoding='utf-8').values[108:]
-T_GCN=pd.read_csv('results/T-GCN.csv',encoding='utf-8').values[108:]
+"""
+用来画红色路段和绿色路段重合部分，行程时间时段上的总的行程轨迹
+"""
+sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+data = pd.read_csv('/Users/guojianzou/Travel-time-prediction/data/statistic/1.csv',encoding='utf-8')
+g=sns.displot(data, x='period', col="Road Name",
+              row_order=['[0, 10)','[10, 20)','[20, 30)','[30, 40)','[40, 50)','[50, 60)','[60, )'])
+g.set_axis_labels('Travel Time Interval (min)',y_var='Total Amount of the Vehicles')
+# g.set_xticklabels(fontsize=12)
+# g.set_yticklabels(fontsize=10)
+plt.show()
+
+
+# LSTM = pd.read_csv('results/LSTM.csv',encoding='utf-8').values[108:]
+# Bi_LSTM = pd.read_csv('results/BILSTM.csv',encoding='utf-8').values[108:]
+# FI_RNNs = pd.read_csv('results/FI-RNN.csv',encoding='utf-8').values[108:]
+# GMAN = pd.read_csv('results/GMAN.csv',encoding='utf-8').values[108:]
+# STGIN = pd.read_csv('results/STGIN.csv',encoding='utf-8').values
+# PSPNN = pd.read_csv('results/PSPNN.csv',encoding='utf-8').values[108:]
+# MDL = pd.read_csv('results/MDL.csv',encoding='utf-8').values[108:]
+# AST_GAT=pd.read_csv('results/AST-GAT.csv',encoding='utf-8').values[108:]
+# T_GCN=pd.read_csv('results/T-GCN.csv',encoding='utf-8').values[108:]
 
 LSTM_pre = []
 LSTM_obs = []
@@ -103,41 +100,41 @@ T_GCN_obs = []
 
 K = 10
 site_num=108
-for i in range(site_num,site_num*K,site_num):
-    LSTM_obs.append(LSTM[i:i+site_num,19:25])
-    LSTM_pre.append(LSTM[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    Bi_LSTM_obs.append(Bi_LSTM[i:i+site_num,19:25])
-    Bi_LSTM_pre.append(Bi_LSTM[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    FI_RNNs_obs.append(FI_RNNs[i:i+site_num,19:25])
-    FI_RNNs_pre.append(FI_RNNs[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    GMAN_obs.append(GMAN[i:i+site_num,19:25])
-    GMAN_pre.append(GMAN[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    STGIN_obs.append(STGIN[i:i+site_num,19:25])
-    STGIN_pre.append(STGIN[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    PSPNN_obs.append(PSPNN[i:i+site_num,19:25])
-    PSPNN_pre.append(PSPNN[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    MDL_obs.append(MDL[i:i+site_num,19:25])
-    MDL_pre.append(MDL[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    AST_GAT_obs.append(AST_GAT[i:i+site_num,19:25])
-    AST_GAT_pre.append(AST_GAT[i:i + site_num, 25:])
-
-for i in range(site_num,site_num*K,site_num):
-    T_GCN_obs.append(T_GCN[i:i+site_num,19:25])
-    T_GCN_pre.append(T_GCN[i:i + site_num, 25:])
+# for i in range(site_num,site_num*K,site_num):
+#     LSTM_obs.append(LSTM[i:i+site_num,19:25])
+#     LSTM_pre.append(LSTM[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     Bi_LSTM_obs.append(Bi_LSTM[i:i+site_num,19:25])
+#     Bi_LSTM_pre.append(Bi_LSTM[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     FI_RNNs_obs.append(FI_RNNs[i:i+site_num,19:25])
+#     FI_RNNs_pre.append(FI_RNNs[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     GMAN_obs.append(GMAN[i:i+site_num,19:25])
+#     GMAN_pre.append(GMAN[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     STGIN_obs.append(STGIN[i:i+site_num,19:25])
+#     STGIN_pre.append(STGIN[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     PSPNN_obs.append(PSPNN[i:i+site_num,19:25])
+#     PSPNN_pre.append(PSPNN[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     MDL_obs.append(MDL[i:i+site_num,19:25])
+#     MDL_pre.append(MDL[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     AST_GAT_obs.append(AST_GAT[i:i+site_num,19:25])
+#     AST_GAT_pre.append(AST_GAT[i:i + site_num, 25:])
+#
+# for i in range(site_num,site_num*K,site_num):
+#     T_GCN_obs.append(T_GCN[i:i+site_num,19:25])
+#     T_GCN_pre.append(T_GCN[i:i + site_num, 25:])
 
 '''
 plt.subplot(3, 1, 1)
@@ -278,7 +275,7 @@ for i in range(8, len(STGIN_pre)):
 
 
 # y=x的拟合可视化图
-# '''
+'''
 # plt.figure()
 plt.subplot(3,3,1)
 plt.scatter(LSTM_obs,LSTM_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'LSTM',linewidths=1)
@@ -379,7 +376,7 @@ plt.xlabel("Observed traffic speed", font2)
 # plt.ylabel("Predicted PM2.5 (μg/m3)", font2)
 plt.legend(loc='upper left',prop=font2)
 plt.show()
-# '''
+'''
 
 
 
@@ -421,15 +418,15 @@ plt.show()
 # 可视化每个模型在MAE，RMSE和MAPE上的一个表现
 '''
 plt.subplot(1,3,1)
-plt.plot(range(1,7,1),LSTM_mae,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),Bi_LSTM_mae,marker='h',color='blue',linestyle='-', linewidth=1,label='Bi-LSTM')
-plt.plot(range(1,7,1),FI_RNNs_mae,marker='o',color='orange',linestyle='-', linewidth=1,label='FI-RNNs')
-plt.plot(range(1,7,1), PSPNN_mae,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_mae,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_mae,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_mae ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_mae,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), STGIN_mae,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
+plt.plot(range(1,5,1),DNN_mae,marker='P',color='red',linestyle='-', linewidth=1,label='DNN')
+plt.plot(range(1,5,1),CoDriverETA_mae,marker='h',color='blue',linestyle='-', linewidth=1,label='CoDriverETA')
+plt.plot(range(1,5,1),DeepTTE_mae,marker='o',color='orange',linestyle='-', linewidth=1,label='DeepTTE')
+plt.plot(range(1,5,1), WDR_mae,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='WDR')
+plt.plot(range(1,5,1), CompactETA_mae,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='CompactETA')
+plt.plot(range(1,5,1),CTTE_mae,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='CTTE')
+plt.plot(range(1,5,1),MTSTAN_mae ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='MT-STAN')
+# plt.plot(range(1,7,1), AST_GAT_mae,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+# plt.plot(range(1,7,1), STGIN_mae,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.ylabel('MAE',font2)
@@ -439,15 +436,15 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 
 plt.subplot(1,3,2)
 # plt.xticks(range(1,8), range(0,31,5))
-plt.plot(range(1,7,1),LSTM_rmse,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),Bi_LSTM_rmse,marker='h',color='blue',linestyle='-', linewidth=1,label='Bi-LSTM')
-plt.plot(range(1,7,1),FI_RNNs_rmse,marker='o',color='orange',linestyle='-', linewidth=1,label='FI-RNNs')
-plt.plot(range(1,7,1), PSPNN_rmse,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_rmse,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_rmse,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_rmse ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_rmse,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), STGIN_rmse,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
+plt.plot(range(1,5,1),DNN_rmse,marker='P',color='red',linestyle='-', linewidth=1,label='DNN')
+plt.plot(range(1,5,1),CoDriverETA_rmse,marker='h',color='blue',linestyle='-', linewidth=1,label='CoDriverETA')
+plt.plot(range(1,5,1),DeepTTE_rmse,marker='o',color='orange',linestyle='-', linewidth=1,label='DeepTTE')
+plt.plot(range(1,5,1), WDR_rmse,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='WDR')
+plt.plot(range(1,5,1), CompactETA_rmse,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='CompactETA')
+plt.plot(range(1,5,1),CTTE_rmse,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='CTTE')
+plt.plot(range(1,5,1),MTSTAN_rmse ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='MT-STAN')
+# plt.plot(range(1,7,1), AST_GAT_rmse,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+# plt.plot(range(1,7,1), STGIN_rmse,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.ylabel('RMSE',font2)
@@ -456,15 +453,15 @@ plt.xlabel('Target time steps',font2)
 plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 
 plt.subplot(1,3,3)
-plt.plot(range(1,7,1),LSTM_mape,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),Bi_LSTM_mape,marker='h',color='blue',linestyle='-', linewidth=1,label='Bi-LSTM')
-plt.plot(range(1,7,1),FI_RNNs_mape,marker='o',color='orange',linestyle='-', linewidth=1,label='FI-RNNs')
-plt.plot(range(1,7,1), PSPNN_mape,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_mape,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_mape,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_mape ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_mape,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), STGIN_mape,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
+plt.plot(range(1,5,1),DNN_mape,marker='P',color='red',linestyle='-', linewidth=1,label='DNN')
+plt.plot(range(1,5,1),CoDriverETA_mape,marker='h',color='blue',linestyle='-', linewidth=1,label='CoDriverETA')
+plt.plot(range(1,5,1),DeepTTE_mape,marker='o',color='orange',linestyle='-', linewidth=1,label='DeepTTE')
+plt.plot(range(1,5,1), WDR_mape,marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='WDR')
+plt.plot(range(1,5,1), CompactETA_mape,marker='p', color='#f504c9',linestyle='-',linewidth=1,label='CompactETA')
+plt.plot(range(1,5,1),CTTE_mape,marker='^',color='#d0c101',linestyle='-', linewidth=1,label='CTTE')
+plt.plot(range(1,5,1),MTSTAN_mape ,marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='MT-STAN')
+# plt.plot(range(1,7,1), AST_GAT_mape,marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+# plt.plot(range(1,7,1), STGIN_mape,marker='X', color='#a55af4',linestyle='-',linewidth=1,label='STGIN')
 plt.ylabel('MAPE',font2)
 plt.xlabel('Target time steps',font2)
 # plt.title('Gantry dataset',font2)
