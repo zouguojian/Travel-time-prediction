@@ -57,7 +57,9 @@ class DataClass(object):
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
         # self.normalization(self.data_tra, [], max_dict=self.max_t, min_dict=self.min_t, is_normalize=self.normalize)  # normalization
 
-    def get_source_data(self,file_path=None):
+        self.vehicle_id_counts = self.get_vehicle_id_counts(self.data_tra.values[:,0]) # store the count of the vehicle id in the dataset
+
+    def get_source_data(self, file_path=None):
         '''
         :return:
         '''
@@ -140,6 +142,7 @@ class DataClass(object):
             array[int(value)]=1
         return array
 
+    """将每个元素映射到对应的index"""
     def get_element_index(self, elements_index = [], elements_field_length=[]):
         '''
         :param elements_index:
@@ -155,6 +158,26 @@ class DataClass(object):
                 else:indexs.append(sum_index + element)
             sum_index += elements_field_length[i]
         return indexs
+
+    """统计每个vehicle id 出现的次数"""
+    def get_vehicle_id_counts(self, data = None):
+        '''
+        :param data:
+        :return: {'宁F2325677':23}
+        '''
+        vehicle_id_counts_dict=dict()
+        for vehicle_ID in data:
+            if vehicle_ID not in vehicle_id_counts_dict:
+                vehicle_id_counts_dict[id] = 1
+            else:vehicle_id_counts_dict[id] += 1
+        return vehicle_id_counts_dict
+
+    """判定测试集上有没有和训练集重复的样本"""
+    def get_appeared(self, vehicle_ID = None):
+        wether_appear = 0
+        if self.vehicle_id_counts[vehicle_ID] ==1:
+            wether_appear=1
+        return wether_appear
 
     def generator(self):
         '''
@@ -222,6 +245,7 @@ class DataClass(object):
                        np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
                        np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), # trajectory 对应的路径 index
                        data_tra[low, 2])     # 每辆车的出发时间
+                       # data_tra[low,0], data_tra[low, 1],
 
                 low += 1
             elif datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S') < data_s[(speed_low + 1) * self.site_num, -1]: low += 1
