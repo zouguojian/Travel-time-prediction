@@ -168,8 +168,8 @@ class DataClass(object):
         vehicle_id_counts_dict=dict()
         for vehicle_ID in data:
             if vehicle_ID not in vehicle_id_counts_dict:
-                vehicle_id_counts_dict[id] = 1
-            else:vehicle_id_counts_dict[id] += 1
+                vehicle_id_counts_dict[vehicle_ID] = 1
+            else:vehicle_id_counts_dict[vehicle_ID] += 1
         return vehicle_id_counts_dict
 
     """判定测试集上有没有和训练集重复的样本"""
@@ -244,8 +244,10 @@ class DataClass(object):
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
                        np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), # trajectory 对应的路径 index
-                       data_tra[low, 2])     # 每辆车的出发时间
-                       # data_tra[low,0], data_tra[low, 1],
+                       data_tra[low, 2],     # 每辆车的出发时间, string类型
+                       data_tra[low,0],      # 真实的车牌号, string类型
+                       data_tra[low, 1],     # 真实的车型, 我们任务中会只考虑小于等于16的车型, int类型
+                       self.get_appeared(vehicle_ID = data_tra[low,0]))  # 测试集中车牌是不是第一次出现, 0表示不是, 1表示是, int类型
 
                 low += 1
             elif datetime.datetime.strptime(data_tra[low, 2], '%Y-%m-%d %H:%M:%S') < data_s[(speed_low + 1) * self.site_num, -1]: low += 1
@@ -281,7 +283,8 @@ class DataClass(object):
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.string))
+                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.string,
+                                                                            tf.string, tf.int32, tf.int32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio))

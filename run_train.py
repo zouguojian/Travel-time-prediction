@@ -5,6 +5,7 @@ import numpy as np
 import os
 import argparse
 import datetime
+import csv
 
 from model.embedding import embedding
 from model.trajectory_inf import STANClass
@@ -188,7 +189,7 @@ class Model(object):
         for i in range(int(iterate.shape_tra[0] * self.divide_ratio) * self.epoch // self.batch_size):
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time, trajectory_inds,_ = self.sess.run(train_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds,_,_,_,_ = self.sess.run(train_next)
 
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
@@ -248,11 +249,20 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
+        # file = open('results/'+str(self.hp.model_name)+'-4'+'.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(['vehicle_id', 'vehicle_type', 'time', 'whether_app', 'pre_sum', 'label_sum'] +
+        #     ['segment_pre_' + str(i) for i in range(self.trajectory_length)]+
+        #                 ['segment_label_' + str(i) for i in range(self.trajectory_length)])
+
         for i in range(int(iterate_test.shape_tra[0] * (1 - self.hp.divide_ratio) - 15 * (
                 self.input_length + self.output_length)) // self.batch_size):
+            """
+            vehicle_id, vehicle_type 这两个变量是index类型的, 即经过映射后的, 和vehicle_id_str, vehicle_type_int不同
+            """
             x_s, week, day, hour, minute, label_s, \
             vehicle_id, vehicle_type, start_week, start_day, start_hour, start_minute, start_second, distances, route_id, \
-            element_index, separate_trajectory_time, total_time, trajectory_inds, dates = self.sess.run(test_next)
+            element_index, separate_trajectory_time, total_time, trajectory_inds, dates, vehicle_id_str, vehicle_type_int, whether_app = self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.input_length, self.site_num, self.feature_s])
             week = np.reshape(week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
@@ -274,13 +284,19 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_s, pre_tra_sep, pre_tra_sum, holistic_weights= self.sess.run((self.pre_s, self.pre_tra_sep, self.pre_tra_sum, self.holistic_weights), feed_dict=feed_dict)
-            print(dates, '\n',pre_tra_sep * 60, separate_trajectory_time * 60)
+            # print(dates, '\n',pre_tra_sep * 60, separate_trajectory_time * 60)
 
             # print(np.min(holistic_weights[0][:,:,0,:]))
             # print('travel time is : ', separate_trajectory_time)
             # print(label_s[:,trajectory_inds[0]])
             # print(dates[0])
             # seaborn(x=holistic_weights[0][:,:,0,:])
+
+            # print([vehicle_id_str[0].decode(), vehicle_type_int, dates[0], whether_app, pre_tra_sum[0], total_time[0]]+
+            #                  list(pre_tra_sep) + list(separate_trajectory_time[0]))
+            #
+            # writer.writerow([vehicle_id_str[0].decode(), vehicle_type_int[0], dates[0], whether_app[0], pre_tra_sum[0,0] * 60, total_time[0,0] * 60]+
+            #                  list(pre_tra_sep[0] * 60) + list(separate_trajectory_time[0] * 60))
 
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra_sum)
