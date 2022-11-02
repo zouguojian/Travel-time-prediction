@@ -19,7 +19,7 @@ dragon_dragon={('78000F', '780011'): 28, ('780011', '780013'): 29, ('780011', '7
                ('790068', '78007D'): 68, ('790068', '79007C'): 69, ('79006A', '790068'): 70, ('79006C', '79006A'): 71,
                ('79007A', '78001D'): 72, ('79007A', '79001C'): 73, ('79007C', '780063'): 74, ('79007C', '790062'): 75,
                ('79007C', '79007A'): 76, ('79007E', '780067'): 77, ('79007E', '79007C'): 78, ('790080', '79007E'): 79}
-route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]
+route = [('780019', '78001B'),('78001B','780079'),('780079','78007B'),('78007B','78007D'),('78007D','78007F')]
 max_road_leangth = 22193.94
 
 class DataClass(object):
@@ -55,6 +55,8 @@ class DataClass(object):
 
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
         # self.normalization(self.data_tra, [], max_dict=self.max_t, min_dict=self.min_t, is_normalize=self.normalize)  # normalization
+
+        self.vehicle_id_counts = self.get_vehicle_id_counts(self.data_tra.values[:,0]) # store the count of the vehicle id in the dataset
 
     def get_source_data(self,file_path=None):
         '''
@@ -155,6 +157,26 @@ class DataClass(object):
             sum_index += elements_field_length[i]
         return indexs
 
+    """统计每个vehicle id 出现的次数"""
+    def get_vehicle_id_counts(self, data = None):
+        '''
+        :param data:
+        :return: {'宁F2325677':23}
+        '''
+        vehicle_id_counts_dict=dict()
+        for vehicle_ID in data:
+            if vehicle_ID not in vehicle_id_counts_dict:
+                vehicle_id_counts_dict[vehicle_ID] = 1
+            else:vehicle_id_counts_dict[vehicle_ID] += 1
+        return vehicle_id_counts_dict
+
+    """判定测试集上有没有和训练集重复的样本"""
+    def get_appeared(self, vehicle_ID = None):
+        wether_appear = 0
+        if self.vehicle_id_counts[vehicle_ID] ==1:
+            wether_appear=1
+        return wether_appear
+
     def generator(self):
         '''
         speed: [length, site num, feature]
@@ -221,7 +243,10 @@ class DataClass(object):
                        np.array([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)], dtype=np.float),                   # separate trajectory time label
                        np.array([sum([data_tra[low, 5 + i * 4] for i in range(self.trajectory_length)])], dtype=np.float),            # total time label
                        np.array([dragon_dragon[tuple] for tuple in route], dtype=np.int), # trajectory 对应的路径 index
-                       data_tra[low, 2])     # 每辆车的出发时间
+                       data_tra[low, 2],     # 每辆车的出发时间, string类型
+                       data_tra[low,0],      # 真实的车牌号, string类型
+                       data_tra[low, 1],     # 真实的车型, 我们任务中会只考虑小于等于16的车型, int类型
+                       self.get_appeared(vehicle_ID = data_tra[low,0]))  # 测试集中车牌是不是第一次出现, 0表示不是, 1表示是, int类型
 
                 low += 1
             elif datetime.datetime.strptime(data_tra[low, 2],'%Y-%m-%d %H:%M:%S') < data_s[(speed_low+1)*self.site_num, -1]:low += 1
@@ -257,7 +282,8 @@ class DataClass(object):
         self.is_training=is_training
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32,  # speed
                                                                             tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32, tf.int32,
-                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.string))
+                                                                            tf.float32, tf.int32, tf.int32, tf.float32, tf.float32, tf.int32, tf.string,
+                                                                            tf.string, tf.int32, tf.int32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_tra[0] * self.divide_ratio))
