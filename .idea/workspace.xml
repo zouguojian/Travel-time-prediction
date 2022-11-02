@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/model/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/model/hyparameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CompactETA/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CompactETA/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CompactETA/model/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CompactETA/model/data_next.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/CompactETA/model/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/CompactETA/model/hyparameter.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +36,7 @@
           <entry key="json" value="10" />
           <entry key="log" value="6" />
           <entry key="md" value="25" />
-          <entry key="py" value="367" />
+          <entry key="py" value="373" />
           <entry key="res" value="5" />
           <entry key="sh" value="2" />
           <entry key="test" value="8" />
@@ -51,14 +50,14 @@
           <entry key="JSON" value="10" />
           <entry key="Markdown" value="25" />
           <entry key="PLAIN_TEXT" value="82" />
-          <entry key="Python" value="367" />
+          <entry key="Python" value="373" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="50" />
           <entry key="md" value="2443" />
-          <entry key="py" value="26174" />
+          <entry key="py" value="26245" />
           <entry key="txt" value="72" />
         </counts>
       </usages-collector>
@@ -67,26 +66,26 @@
           <entry key="JSON" value="50" />
           <entry key="Markdown" value="2443" />
           <entry key="PLAIN_TEXT" value="72" />
-          <entry key="Python" value="26174" />
+          <entry key="Python" value="26245" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="45" column="128" selection-start-line="45" selection-start-column="128" selection-end-line="45" selection-end-column="128" />
+            <state relative-caret-position="73">
+              <caret line="30" column="94" lean-forward="true" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/baseline/CTTE/model/data_next.py">
+        <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
+            <state relative-caret-position="315">
               <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
@@ -95,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/baseline/CTTE/main.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="190" column="99" selection-start-line="190" selection-start-column="99" selection-end-line="190" selection-end-column="99" />
+            <state relative-caret-position="198">
+              <caret line="185" column="99" selection-start-line="185" selection-start-column="99" selection-end-line="185" selection-end-column="99" />
               <folding>
                 <element signature="e#22#45#0" expanded="true" />
               </folding>
@@ -112,7 +111,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="156">
-                <caret line="33" column="25" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="25" />
+                <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="25" />
               </first_editor>
               <second_editor />
             </state>
@@ -123,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/data/routeline.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="124" />
+              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="124" />
             </state>
           </provider>
         </entry>
@@ -165,13 +164,10 @@
         <option value="$PROJECT_DIR$/data/generate_trajectory.py" />
         <option value="$PROJECT_DIR$/model/trajectory_inference.py" />
         <option value="$PROJECT_DIR$/baseline/CompactETA/model/utils.py" />
-        <option value="$PROJECT_DIR$/baseline/CompactETA/model/hyparameter.py" />
         <option value="$PROJECT_DIR$/baseline/CompactETA/model/gat.py" />
-        <option value="$PROJECT_DIR$/baseline/CompactETA/main.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/model/utils.py" />
         <option value="$PROJECT_DIR$/baseline/CompactETA/model/eta_inf.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/model/wdr_inf.py" />
-        <option value="$PROJECT_DIR$/baseline/CompactETA/model/data_next.py" />
         <option value="$PROJECT_DIR$/baseline/WDR/README.md" />
         <option value="$PROJECT_DIR$/baseline/CompactETA/README.md" />
         <option value="$PROJECT_DIR$/baseline/CTTE/node2vec/generateSE.py" />
@@ -186,10 +182,7 @@
         <option value="$PROJECT_DIR$/baseline/CTTE/model/resnet.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/README.md" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/utils.py" />
-        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/wdr_inf.py" />
-        <option value="$PROJECT_DIR$/baseline/CoDriverETA/main.py" />
-        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py" />
         <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/triplet_loss.py" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/main.py" />
@@ -211,12 +204,17 @@
         <option value="$PROJECT_DIR$/baseline/CTTE/model/data_next.py" />
         <option value="$PROJECT_DIR$/baseline/CTTE/main.py" />
         <option value="$PROJECT_DIR$/baseline/CTTE/model/hyparameter.py" />
+        <option value="$PROJECT_DIR$/baseline/CompactETA/model/data_next.py" />
+        <option value="$PROJECT_DIR$/baseline/CompactETA/main.py" />
+        <option value="$PROJECT_DIR$/baseline/CompactETA/model/hyparameter.py" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/main.py" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py" />
+        <option value="$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="60" />
-    <option name="y" value="75" />
+    <option name="y" value="74" />
     <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
@@ -241,13 +239,13 @@
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="CTTE" type="462c0819:PsiDirectoryNode" />
+              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="CTTE" type="462c0819:PsiDirectoryNode" />
+              <item name="CoDriverETA" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -283,49 +281,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (2)">
-    <configuration name="data_next" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Travel-time-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model/data_next.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="experimental_show" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Travel-time-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experimental_show.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.main (4)">
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Travel-time-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -368,6 +324,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main (3)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Travel-time-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/baseline/CompactETA" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/baseline/CompactETA/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (4)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Travel-time-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/baseline/CoDriverETA" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/baseline/CoDriverETA/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Travel-time-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -391,18 +389,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.experimental_show" />
-      <item itemvalue="Python.data_next" />
       <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.main (2)" />
+      <item itemvalue="Python.main (3)" />
+      <item itemvalue="Python.main (4)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main (4)" />
+        <item itemvalue="Python.main (3)" />
         <item itemvalue="Python.main (2)" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.data_next" />
-        <item itemvalue="Python.experimental_show" />
       </list>
     </recent_temporary>
   </component>
@@ -420,14 +418,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="60" y="75" width="1440" height="796" extended-state="0" />
+    <frame x="0" y="74" width="1440" height="796" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.56392044" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39204547" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -445,17 +443,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/trajectory_inference.py" />
-    <entry file="file://$PROJECT_DIR$/baseline/CTTE/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="165">
-            <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CTTE/model/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
@@ -513,16 +500,6 @@
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/lstm.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CompactETA/model/data_next.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="117" selection-start-line="21" selection-start-column="117" selection-end-line="21" selection-end-column="117" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/wdr_inf.py" />
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -541,39 +518,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/wdraux_inf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
           <folding>
             <element signature="e#22#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="33" column="92" lean-forward="true" selection-start-line="33" selection-start-column="92" selection-end-line="33" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -799,27 +749,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/routeline.txt">
+    <entry file="file://$PROJECT_DIR$/baseline/CTTE/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="156">
-            <caret line="33" column="25" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="25" />
-          </first_editor>
-          <second_editor />
+        <state relative-caret-position="97">
+          <caret line="222" selection-start-line="222" selection-end-line="223" selection-end-column="139" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baseline/CTTE/model/data_next.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
+        <state relative-caret-position="163">
+          <caret line="285" column="76" selection-start-line="285" selection-start-column="76" selection-end-line="285" selection-end-column="105" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
@@ -833,13 +776,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CTTE/main.py">
+    <entry file="file://$PROJECT_DIR$/baseline/CompactETA/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="190" column="99" selection-start-line="190" selection-start-column="99" selection-end-line="190" selection-end-column="99" />
+        <state relative-caret-position="-28">
+          <caret line="189" column="56" lean-forward="true" selection-start-line="189" selection-start-column="56" selection-end-line="189" selection-end-column="56" />
           <folding>
             <element signature="e#22#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CompactETA/model/data_next.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="286" column="76" selection-start-line="286" selection-start-column="76" selection-end-line="286" selection-end-column="105" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CompactETA/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="87" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/routeline.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="156">
+            <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="25" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/data_next.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="110" selection-start-line="21" selection-start-column="110" selection-end-line="21" selection-end-column="110" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="185" column="99" selection-start-line="185" selection-start-column="99" selection-end-line="185" selection-end-column="99" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="30" column="94" lean-forward="true" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
         </state>
       </provider>
     </entry>
