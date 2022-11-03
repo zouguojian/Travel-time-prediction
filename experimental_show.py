@@ -59,6 +59,7 @@ font1 = {'family' : 'Times New Roman',
 """
 用来画红色路段和绿色路段重合部分，行程时间时段上的总的行程轨迹
 """
+'''
 sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
 data = pd.read_csv('/Users/guojianzou/Travel-time-prediction/data/statistic/1.csv',encoding='utf-8')
 g=sns.displot(data, x='period', col="Road Name",
@@ -67,74 +68,111 @@ g.set_axis_labels('Travel Time Interval (min)',y_var='Total Amount of the Vehicl
 # g.set_xticklabels(fontsize=12)
 # g.set_yticklabels(fontsize=10)
 plt.show()
+'''
 
 
-# LSTM = pd.read_csv('results/LSTM.csv',encoding='utf-8').values[108:]
-# Bi_LSTM = pd.read_csv('results/BILSTM.csv',encoding='utf-8').values[108:]
-# FI_RNNs = pd.read_csv('results/FI-RNN.csv',encoding='utf-8').values[108:]
-# GMAN = pd.read_csv('results/GMAN.csv',encoding='utf-8').values[108:]
-# STGIN = pd.read_csv('results/STGIN.csv',encoding='utf-8').values
-# PSPNN = pd.read_csv('results/PSPNN.csv',encoding='utf-8').values[108:]
-# MDL = pd.read_csv('results/MDL.csv',encoding='utf-8').values[108:]
-# AST_GAT=pd.read_csv('results/AST-GAT.csv',encoding='utf-8').values[108:]
-# T_GCN=pd.read_csv('results/T-GCN.csv',encoding='utf-8').values[108:]
+CoDriverETA = pd.read_csv('results/CoDriverETA-1.csv',encoding='utf-8')
+WDR= pd.read_csv('results/WDR-1.csv',encoding='utf-8')
+CompactETA = pd.read_csv('results/CompactETA-4.csv',encoding='utf-8')
+CTTE= pd.read_csv('results/CTTE-4.csv',encoding='utf-8')
+MT_STAN = pd.read_csv('results/MT-STAN-1.csv',encoding='utf-8')
 
-LSTM_pre = []
-LSTM_obs = []
-Bi_LSTM_pre = []
-Bi_LSTM_obs = []
-FI_RNNs_pre = []
-FI_RNNs_obs = []
-GMAN_pre = []
-GMAN_obs = []
-STGIN_pre = []
-STGIN_obs = []
-PSPNN_pre = []
-PSPNN_obs = []
-MDL_pre = []
-MDL_obs = []
-AST_GAT_pre = []
-AST_GAT_obs = []
-T_GCN_pre = []
-T_GCN_obs = []
 
-K = 10
-site_num=108
-# for i in range(site_num,site_num*K,site_num):
-#     LSTM_obs.append(LSTM[i:i+site_num,19:25])
-#     LSTM_pre.append(LSTM[i:i + site_num, 25:])
+"""研究每条路上不同车辆对行程时间的影响，以及确定我们的模型在每条路上的实际拟合情况，在第一个数据集上"""
+# '''
+MT_STAN = MT_STAN[(MT_STAN['label_sum']<50)]
+# g=sns.jointplot(x="vehicle type", y="label_sum", data=MT_STAN, hue='first appear')
+# g.set_axis_labels(xlabel='Vehicle Type', ylabel='Observed Individual Travel Time (min)')
+# plt.show()
 #
-# for i in range(site_num,site_num*K,site_num):
-#     Bi_LSTM_obs.append(Bi_LSTM[i:i+site_num,19:25])
-#     Bi_LSTM_pre.append(Bi_LSTM[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     FI_RNNs_obs.append(FI_RNNs[i:i+site_num,19:25])
-#     FI_RNNs_pre.append(FI_RNNs[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     GMAN_obs.append(GMAN[i:i+site_num,19:25])
-#     GMAN_pre.append(GMAN[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     STGIN_obs.append(STGIN[i:i+site_num,19:25])
-#     STGIN_pre.append(STGIN[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     PSPNN_obs.append(PSPNN[i:i+site_num,19:25])
-#     PSPNN_pre.append(PSPNN[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     MDL_obs.append(MDL[i:i+site_num,19:25])
-#     MDL_pre.append(MDL[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     AST_GAT_obs.append(AST_GAT[i:i+site_num,19:25])
-#     AST_GAT_pre.append(AST_GAT[i:i + site_num, 25:])
-#
-# for i in range(site_num,site_num*K,site_num):
-#     T_GCN_obs.append(T_GCN[i:i+site_num,19:25])
-#     T_GCN_pre.append(T_GCN[i:i + site_num, 25:])
+# MT_STAN = MT_STAN[((MT_STAN['vehicle type']==1)|(MT_STAN['vehicle type']==11)|
+#                   (MT_STAN['vehicle type']==12)|(MT_STAN['vehicle type']==13)|
+#                   (MT_STAN['vehicle type']==14)|(MT_STAN['vehicle type']==16))]
+
+sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+# data=MT_STAN.query('label_sum<100')
+# 用以表示在训练集中的出现过的ID和没出现过的ID，他们在测试集上的预测表现
+for i in range(5):
+    # “scatter” | “kde” | “hist” | “hex” | “reg” | “resid”
+    g=sns.jointplot(x="segment_label_"+str(i), y="segment_pre_"+str(i), data=MT_STAN, hue='first appear')
+    # g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+    g.set_axis_labels(xlabel='Observed Individual Travel Time (min)', ylabel='Predicted Individual Travel Time (min)')
+    plt.show()
+# '''
+
+
+"""实现展示模型的拟合情况, 在第四个数据集上G20"""
+'''
+CompactETA = CompactETA[(CompactETA['label_sum']<55)]
+CTTE = CTTE[(CTTE['label_sum']<55)]
+MT_STAN = MT_STAN[(MT_STAN['label_sum']<55)]
+sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+# f, (ax1) = plt.subplots(nrows=1,ncols=3)
+CompactETA.rename(columns={'label_sum':'Observed Individual Travel Time (min)','pre_sum':'Predicted Individual Travel Time (min)'},inplace=True)
+CTTE.rename(columns={'label_sum':'Observed Individual Travel Time (min)','pre_sum':'Predicted Individual Travel Time (min)'},inplace=True)
+MT_STAN.rename(columns={'label_sum':'Observed Individual Travel Time (min)','pre_sum':'Predicted Individual Travel Time (min)'},inplace=True)
+# sns.regplot(x="Observed Individual Travel Time (min)", y="Predicted Individual Travel Time (min)", data=CompactETA, color='#969696',label='CompactETA')
+# sns.regplot(x="Observed Individual Travel Time (min)", y="Predicted Individual Travel Time (min)", data=CTTE, color='#969696',label='CTTE')
+sns.regplot(x="Observed Individual Travel Time (min)", y="Predicted Individual Travel Time (min)", data=MT_STAN, color='#969696',label='MT-STAN')
+plt.ylim(10,35)
+plt.legend(loc='upper left')
+plt.show()
+'''
+
+
+"""研究车型、稀疏性对预测的影响，在第一个数据集上"""
+'''
+MT_STAN = MT_STAN[(MT_STAN['label_sum']<50)]
+
+# 这个用来可视化车型和真实行程时间之间的关系
+# g=sns.jointplot(x="vehicle type", y="label_sum", data=MT_STAN, hue='first appear')
+# g.set_axis_labels(xlabel='Vehicle Type', ylabel='Observed Individual Travel Time (min)')
+# plt.show()
+
+MT_STAN = MT_STAN[((MT_STAN['vehicle type']==1)|(MT_STAN['vehicle type']==11)|
+                  (MT_STAN['vehicle type']==12)|(MT_STAN['vehicle type']==13)|
+                  (MT_STAN['vehicle type']==14)|(MT_STAN['vehicle type']==16))&(MT_STAN['first appear']==1)]
+
+sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+# data=MT_STAN.query('label_sum<100')
+# 用以表示在训练集中的出现过的ID和没出现过的ID，他们在测试集上的预测表现
+g=sns.jointplot(x="label_sum", y="pre_sum", data=MT_STAN, hue='vehicle type')
+g.set_axis_labels(xlabel='Observed Individual Travel Time (min)', ylabel='Predicted Individual Travel Time (min)')
+plt.show()
+'''
+
+"""实现展示模型的拟合情况，最后我们论文中使用的这个图，在第4个数据集上"""
+'''
+# plt.figure()
+CompactETA = CompactETA[(CompactETA['label_sum']<50)]
+CTTE = CTTE[(CTTE['label_sum']<50)]
+MT_STAN = MT_STAN[(MT_STAN['label_sum']<50)]
+plt.subplot(1,3,1)
+plt.scatter(CompactETA['label_sum'], CompactETA['pre_sum'],alpha=0.7,color='#969696',edgecolor = "black",marker='o',label=u'CompactETA',linewidths=1)
+a=[i for i in range(12, 35)]
+b=[i for i in range(12, 35)]
+plt.plot(a,b,'black',linewidth=2)
+#设置横纵坐标的名称以及对应字体格式
+plt.xlabel("Observed Individual Travel Time (min)", font2)
+plt.ylabel("Predicted Individual Travel Time (min)", font2)
+plt.legend(loc='upper left',prop=font2)
+
+plt.subplot(1,3,2)
+plt.scatter(CTTE['label_sum'], CTTE['pre_sum'],alpha=0.7,color='#969696',edgecolor = "black",marker='o',label=u'CTTE',linewidths=1)
+plt.plot(a,b,'black',linewidth=2)
+plt.xlabel("Observed Individual Travel Time (min)", font2)
+
+plt.legend(loc='upper left',prop=font2)
+plt.subplot(1,3,3)
+plt.scatter(MT_STAN['label_sum'], MT_STAN['pre_sum'],alpha=0.7,color='#969696',edgecolor = "black",marker='o',label=u'MT-STAN',linewidths=1)
+plt.plot(a,b,'black',linewidth=2)
+# plt.title("Gantry dataset", font2)
+#设置横纵坐标的名称以及对应字体格式
+plt.xlabel("Observed Individual Travel Time (min)", font2)
+plt.legend(loc='upper left',prop=font2)
+plt.show()
+'''
+
 
 '''
 plt.subplot(3, 1, 1)
@@ -186,7 +224,6 @@ plt.plot(range(1, 7), T_GCN_pre[i][j], marker='d', color='#ff5b00', label=u'T-GC
 # plt.xlabel("Target time steps", font2)
 plt.ylabel("Taffic speed", font1)
 plt.title("Road segment 3", font1)
-
 plt.show()
 '''
 
@@ -271,112 +308,6 @@ for i in range(8, len(STGIN_pre)):
 # plt.xlabel("Target time steps", font2)
 # # plt.ylabel("Taffic flow", font2)
 # plt.title("Exit toll dataset (sample 2)", font2)
-
-
-
-# y=x的拟合可视化图
-'''
-# plt.figure()
-plt.subplot(3,3,1)
-plt.scatter(LSTM_obs,LSTM_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'LSTM',linewidths=1)
-a=[i for i in range(150)]
-b=[i for i in range(150)]
-plt.plot(a,b,'black',linewidth=2)
-#plt.scatter(a, b)
-#plt.plot(test_y_out,'r*:',label=u'predicted value')
-# plt.title("Entrance tall dataset", font2)
-#设置横纵坐标的名称以及对应字体格式
-# plt.xlabel("Observed PM2.5 (ug/m3)", font2)
-plt.ylabel("Predicted traffic spedd", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,2)
-plt.scatter(Bi_LSTM_obs,Bi_LSTM_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'Bi-LSTM',linewidths=1)
-a=[i for i in range(150)]
-b=[i for i in range(150)]
-plt.plot(a,b,'black',linewidth=2)
-#plt.scatter(a, b)
-#plt.plot(test_y_out,'r*:',label=u'predicted value')
-# plt.title("Entrance tall dataset", font2)
-#设置横纵坐标的名称以及对应字体格式
-# plt.xlabel("Observed PM2.5 (ug/m3)", font2)
-# plt.ylabel("Predicted traffic spedd", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,3)
-plt.scatter(FI_RNNs_obs,FI_RNNs_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'FI-RNNs',linewidths=1)
-a=[i for i in range(150)]
-b=[i for i in range(150)]
-plt.plot(a,b,'black',linewidth=2)
-#plt.scatter(a, b)
-#plt.plot(test_y_out,'r*:',label=u'predicted value')
-# plt.title("Entrance tall dataset", font2)
-#设置横纵坐标的名称以及对应字体格式
-# plt.xlabel("Observed PM2.5 (ug/m3)", font2)
-# plt.ylabel("Predicted traffic spedd", font2)
-plt.legend(loc='upper left',prop=font2)
-
-
-
-plt.subplot(3,3,4)
-plt.scatter(PSPNN_obs,PSPNN_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'PSPNN',linewidths=1)
-a=[i for i in range(150)]
-b=[i for i in range(150)]
-plt.plot(a,b,'black',linewidth=2)
-#plt.scatter(a, b)
-#plt.plot(test_y_out,'r*:',label=u'predicted value')
-# plt.title("Entrance tall dataset", font2)
-#设置横纵坐标的名称以及对应字体格式
-# plt.xlabel("Observed PM2.5 (ug/m3)", font2)
-plt.ylabel("Predicted traffic spedd", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,5)
-plt.scatter(MDL_obs,MDL_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'MDL',linewidths=1)
-plt.plot(a,b,'black',linewidth=2)
-#plt.scatter(a, b)
-#plt.plot(test_y_out,'r*:',label=u'predicted value')
-# plt.title("Exit tall dataset", font2)
-# plt.xlabel("Observed PM2.5 (μg/m3)", font2)
-# plt.ylabel("Predicted PM2.5 (μg/m3)", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,6)
-plt.scatter(T_GCN_obs,T_GCN_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'T-GCN',linewidths=1)
-c=[i for i in range(150)]
-d=[i for i in range(150)]
-plt.plot(c,d,'black',linewidth=2)
-# plt.title("Gantry dataset", font2)
-#设置横纵坐标的名称以及对应字体格式
-# plt.xlabel("Observed PM2.5 (μg/m3)", font2)
-# plt.ylabel("Predicted PM2.5 (μg/m3)", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,7)
-plt.scatter(AST_GAT_obs,AST_GAT_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'AST-GAT',linewidths=1)
-plt.plot(a,b,'black',linewidth=2)
-#设置横纵坐标的名称以及对应字体格式
-plt.xlabel("Observed traffic speed", font2)
-plt.ylabel("Predicted traffic speed", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,8)
-plt.scatter(GMAN_obs,GMAN_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'GMAN',linewidths=1)
-plt.plot(a,b,'black',linewidth=2)
-#设置横纵坐标的名称以及对应字体格式
-plt.xlabel("Observed traffic speed", font2)
-# plt.ylabel("Predicted PM2.5 (μg/m3)", font2)
-plt.legend(loc='upper left',prop=font2)
-
-plt.subplot(3,3,9)
-plt.scatter(STGIN_obs,STGIN_pre,alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'STGIN',linewidths=1)
-plt.plot(c,d,'black',linewidth=2)
-#设置横纵坐标的名称以及对应字体格式
-plt.xlabel("Observed traffic speed", font2)
-# plt.ylabel("Predicted PM2.5 (μg/m3)", font2)
-plt.legend(loc='upper left',prop=font2)
-plt.show()
-'''
 
 
 

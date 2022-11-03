@@ -19,7 +19,7 @@ dragon_dragon={('78000F', '780011'): 28, ('780011', '780013'): 29, ('780011', '7
                ('790068', '78007D'): 68, ('790068', '79007C'): 69, ('79006A', '790068'): 70, ('79006C', '79006A'): 71,
                ('79007A', '78001D'): 72, ('79007A', '79001C'): 73, ('79007C', '780063'): 74, ('79007C', '790062'): 75,
                ('79007C', '79007A'): 76, ('79007E', '780067'): 77, ('79007E', '79007C'): 78, ('790080', '79007E'): 79}
-route = [('780019', '78001B'),('78001B','780079'),('780079','78007B'),('78007B','78007D'),('78007D','78007F')]
+route = [('780019', '78001B'),('78001B', '78001D'), ('78001D', '78001F'), ('78001F', '780021'), ('780021', '780023')]
 
 max_road_leangth = 22193.94
 
@@ -57,7 +57,7 @@ class DataClass(object):
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
         # self.normalization(self.data_tra, [], max_dict=self.max_t, min_dict=self.min_t, is_normalize=self.normalize)  # normalization
 
-        self.vehicle_id_counts = self.get_vehicle_id_counts(self.data_tra.values[:,0]) # store the count of the vehicle id in the dataset
+        self.vehicle_id_counts = self.get_vehicle_id_counts(self.data_tra.values[: int(self.shape_tra[0] * self.divide_ratio),0]) # store the count of the vehicle id in the dataset
 
     def get_source_data(self, file_path=None):
         '''
@@ -175,7 +175,7 @@ class DataClass(object):
     """判定测试集上有没有和训练集重复的样本"""
     def get_appeared(self, vehicle_ID = None):
         wether_appear = 0
-        if self.vehicle_id_counts[vehicle_ID] ==1:
+        if vehicle_ID not in self.vehicle_id_counts:
             wether_appear=1
         return wether_appear
 
