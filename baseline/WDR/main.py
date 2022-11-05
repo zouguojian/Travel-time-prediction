@@ -178,9 +178,9 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
-        file = open('/Users/guojianzou/Travel-time-prediction/results/'+str(self.hp.model_name)+'-4'+'.csv', 'w', encoding='utf-8')
-        writer = csv.writer(file)
-        writer.writerow(['vehicle_id', 'vehicle_type', 'time', 'whether_app', 'pre_sum', 'label_sum'])
+        # file = open('/Users/guojianzou/Travel-time-prediction/results/'+str(self.hp.model_name)+'-4'+'.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(['vehicle_id', 'vehicle_type', 'time', 'whether_app', 'pre_sum', 'label_sum'])
 
         for i in range(int(iterate_test.shape_tra[0] * (1 - self.hp.divide_ratio) - 15 * (
                 self.input_length + self.output_length)) // self.batch_size):
@@ -208,10 +208,11 @@ class Model(object):
                                             placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             y_wdr = self.sess.run((self.y_wdr), feed_dict=feed_dict)
+            print(y_wdr[0,0] * 60, total_time[0,0] * 60)
 
 
-            print([vehicle_id_str[0].decode(), vehicle_type_int, dates[0], whether_app, y_wdr[0], total_time[0]])
-            writer.writerow([vehicle_id_str[0].decode(), vehicle_type_int[0], dates[0], whether_app[0], y_wdr[0,0] * 60, total_time[0,0] * 60])
+            # print([vehicle_id_str[0].decode(), vehicle_type_int, dates[0], whether_app, y_wdr[0], total_time[0]])
+            # writer.writerow([vehicle_id_str[0].decode(), vehicle_type_int[0], dates[0], whether_app[0], y_wdr[0,0] * 60, total_time[0,0] * 60])
 
             # print(dates, pre_tra_sum * 60, total_time * 60)
             label_tra_sum_list.append(total_time)
