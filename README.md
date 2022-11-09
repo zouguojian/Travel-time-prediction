@@ -44,8 +44,8 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 # Experimental Results
 
 
-|Beijing-Lhasa (G6_1)|  Beijing-Lhasa (G6_2) |  Yinchuan-Kunming (G85)	|
-|  ----              |  ----                 |  ----                    |
+|Fuyin Expressway (G70)|  Jingzang Expressway (G6) |  YinKun Expressway (G85)	|
+|  ----                |  ----                     |  ----                      |
 
 |Model           |MAE	   | RMSE	 |MAPE     |MAE	     | RMSE	   |MAPE     |MAE	   | RMSE	 |MAPE    |
 |  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |----     |----    |
@@ -61,8 +61,8 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |MT-STAN	     |5.130    |28.615	 |9.190%   |11.978	 |53.087   |14.592%	 |1.229	   |1.656	 |5.386%  |
 
 
-|Tsingtao-Yinchuan (G20)	|
-|  ----          |
+|Qingyin Expressway (G20)|
+|  ----                  |
 
 |Model           |MAE	   | RMSE	 |MAPE     |
 |  ----          | ----    |  ----   |  ----   |
