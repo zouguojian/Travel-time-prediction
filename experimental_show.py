@@ -60,10 +60,10 @@ font1 = {'family' : 'Times New Roman',
 用来画红色路段和绿色路段重合部分，行程时间时段上的总的行程轨迹
 """
 '''
-sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+sns.set_theme(style='ticks', font_scale=1.3,font='Times New Roman')
 data = pd.read_csv('/Users/guojianzou/Travel-time-prediction/data/statistic/1.csv',encoding='utf-8')
 g=sns.displot(data, x='period', col="Road Name",
-              row_order=['[0, 10)','[10, 20)','[20, 30)','[30, 40)','[40, 50)','[50, 60)','[60, )'])
+              row_order=['[0, 10)','[10, 20)','[20, 30)','[30, 40)','[40, 50)','[50, 60)','[60, )'],)
 g.set_axis_labels('Travel Time Interval (min)',y_var='Total Amount of the Vehicles')
 # g.set_xticklabels(fontsize=12)
 # g.set_yticklabels(fontsize=10)
@@ -89,7 +89,7 @@ MT_STAN = MT_STAN[(MT_STAN['label_sum']<50)]
 #                   (MT_STAN['vehicle type']==12)|(MT_STAN['vehicle type']==13)|
 #                   (MT_STAN['vehicle type']==14)|(MT_STAN['vehicle type']==16))]
 
-sns.set_theme(style='ticks', font_scale=1.,font='Times New Roman')
+sns.set_theme(style='ticks', font_scale=1.3,font='Times New Roman')
 # data=MT_STAN.query('label_sum<100')
 # 用以表示在训练集中的出现过的ID和没出现过的ID，他们在测试集上的预测表现
 for i in range(5):

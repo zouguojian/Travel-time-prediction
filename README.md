@@ -82,3 +82,16 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 
 * 车型分类如下
 >1-一型客车; 2-二型客车; 3-三型客车; 4-四型客车; 11-一型货车; 12-二型货车; 13-三型货车; 14-四型货车; 15-五型货车; 16-六型货车; 21-一型专项作业车; 22-二型专项作业车; 23-三型专项作业车; 24-四型专项作业车; 25-五型专项作业车; 26-六型专项作业车
+|Vehicle Type            |definition	   |
+|  ----          | ----    | 
+|1类客车	         |车长小于 6000mm且核定载人数不大于9人的载客汽车
+注意：摩托车通行收费公路按１类客车分类	   |
+|CoDriver ETA	 |4.236	   |
+|DeepTTE	     |5.524	   |
+|DWR	         |4.212	   |
+|CompactETA	     |4.193	   |
+|CTTE	         |4.197	   |
+|Cross-network	 |4.222	   |
+|No-Holistic	 |4.179	   |
+|No-Multi-Task	 |4.181	   |
+|MT-STAN	     |4.167	   |
