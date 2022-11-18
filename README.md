@@ -78,11 +78,11 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |MT-STAN	     |4.167	   |28.672	 |8.774%   |
 
 
-# Vehicle Type [standard](http://jt.hlj.gov.cn/gip/ewebeditor/uploadfile/20201106155214231.pdf)
+# Vehicle Type (-[standard](http://jt.hlj.gov.cn/gip/ewebeditor/uploadfile/20201106155214231.pdf))
 
 * 车型分类如下  
 
-|Vehicle Type |definition	   |
+|Vehicle Type |Definition	   |
 |  ----       | ----    | 
 |1类客车(1-一型客车)	   |车长小于 6000mm且核定载人数不大于9人的载客汽车 注意，摩托车通行收费公路按１类客车分类|
 |2类客车(2-二型客车)	   |核载人数10-19人 车长小于 6000mm且核定载人数为(10-19)人的载客汽车                |
