@@ -78,25 +78,25 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |MT-STAN	     |4.167	   |28.672	 |8.774%   |
 
 
-# Vehicle Type (-[standard](http://jt.hlj.gov.cn/gip/ewebeditor/uploadfile/20201106155214231.pdf))
+# Vehicle Type (-[standard-link](http://jt.hlj.gov.cn/gip/ewebeditor/uploadfile/20201106155214231.pdf))
 
 * 车型分类如下  
 
 |Vehicle Type |Definition	   |
 |  ----       | ----    | 
-|1类客车(1-一型客车)	   |车长小于 6000mm且核定载人数不大于9人的载客汽车 注意，摩托车通行收费公路按１类客车分类|
-|2类客车(2-二型客车)	   |核载人数10-19人 车长小于 6000mm且核定载人数为(10-19)人的载客汽车                |
-|3类客车(3-三型客车)	   |核载人数≤39人 车长不小于6000mm且核定载人数不大于 39人的载客汽车                  |
-|4类客车(4-四型客车)	   |核载人数≥40人 车长不小于6000mm且核定载人数不小于40人的载客汽车	                 |
-|1类货车(11-一型货车)	   |总轴数为(含悬浮轴)2 车长小于6000mm且最大允 许总质量小于4500kg      |
-|2类货车(12-二型货车)	   |总轴数(含悬浮轴)为2 车长小于6000mm且最大允 许总质量小于4500kg	   |
-|3类货车(13-三型货车)	   |总轴数(含悬浮轴)为3	|
-|4类货车(14-四型货车)	   |总轴数(含悬浮轴)为4	|
-|5类货车(15-五型货车)	   |总轴数(含悬浮轴)为5   |
-|6类货车(16-六型货车)	   |总轴数(含悬浮轴)为6   |
-|1类专项作业车(21-一型专项作业车)	   |总轴数(含悬浮轴)为2轴 车长小于6000mm且最大允许总质量小于4500kg      |
-|2类专项作业车(22-二型专项作业车)	   |总轴数(含悬浮轴)为2轴 车长不小于6000mm且最大允许总质量不小于4500kg   |
-|3类专项作业车(23-三型专项作业车)	   |总轴数(含悬浮轴)为3   |
-|4类专项作业车(24-四型专项作业车)	   |总轴数(含悬浮轴)为4	  |
-|5类专项作业车(25-五型专项作业车)	   |总轴数(含悬浮轴)为5   |
-|6类专项作业车(26-六型专项作业车)	   |6类专项作业车的总轴数（含悬浮轴）不小于6轴，大于或等于6轴   |
+|1类客车(1-一型客车)	   |Passenger cars that a length is less than 6000 mm and a seating capacity is no more than 9 people        |
+|2类客车(2-二型客车)	   |Passenger cars that a length is less than 6000 mm and a seating capacity is 10-19 people                 |
+|3类客车(3-三型客车)	   |Passenger cars that a length is no less than 6000 mm and a seating capacity is no more than 39 people    |
+|4类客车(4-四型客车)	   |Passenger cars that the length is no less than 6000 mm and a seating capacity is no more than 40 people	 |
+|1类货车(11-一型货车)	   |Truck that the number of suspension shaft is 2, and the length is less than 6000 mm, and the total weight is not less than 4500kg  |
+|2类货车(12-二型货车)	   |Truck that the number of suspension shaft is 2, and the length is less than 6000 mm, or the total weight is not less than 4500kg	   |
+|3类货车(13-三型货车)	   |Truck that the number of suspension shaft is 3|
+|4类货车(14-四型货车)	   |Truck that the number of suspension shaft is 4|
+|5类货车(15-五型货车)	   |Truck that the number of suspension shaft is 5|
+|6类货车(16-六型货车)	   |Truck that the number of suspension shaft is 6|
+|1类专项作业车(21-一型专项作业车)	   |Operation Van that the number of suspension shaft is 2, and the length is less than 6000 mm, and the total weight is not less than 4500kg |
+|2类专项作业车(22-二型专项作业车)	   |Operation Van that the number of suspension shaft is 2, and the length is less than 6000 mm, or the total weight is not less than 4500kg |
+|3类专项作业车(23-三型专项作业车)	   |Operation Van that the number of suspension shaft is 3|
+|4类专项作业车(24-四型专项作业车)	   |Operation Van that the number of suspension shaft is 4|
+|5类专项作业车(25-五型专项作业车)	   |Operation Van that the number of suspension shaft is 5|
+|6类专项作业车(26-六型专项作业车)	   |Operation Van that the number of suspension shaft is no less than 6|
