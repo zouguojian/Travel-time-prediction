@@ -3,11 +3,11 @@ import tensorflow as tf
 from model.temporal_attention import TemporalTransformer
 
 
+
 class STANClass(object):
     """
     Deep FM with FTRL optimization
     """
-
     def __init__(self, hp):
         """
         :param config: configuration of hyperparameters
@@ -37,7 +37,6 @@ class STANClass(object):
         :return: labels for each sample
         '''
         v = tf.Variable(tf.truncated_normal(shape=[self.p, self.k], mean=0, stddev=0.01), dtype='float32')
-        # p 总的轨迹数据元素长度
 
         # Factorization Machine
         if self.hp.model_name == 'DNN':
@@ -58,7 +57,6 @@ class STANClass(object):
                 # output layer
                 y_fm = tf.layers.dense(y_hidden_l3, units=1, activation=tf.nn.relu,
                                               kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
-
         else:
             with tf.variable_scope('FM', reuse=False):
                 b = tf.get_variable('bias', shape=[1],
@@ -105,6 +103,9 @@ class STANClass(object):
             hiddens = tf.reshape(hiddens, shape=[-1, self.output_length + self.input_length, self.emb_size])
             x_trajectory_separate = tf.reshape(x_trajectory_separate, [-1, 1, self.k])
 
+            """using for ITTE，none of traffic speed prediction and holistic attention models"""
+            # x_trajectory_separate_copy = x_trajectory_separate
+
             if self.hp.model_name=='Hatt':
                 x_trajectory_separate = hiddens[:, self.input_length-1:self.input_length] + x_trajectory_separate
             else:
@@ -146,5 +147,21 @@ class STANClass(object):
                 y_out_2 = tf.layers.dense(y_out_2, units=32, activation=tf.nn.relu,
                                           kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
                 y_out_2 = tf.layers.dense(y_out_2, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+
+            # if self.hp.model_name == 'FM':
+            #     """ITTE，none of traffic speed prediction and holistic attention models"""
+            #     x_trajectory_separate_copy = tf.reshape(x_trajectory_separate_copy, [-1, self.trajectory_length, self.k])
+            #     trajectory_sum = tf.layers.conv1d(inputs=x_trajectory_separate_copy,
+            #                                         filters=self.emb_size,
+            #                                         kernel_size=3,
+            #                                         padding='VALID',
+            #                                         kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
+            #                                         name='conv_2', strides=2)
+            #     y_out_3 = tf.reduce_sum(trajectory_sum, axis=1) # (N, 64)
+            #     y_out_3 = tf.layers.dense(y_out_3, units=self.k, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            #     y_out_3 = tf.layers.dense(y_out_3, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            #     y_fm = tf.concat([y_out_3, y_fm], axis=-1)
+            #     y_fm = tf.layers.dense(y_fm, units=32, activation=tf.nn.relu, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
+            #     y_fm = tf.layers.dense(y_fm, units=1, kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
 
         return y_out_1, y_out_2, y_fm

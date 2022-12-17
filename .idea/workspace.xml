@@ -3,8 +3,60 @@
   <component name="ChangeListManager">
     <list default="true" id="3c684b58-d104-4ee7-a4fd-501e3521e140" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/WDR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/WDR/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experimental_show.py" beforeDir="false" afterPath="$PROJECT_DIR$/experimental_show.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/28.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/29.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/30.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/31.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/32.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/33.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/34.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/35.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/36.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/37.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/38.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/39.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/40.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/41.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/42.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/43.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/44.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/45.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/46.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/47.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/48.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/49.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/50.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/51.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/52.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/53.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/54.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/55.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/56.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/57.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/58.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/59.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/60.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/61.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/62.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/63.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/64.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/65.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/66.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/67.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/68.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/69.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/70.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/71.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/72.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/73.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/74.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/75.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/76.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/77.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/78.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_list/79.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/trajectory_inf.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/trajectory_inf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/MT-STAN-1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/MT-STAN-1.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,12 +72,12 @@
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.4" value="8" />
+          <entry key="project.open.time.4" value="9" />
           <entry key="project.open.time.5" value="4" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -33,8 +85,8 @@
           <entry key="csv" value="33" />
           <entry key="json" value="10" />
           <entry key="log" value="6" />
-          <entry key="md" value="25" />
-          <entry key="py" value="396" />
+          <entry key="md" value="26" />
+          <entry key="py" value="403" />
           <entry key="res" value="5" />
           <entry key="sh" value="2" />
           <entry key="test" value="8" />
@@ -46,9 +98,9 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="10" />
-          <entry key="Markdown" value="25" />
+          <entry key="Markdown" value="26" />
           <entry key="PLAIN_TEXT" value="86" />
-          <entry key="Python" value="396" />
+          <entry key="Python" value="403" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -56,7 +108,7 @@
           <entry key="csv" value="3" />
           <entry key="json" value="50" />
           <entry key="md" value="2443" />
-          <entry key="py" value="27965" />
+          <entry key="py" value="28224" />
           <entry key="txt" value="72" />
         </counts>
       </usages-collector>
@@ -65,20 +117,62 @@
           <entry key="JSON" value="50" />
           <entry key="Markdown" value="2443" />
           <entry key="PLAIN_TEXT" value="75" />
-          <entry key="Python" value="27965" />
+          <entry key="Python" value="28224" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/experimental_show.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="270">
+                <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="91" column="43" selection-start-line="91" selection-start-column="43" selection-end-line="91" selection-end-column="43" />
+            <state relative-caret-position="90">
+              <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="322" column="57" lean-forward="true" selection-start-line="322" selection-start-column="57" selection-end-line="322" selection-end-column="57" />
               <folding>
-                <element signature="e#22#42#0" expanded="true" />
+                <element signature="e#22#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/trajectory_inf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="166" column="37" lean-forward="true" selection-start-line="166" selection-start-column="37" selection-end-line="166" selection-end-column="37" />
+              <folding>
+                <element signature="e#22#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,7 +238,6 @@
         <option value="$PROJECT_DIR$/baseline/DeepTTE/main.py" />
         <option value="$PROJECT_DIR$/baseline/DeepTTE/config.json" />
         <option value="$PROJECT_DIR$/model/temporal_attention.py" />
-        <option value="$PROJECT_DIR$/model/trajectory_inf.py" />
         <option value="$PROJECT_DIR$/model/utils.py" />
         <option value="$PROJECT_DIR$/model/st_block.py" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -167,11 +260,13 @@
         <option value="$PROJECT_DIR$/results/CompactETA-4.csv" />
         <option value="$PROJECT_DIR$/baseline/WDR/main.py" />
         <option value="$PROJECT_DIR$/experimental_show.py" />
+        <option value="$PROJECT_DIR$/model/trajectory_inf.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="110" />
+    <option name="x" value="145" />
+    <option name="y" value="63" />
     <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
@@ -190,7 +285,7 @@
             <path>
               <item name="Travel-time-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Travel-time-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -220,7 +315,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.experimental_show">
+  <component name="RunManager" selected="Python.main">
     <configuration name="experimental_show" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Travel-time-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -335,9 +430,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.experimental_show" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.main (4)" />
         <item itemvalue="Python.main (3)" />
       </list>
@@ -357,15 +452,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="110" width="1440" height="796" extended-state="0" />
+    <frame x="145" y="63" width="1440" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15362932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3224432" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3224432" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -383,10 +478,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/lstm.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/model/wdr_inf.py" />
     <entry file="file://$PROJECT_DIR$/baseline/CoDriverETA/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -444,13 +535,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/trajectory_inf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="111" column="68" selection-start-line="111" selection-start-column="68" selection-end-line="111" selection-end-column="94" />
         </state>
       </provider>
     </entry>
@@ -581,16 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="111">
-            <caret line="30" column="25" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="25" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/results/CompactETA-4.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -633,13 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/matplotlib/axes/_base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-269">
@@ -661,30 +728,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="48" column="128" selection-start-line="48" selection-start-column="128" selection-end-line="48" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="234" column="4" selection-start-line="234" selection-start-column="4" selection-end-line="234" selection-end-column="48" />
-          <folding>
-            <element signature="e#22#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="288" column="57" selection-start-line="288" selection-start-column="57" selection-end-line="288" selection-end-column="57" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -692,9 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -709,12 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-            <marker date="1667371694675" expanded="true" signature="5952:5958" ph="..." />
-            <marker date="1667371694675" expanded="true" signature="7518:7524" ph="..." />
-            <marker date="1667371694675" expanded="true" signature="7731:7737" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -739,12 +777,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experimental_show.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="91" column="43" selection-start-line="91" selection-start-column="43" selection-end-line="91" selection-end-column="43" />
+        <state relative-caret-position="-1733">
+          <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
           <folding>
             <element signature="e#22#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="270">
+            <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-548" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/bridge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3548" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="322" column="57" lean-forward="true" selection-start-line="322" selection-start-column="57" selection-end-line="322" selection-end-column="57" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/trajectory_inf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="166" column="37" lean-forward="true" selection-start-line="166" selection-start-column="37" selection-end-line="166" selection-end-column="37" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
