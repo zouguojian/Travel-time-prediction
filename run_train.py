@@ -249,11 +249,11 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
-        file = open('results/'+str(self.hp.model_name)+'-1'+'.csv', 'w', encoding='utf-8')
-        writer = csv.writer(file)
-        writer.writerow(['vehicle_id', 'vehicle_type', 'time', 'whether_app', 'pre_sum', 'label_sum'] +
-            ['segment_pre_' + str(i) for i in range(self.trajectory_length)]+
-                        ['segment_label_' + str(i) for i in range(self.trajectory_length)])
+        # file = open('results/'+str(self.hp.model_name)+'-1'+'.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(['vehicle_id', 'vehicle_type', 'time', 'whether_app', 'pre_sum', 'label_sum'] +
+        #     ['segment_pre_' + str(i) for i in range(self.trajectory_length)]+
+        #                 ['segment_label_' + str(i) for i in range(self.trajectory_length)])
 
         for i in range(int(iterate_test.shape_tra[0] * (1 - self.hp.divide_ratio) - 15 * (
                 self.input_length + self.output_length)) // self.batch_size):
@@ -295,8 +295,8 @@ class Model(object):
             print([vehicle_id_str[0].decode(), vehicle_type_int, dates[0], whether_app, pre_tra_sum[0], total_time[0]]+
                              list(pre_tra_sep) + list(separate_trajectory_time[0]))
 
-            writer.writerow([vehicle_id_str[0].decode(), vehicle_type_int[0], dates[0], whether_app[0], pre_tra_sum[0,0] * 60, total_time[0,0] * 60]+
-                             list(pre_tra_sep[0] * 60) + list(separate_trajectory_time[0] * 60))
+            # writer.writerow([vehicle_id_str[0].decode(), vehicle_type_int[0], dates[0], whether_app[0], pre_tra_sum[0,0] * 60, total_time[0,0] * 60]+
+            #                  list(pre_tra_sep[0] * 60) + list(separate_trajectory_time[0] * 60))
 
             label_tra_sum_list.append(total_time)
             pre_tra_sum_list.append(pre_tra_sum)
