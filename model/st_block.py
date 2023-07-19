@@ -56,6 +56,14 @@ class ST_Block():
         x_s = tf.reshape(x_s, shape=[-1, self.input_length, self.site_num, self.emb_size])
         # feature fusion
         x_f = gatedFusion(x_s, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
+
+        # fusion gate network
+        # x = tf.multiply(x_t, x_s)
+        # x = tf.sigmoid(x)
+        # x_t = tf.multiply(x_t, 1-x)
+        # x_s = tf.multiply(x_s, x)
+        # x_f = tf.add_n([x_t, x_s])
+
         # x_f = tf.concat([x_t, x_s], axis=-1)
         # x_f = tf.layers.dense(x_f, units=self.emb_size, activation=tf.nn.relu)
         # x_f = tf.layers.dense(x_f, units=self.emb_size)
