@@ -110,3 +110,20 @@ self.parser.add_argument('--field_cnt', type=int, default=17, help='the number o
 |4类专项作业车(24-四型专项作业车)	   |Operation Van that the number of suspension shaft is 4|
 |5类专项作业车(25-五型专项作业车)	   |Operation Van that the number of suspension shaft is 5|
 |6类专项作业车(26-六型专项作业车)	   |Operation Van that the number of suspension shaft is no less than 6|
+
+
+# About
+
+If you find this repository useful in your research, please cite the following paper:
+```
+@article{zou2023will,
+  title={When will we arrive? A novel multi-task spatio-temporal attention network based on individual preference for estimating travel time},
+  author={Zou, Guojian and Lai, Ziliang and Ma, Changxi and Tu, Meiting and Fan, Jing and Li, Ye},
+  journal={IEEE Transactions on Intelligent Transportation Systems},
+  volume={24},
+  number={10},
+  pages={11438--11452},
+  year={2023},
+  publisher={IEEE}
+}
+```
